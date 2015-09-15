@@ -80,55 +80,40 @@ class BackendController extends Controller
 	 */
 	public function createBackendAction (Request $request, $entity ,$group = null, $type =null)
 	{
-        $element = null;
         $backend = $this->get('backend');
-
         if (!is_null($type))
         {
             $element = $backend->getElements($type,'one',$group);
             $entity = $entity .'Contenido';
             $list = $backend->getElements($type.'Contenido','content',$group);
-
         }
 
 		$new = $this->get(strtolower($entity))->newEntity($group, $type);
-
         $permiso = $this->get('backend')->checkPermisions('create',$new);
-
         if (false === $permiso)  throw $this->createAccessDeniedException('Unauthorized access!');
 
 		$formulario = $this->createForm ($this->get (strtolower ($entity)), $new);
-
 		$formulario->handleRequest ($request);
 
 		if (($formulario->isSubmitted ()) && ($formulario->isValid ()))
 		{
-
             $backend->postCreate($new,$entity,$type,$element);
             $backend->processForm($new);
-
 
 			$this->get ('session')->getFlashBag()->set ('success', [
 				'title'   => $this->get('translator')->trans ('flash.edit.title'),
 				'message' => $this->get('translator')->trans ('flash.edit.message', ['entidad' => $new])
 			]);
 
-
             $url = (is_null($type))
                 ? $this->generateUrl('editBackend', ['entity' => $entity,
                                                      'element'=> $new->getSlug(),])
-
                 :$this->generateUrl('editContentBackend', ['type'=>$group,
                                                            'entity' => $type,
                                                            'element'=> $new->getSlug(),
-                                                           'group' => $this->get('backend')->removeContenidos($entity)
-                ]);
-
-
+                                                           'group' => $this->get('backend')->removeContenidos($entity)]);
             return $this->redirect($url);
-
         }
-
 		return $this->render ('DestinyAppBundle:Backend:editCreate.html.twig',
 			[
 
