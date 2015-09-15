@@ -242,6 +242,7 @@ class InstalaccionController extends Controller
 			$this->createEmails();
 			$this->createMenus();
 			$this->createMenusBackend();
+			$this->createPermisos();
 
 			return $this->redirect($this->generateUrl('_portadaWeb'));
 

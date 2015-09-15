@@ -101,10 +101,6 @@ class NoticiasContenido
 	 */
 	private $fechaModificacion;
 
-	private $type;
-
-	private $enity;
-
     /**
      * Get id
      *

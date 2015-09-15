@@ -105,9 +105,6 @@ class SeccionesContenido
 	 */
 	private $fechaModificacion;
 
-	private $type;
-
-	private $enity;
 
     /**
      * Get id
