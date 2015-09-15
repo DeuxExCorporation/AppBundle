@@ -2,11 +2,8 @@
 
 namespace Destiny\AppBundle\Form\Type;
 
-use Destiny\AppBundle\Entity\Articulos;
+
 use Destiny\AppBundle\Entity\ArticulosTraducciones;
-use Destiny\AppBundle\Entity\NoticiasContenido;
-use Destiny\AppBundle\Entity\SeccionesContenido;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -4,7 +4,6 @@ namespace Destiny\AppBundle\Form\Type;
 
 
 use Destiny\AppBundle\Entity\BackendPermisos;
-use Destiny\AppBundle\Entity\Permisos;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Form\AbstractType;

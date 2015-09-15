@@ -2,9 +2,8 @@
 
 namespace Destiny\AppBundle\Form\Type;
 
-use Destiny\AppBundle\Entity\Adjuntos;
+
 use Destiny\AppBundle\Entity\AdjuntosTraducciones;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

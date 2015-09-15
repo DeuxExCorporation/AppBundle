@@ -3,7 +3,7 @@
 namespace Destiny\AppBundle\Entity\Repository;
 
 use Destiny\AppBundle\Entity\Idiomas;
-use Destiny\AppBundle\Entity\SeccionesTraducciones;
+
 use Doctrine\ORM\EntityRepository;
 
 /**

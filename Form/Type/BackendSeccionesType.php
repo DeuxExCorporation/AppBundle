@@ -3,7 +3,6 @@
 namespace Destiny\AppBundle\Form\Type;
 
 use Destiny\AppBundle\Entity\BackendSecciones;
-use Destiny\AppBundle\Entity\MenusBackend;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
