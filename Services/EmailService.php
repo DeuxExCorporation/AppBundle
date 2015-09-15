@@ -25,7 +25,7 @@ use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class EmailService
 {
-	protected $twig, $mailer, $entityManager, $container, $email, $empresa;
+	protected $twig, $mailer, $entityManager, $email, $empresa;
 
 	public function __construct (\Swift_Mailer $mailer,
 	                             EngineInterface $templating,
@@ -35,7 +35,6 @@ class EmailService
 		$this->mailer = $mailer;
 		$this->twig = $templating;
 		$this->entityManager = $entityManager;
-		$this->container = $container;
 		$this->email = $this->entityManager->getRepository('DestinyAppBundle:EmpresaEmails')->getOne();
         $this->empresa = $this->entityManager->getRepository('DestinyAppBundle:EmpresaWeb')->getEmpresaActiva();
 	}

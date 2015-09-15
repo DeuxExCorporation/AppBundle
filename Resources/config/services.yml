@@ -2,11 +2,11 @@ services:
 
     email:
         class: Destiny\AppBundle\Services\EmailService
-        arguments: ["@swiftmailer.mailer","@templating","@doctrine.orm.entity_manager","@service_container"]
+        arguments: ["@swiftmailer.mailer","@templating","@doctrine.orm.entity_manager"]
 
     datosEmpresa:
         class: Destiny\AppBundle\Services\DatosEmpresaService
-        arguments: ["@doctrine.orm.entity_manager","@service_container"]
+        arguments: ["@doctrine.orm.entity_manager"]
 
     plantilla:
         class: Destiny\AppBundle\Services\PlantillaService
@@ -78,7 +78,7 @@ services:
 
     destiny_appbundle.form.type.usuarios:
         class:  Destiny\AppBundle\Form\Type\UsuariosType
-        arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
+        arguments: ["@doctrine.orm.entity_manager", "@translator.default","@email"]
         tags:
             - { name: form.type }
 

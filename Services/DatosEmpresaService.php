@@ -13,13 +13,12 @@ use Symfony\Component\DependencyInjection\Container;
 
 class DatosEmpresaService
 {
-	protected $entityManager, $container;
+	protected $entityManager;
 	public $web, $contacto, $redesSociales;
 
-	public function __construct (EntityManager $entityManager,Container $container)
+	public function __construct (EntityManager $entityManager)
 	{
 		$this->entityManager = $entityManager;
-		$this->container = $container;
 		$this->web = $this->getEmpresa();
 		$this->redesSociales = $this->getRedesSociales();
 		$this->contacto = $this->getContacto();

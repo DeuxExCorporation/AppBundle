@@ -7,11 +7,11 @@ namespace Destiny\AppBundle\Form\Type;
 use Destiny\AppBundle\Entity\Usuarios;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\Email;
 
 
 /**
@@ -22,13 +22,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class UsuariosType extends AbstractType
 {
-	protected $em, $translator, $container;
+	protected $em, $translator, $email;
 
-	public function __construct (EntityManager $em, Translator $translator, Container $container)
+	public function __construct (EntityManager $em, Translator $translator, Email $email)
 	{
 		$this->em = $em;
 		$this->translator = $translator;
-		$this->container = $container;
+        $this->email = $email;
 
 	}
 
@@ -130,13 +130,13 @@ class UsuariosType extends AbstractType
 
 	public function postEdit ($usuario)
 	{
-		$this->container->get ('email')->enviarEmailUsuario ('modificacion-usuario', $usuario);
+        $this->email->enviarEmailUsuario ('modificacion-usuario', $usuario);
 	}
 
 	public function postCreate ($usuario)
 	{
 		$usuario->setEstado (FALSE);
-		$this->container->get ('email')->enviarEmailUsuario ('nuevo-usuario', $usuario);
+        $this->email->enviarEmailUsuario ('nuevo-usuario', $usuario);
 
 		return $usuario;
 	}

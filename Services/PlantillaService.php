@@ -10,17 +10,16 @@ namespace Destiny\AppBundle\Services;
 
 use Destiny\AppBundle\Entity\Idiomas;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\Container;
+
 
 class PlantillaService
 {
-	protected $entityManager, $container;
+	protected $entityManager;
 
 
-	public function __construct (EntityManager $entityManager,Container $container)
+	public function __construct (EntityManager $entityManager)
 	{
 		$this->entityManager = $entityManager;
-		$this->container = $container;
 
 	}
 
