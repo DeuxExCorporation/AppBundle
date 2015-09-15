@@ -150,7 +150,7 @@ class FrontendController extends Controller
 	 */
 	public function newsWebAction($section= null , Idiomas $language = null, $news = null)
 	{
-		if (is_null($language) || is_null($section) or is_null($news)) throw  $this->createNotFoundException();
+		if (is_null($language) || is_null($section) || is_null($news)) throw  $this->createNotFoundException();
 
 		return $this->render ('DestinyAppBundle:Frontend:noticias.html.twig',
 			[

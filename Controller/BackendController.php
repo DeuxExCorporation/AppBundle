@@ -106,12 +106,8 @@ class BackendController extends Controller
 			]);
 
             $url = (is_null($type))
-                ? $this->generateUrl('editBackend', ['entity' => $entity,
-                                                     'element'=> $new->getSlug(),])
-                :$this->generateUrl('editContentBackend', ['type'=>$group,
-                                                           'entity' => $type,
-                                                           'element'=> $new->getSlug(),
-                                                           'group' => $this->get('backend')->removeContenidos($entity)]);
+                ? $this->generateUrl('editBackend', ['entity' => $entity, 'element'=> $new->getSlug(),])
+                :$this->generateUrl('editContentBackend', ['type'=>$group, 'entity' => $type, 'element'=> $new->getSlug(), 'group' => $this->get('backend')->removeContenidos($entity)]);
             return $this->redirect($url);
         }
 		return $this->render ('DestinyAppBundle:Backend:editCreate.html.twig',

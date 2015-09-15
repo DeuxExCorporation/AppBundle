@@ -49,7 +49,7 @@ class ModoMantenimientoListener
             if ($ruta != "fos_user_security_login")
             {
 
-                if (!(is_object($usuario)) || ($usuario->getUser() === "anon.") or ('ROLE_NORMALUSER' === $usuario->getRoles()[0]->getRole()))
+                if (!(is_object($usuario)) || ($usuario->getUser() === "anon.") || ('ROLE_NORMALUSER' === $usuario->getRoles()[0]->getRole()))
                 {
                     $plantilla = $this->twig->render('@DestinyApp/blockWebBase.html.twig',["empresa" => $empresa]);
                     $response = new Response($plantilla, 200);
