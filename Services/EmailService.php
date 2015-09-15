@@ -14,7 +14,6 @@ use Destiny\AppBundle\Entity\Mensajes;
 use Destiny\AppBundle\Entity\Usuarios;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\DependencyInjection\Container;
 use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 /**
@@ -29,8 +28,7 @@ class EmailService
 
 	public function __construct (\Swift_Mailer $mailer,
 	                             EngineInterface $templating,
-	                             EntityManager $entityManager,
-	                             Container $container)
+	                             EntityManager $entityManager)
 	{
 		$this->mailer = $mailer;
 		$this->twig = $templating;
