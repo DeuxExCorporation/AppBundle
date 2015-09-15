@@ -1,0 +1,62 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('asset/backend/css/login.css') }}" rel="stylesheet">
+{% endblock %}
+{% block title %} Destiny Website Dashborad  {% endblock %}
+
+{% block body %}
+
+
+
+{% block fos_user_content %}
+
+
+    <div class="container">
+
+        <div class="col-md-12 logo">
+            <a href="{{ path('portadaBackend') }}">
+
+                <img  src="{{ asset(empresa.web.webPath) }}" width="160px">
+
+            </a>
+
+        </div>
+		<div class="clearfix"></div>
+
+        <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+
+	        {% if error %}
+	        <div class="alert alert-danger fade in">
+		        <a data-dismiss="alert" class="pull-right" href="" type="button">
+			        <i class="fa fa-times"></i>
+		        </a>
+		        <strong>Error</strong><br>
+		        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	        </div>
+	        {% endif %}
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            <label for="username">{{ 'dashboard.login.user' | trans }}</label>
+            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+            <label for="password">{{ 'dashboard.login.password' | trans }}</label>
+            <input type="password" class="form-control" id="password" name="_password" required="required" />
+
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'dashboard.login.remember' | trans }}</label>
+
+            <div class="social-links">
+                <a  href="{{ path('fos_user_resetting_request') }}">{{ 'dashboard.login.lost' | trans }}</a>
+            </div>
+
+            <input class="btn btn-lg btn-primary btn-block btn-success login-boton" type="submit" id="_submit" name="_submit" value="Acceso" />
+        </form>
+
+    </div> <!-- /container -->
+
+
+{% endblock fos_user_content %}
+
+{% endblock %}

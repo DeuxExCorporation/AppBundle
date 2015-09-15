@@ -1,0 +1,5 @@
+{% extends "@DestinyApp/emailbase.html.twig" %}
+{% block cuerpo %}
+
+	{{ include(template_from_string(cuerpo.descripcion)) }}
+{% endblock %}

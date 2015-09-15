@@ -1,0 +1,51 @@
+{% set newEntity = (type != null) ? entity ~ 'Contenido.list.new':entity ~ '.list.new'  %}
+{%  set element = (seccion is defined) ? seccion : element  %}
+<div class="btn-group pull-right" role="group">
+	<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		<i class="fa fa-plus-circle"></i>
+		{{ newEntity | trans }}
+		<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		<li>
+			<a href="{{ path('createContentBackend',
+			{'type'  :entity,
+				'group' :element.slug,
+				'entity':'videos'}) }}">
+				{{ 'seccionesContenido.list.video' | trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('createContentBackend',
+			{'type'  :entity,
+				'group' :element.slug,
+				'entity':'imagenes'}) }}">
+				{{ 'seccionesContenido.list.imagenes' | trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('createContentBackend',
+			{'type'  :entity,
+				'group' :element.slug,
+				'entity':'sliders'}) }}">
+				{{ 'seccionesContenido.list.sliders' | trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('createContentBackend',
+			{'type'  :entity,
+				'group' :element.slug,
+				'entity':'adjuntos'}) }}">
+				{{ 'seccionesContenido.list.adjuntos' | trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('createContentBackend',
+			{'type'  :entity,
+				'group': element.slug,
+				'entity':'articulos'}) }}">
+				{{ 'seccionesContenido.list.articulos' | trans }}
+			</a>
+		</li>
+	</ul>
+</div>

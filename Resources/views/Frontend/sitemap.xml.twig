@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.google.com/schemas/sitemap/0.90">
+    {% for url in urls %}
+        {% for menusWeb in url %}
+            {% for seccion in menusWeb.secciones if  seccion.url != null %}
+            <url>
+                <loc>{{ url('seccionWeb',{'language':menusWeb.idioma.isoCode,'section':seccion.url}) }}</loc>
+                <lastmod>{{ seccion.fechaModificacion | date ('Y/m/d') }}</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>0.5</priority>
+            </url>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+</urlset>

@@ -1,0 +1,30 @@
+{% extends "DestinyAppBundle::instalacionBase.html.twig" %}
+
+{% block backendTitle %}{{ 'instalacion.usuario.titulo' | trans }}{% endblock %}
+
+{% block backendBody %}
+
+	<h2>{{ 'instalacion.usuario.info' | trans }}</h2>
+	<div class="progress">
+		<div class="progress-bar progress-bar-striped active" role="progressbar"
+		     aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+			<span class="sr-only">100% Complete</span>
+		</div>
+	</div>
+	<div class="col-md-6">
+	{% include 'DestinyAppBundle:Instalaccion:form.html.twig' %}
+	</div>
+	<div class="col-md-6">
+		<ul style="list-style-type:none">
+			<li><strong>{{ empresa }}:</strong></li>
+			<li>{{ 'empresa.form.slogan' | trans }}: {{ empresa.slogan }}</li>
+			<li>{{ 'empresaContacto.form.direccion' | trans }}: {{ contacto.direccionCompleta }} </li>
+
+			{% for red in redes %}
+				<li><a href="{{ red.url }}">{{ red | raw }}</a> </li>
+			{% endfor %}
+			<li>{{ 'idiomas.list.name' | trans }}:<img src="{{ asset(idioma.webPath) }}"> </li>
+		</ul>
+
+	</div>
+{% endblock %}

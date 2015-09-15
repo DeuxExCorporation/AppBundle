@@ -1,0 +1,51 @@
+{% set actual = (app.request.attributes.get('_route_params').element is defined)
+				? app.request.attributes.get('_route_params').element
+				: ''%}
+{% set name =  (type != null ) ? entity~'Contenido.list.name' : entity~'.list.name'  %}
+{% set status =  entity~'.list.status'  %}
+
+
+{% if group == false %}
+
+	{% include ('@DestinyApp/Backend/Include/table.html.twig') %}
+{% else %}
+
+	{% for list in list %}
+
+		{% set count = loop.index %}
+
+			{% for group in group %}
+				{% if  count == loop.index%}
+					{% if (cantCreate == false) and (app.request.attributes.get('_route') != 'portadaBackend') %}
+
+						{% set newEntity = entity ~'.list.newgroup' %}
+
+								{% set disabled = (group.limite is defined and group.limite <= list |length)
+												 ? "disabled" : "enabled" %}
+
+
+						<a class="btn btn-success" {{ disabled }}
+						   href="{{ path('createBackend',{'entity':entity,'group': group.slug}) }}">
+							<i class="fa fa-plus-circle"></i>
+
+							{{ newEntity | trans }} {{ group.nombre }}
+						</a>
+
+
+
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		<br>
+		<br>
+		{% block listTable %}
+
+		{% include ('@DestinyApp/Backend/Include/table.html.twig') %}
+		{% endblock %}
+
+	{% endfor %}
+
+
+
+
+{% endif %}

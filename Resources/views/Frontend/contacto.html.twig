@@ -1,0 +1,59 @@
+{% extends "@DestinyApp/frontendBase.html.twig" %}
+
+
+{% block h1Title %}
+
+	<a href="{{ path('portadaBackend') }}" class="btn btn-info">Ir al backend</a>
+
+{% endblock %}
+{% block  frontBody %}
+	{{ empresa.web }}<br>
+
+	{%  include "@DestinyApp/Frontend/includes/contenido.html.twig" %}
+
+	{{ form_start(form) }}
+	<div class="box-body clearfix">
+		{% for field in form.children if (field.vars.name != '_token') %}
+			<div class="form-group {% if not field.vars.valid %}has-error{% endif %}">
+				{% set field_label = entity_fields[field.vars.name]['label']|default(null) %}
+				{{ form_label(field, field_label, { label_attr: { class: 'col-sm-12 control-label' } }) }}
+
+				<div class="col-sm-12">
+					{% set tinymce = (field.vars.name == 'descripcion') ? 'tinymce' :'' %}
+					{{ form_widget (field,{'attr':{'class':'form-control '~ tinymce}}) }}
+
+					{% for attrname,attrvalue in  field.vars.attr %}
+						{% if attrname == 'help' %}
+							<span class="help-block">{{ attrvalue }}</span>{% endif %}
+					{% endfor %}
+
+					{%  if form_errors(field)  %}
+
+						<div class="alert alert-danger fade in">
+							<a data-dismiss="alert" class="pull-right" href="" type="button">
+								<i class="fa fa-times"></i>
+							</a>
+							<strong>Error</strong><br>
+							{{ form_errors(field)}}
+
+						</div>
+
+					{%  endif %}
+
+
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+
+	<div class="box-footer clearfix">
+		<button type="submit" class="btn btn-success pull-right" value="Submit" >SEND</button>
+	</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "@DestinyApp/emailbase.html.twig" %}
+{% block cabecera %}{% endblock %}
+{% block cuerpo %}
+   <p> Hola {{ usuario.username }}:</p>
+
+    <p>Se ha instalado correctamente la web para la {{ empresa }}:</p>
+    <ul style="list-style-type:none">
+        <li>{{ 'empresa.form.nombre' | trans }}: {{ empresa }}</li>
+        <li>{{ 'empresa.form.slogan' | trans }}: {{ empresa.slogan }}</li>
+        <li>{{ 'empresaContacto.form.direccion' | trans }}: {{ contacto.direccionCompleta }} </li>
+        <li>{{ usuario.username }} --> {{ usuario.plainpassword }}</li>
+
+        {% for red in redes %}
+            <li><a href="{{ red.url }}">{{ red | raw }}</a> </li>
+        {% endfor %}
+
+    </ul>
+
+
+
+
+{% endblock %}
+{% block pie %}
+    <table class="button">
+        <tr>
+            <td>
+                <a href="{{ url('portadaBackend') }}">ir al bakend</a>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+{% block redes %}{% endblock %}
+{% block contacto %}{% endblock %}

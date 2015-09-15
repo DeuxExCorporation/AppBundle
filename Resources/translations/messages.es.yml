@@ -1,0 +1,676 @@
+block:
+    web: La pagina esta bloqueada.
+    login: Acceso para administradores
+
+dashboard:
+    saludo: Hola,
+    status: Online
+    gotfront: Ir a la web
+    logout: Salir
+    project: Destiny Dashboard
+    name: Destiny project
+    download: Descargar
+
+    login:
+        user: Nombre de usuario/ email
+        password: Contraseña
+        remember: Recordarme
+        lost: He perdido mi contraseña
+flash:
+    edit:
+        title: ¡Se ha editado correctamente!
+        message: Se ha guardado correctamente el elemento (entidad).
+
+    traslation:
+        title: ¡Se ha guardado correctamente la traducción!
+        message: Se ha guardado correctamente la traduccion del elemento (entidad).
+
+    delete:
+        title: ¡Se ha borrado correctamente!
+        message: Se ha borrado correctamente el elemento (entidad).
+
+    cantDelete:
+        title: ¡El elemento no se ha eliminado!
+        message: El elemento (entidad) no puede ser eliminado.
+
+    create:
+        title: ¡Se ha creado correctamente!
+        message: Se ha creado correctamente el elemento (entidad).
+
+    change:
+        title: ¡Se ha cambiado el estado correctamente!
+        message: Se ha cambiado el estado correctamente el elemento (entidad).
+
+    status:
+        title: ¡Se ha cambiado el elemento por defecto correctamente!
+        message: El elemento por defecto ahora es: entidad.
+
+    changePosition:
+        title: ¡Se ha cambiado la posición del elemento por defecto correctamente!
+        message: Se ha cambiado la posición del elemento: entidad.
+
+    notChangable:
+        title: ¡El elemento no se ha podido cambiar de estado!
+        message: El elemento (entidad) no puede ser cambiado de estado.
+
+    cantList:
+        title: ¡El elemento no se ha podido listar!
+        message: El elemento (entidad) no puede ser listado.
+
+    cantcreate:
+        title: ¡El elmento no puede ser creado!
+        message: Por algun motivo este elemento no puede ser creado, pongase en contacto con el administrador de la pagina.
+
+    datosEmpresa:
+        title: ¡Se ha creado la empresa!
+        message: Se han guardado correctamente los datos de la empresa entidad.
+
+    datosContacto:
+        title: ¡Se ha creado la dirección de la empresa!
+        message: Se han guardado correctamente los datos de la direccion de entidad.
+
+    datosSocial:
+        title: ¡Se ha creado una nueva red social!
+        message: Se han guardado correctamente los datos de la red social de entidad.
+
+    idioma:
+        title: ¡Se ha añadido el idioma por defecto de la web!
+        message: Se han guardado correctamente los datos del idioma entidad.
+
+    message:
+        front:
+            title: ¡Hemos recibido su pregunta!
+            message: En breves, nos pondremos en contacto con usted.
+
+    usuarioRoot:
+        title: ¡Se ha añadido el usuario Administrador!
+        message: Se ha finalizado la instalacion y se ha enviado un email con los datos de la instalacion.
+
+    instalacion:
+        title: ¡Bienvenido al sistema Destiny!
+        message: Se va a iniciar la instalacion de la web, al finalizar se enviará un email con los datos.
+
+    chapter:
+        new:
+            title: ¡Se ha creado un nuevo capitulo!
+            message: Se han guardado correctamente el capitulo titulado: capitulos.
+
+        edit:
+            title: ¡Se ha editado el capitulo!
+            message: Se ha editado correctamente el capitulo titulado: capitulos.
+
+        delete:
+             title: ¡Se ha borrado el capitulo!
+             message: Se ha borrado correctamente el capitulo titulado: capitulos.
+
+    action:
+        new:
+            title: ¡Se ha creado una nueva accion!
+            message: Se han guardado correctamente la acción llamada: accion.
+
+        edit:
+            title: ¡Se ha editado la  acción!
+            message: Se ha editado correctamente la  acción llamada: accion.
+
+        delete:
+             title: ¡Se ha borrado la  acción!
+             message: Se ha borrado correctamente la  acción llamada: accion.
+
+instalacion:
+    datosEmpresa:
+        titulo: PASO 1: Datos de la empresa.
+        info: Indique los datos de la web.
+
+    datosContacto:
+        titulo: PASO 2: Datos fisicos de la empresa.
+        info: Indique los datos fisicos de la empresa.
+
+    datosRedesSociales:
+        titulo: PASO 3: Redes sociales.
+        info: Indique los datos de las redes sociales de empresa.
+
+    idioma:
+        titulo: PASO 4: Idioma de la web.
+        info: Indique el idioma de la web.
+
+    usuario:
+        titulo: PASO 5: Creacion del administrador.
+        info: Rellene los datos del usuario de administración de la web.
+
+portada:
+    backend:
+        title: Inicio
+
+    user:
+
+        name: Nombre de usuario
+        lastLogin: Ultimos accesos
+
+    mensajes:
+        sinleer: Mensajes sin leer
+        titulo: Asunto
+        usuario: Email
+        fechaCreacion: Fecha creación
+
+    settings: Configuracion
+    languages: Idiomas
+
+
+
+form:
+    delete: Borrar
+    back: Salir sin borrar
+    lastmodification: Ultima modificacion
+    status: Estado
+    edit: Editar
+    delete: Borrar
+    save: Guardar
+    active: Activo
+    desactive: Desactivado
+    posicion: Posicion
+    move: Mover
+    type: Tipo
+
+
+list:
+    caution: Precaucion
+    predelte: ¿Esta usted seguro de borrar este elemento?
+    nothing: Nada que listar.
+
+idiomas:
+    form:
+        name: Nombre del Idioma
+        isoCode: Codigo ISO
+        file: Bandera
+        status: Estado
+
+    list:
+        name: Idioma
+        isoCode: Codigo Iso
+        flag: Bandera
+        default: Defecto
+        status: Activo
+        new: Nuevo idioma
+        back: Volver
+        save: Guardar idioma
+        title: Idomas
+        image: Bandera actual
+        edit: Editando
+
+newsletter:
+    list:
+        name: Email
+        status: Activo
+        title: Newsletter
+        new: Añadir email
+        back: Volver
+        save: Garudar email
+
+    form:
+      email: Email
+
+mensajes:
+    list:
+        title: Mensajes
+        name: Email
+        subject: Asunto
+        status: Leido
+        noread: No hay mensajes sin leer.
+        cant: Hay %cantidad% mensaje sin leer.
+        all: Leer todos los mensajes.
+        back: Volver
+        save: Guardar
+        edit: Actual
+
+    form:
+        email: Email
+        telephone: Telefono
+        subject: Asunto
+        body: Mensaje
+
+usuarios:
+    list:
+        name: Nombre de usuario
+        status: Activo
+        title: Usuarios
+        new: Nuevo usuario
+        edit: Actual
+        save: Guardar usuario
+        back: Volver
+        newgroup: Añadir usuario al grupo
+        email: Email
+
+    form:
+        email: Email
+        username: Nombre de usuario
+        password: Password
+empresa:
+    form:
+        nombre: Nombre de la empresa
+        email: Email de la empresa
+        slogan: Eslogan de la empresa
+        archivo: Logo de la empresa
+        estado: Estado
+        mensajeBloqueo: Mensaje de bloqueo de la web
+
+configuration:
+    list:
+        title: Configuración
+        language: Idiomas
+        redesSociales: Redes Sociales
+        contacto: Datos Fisicos
+        web: Datos de la web
+        email: Emails
+        content: Secciones web
+        contentMedia: Gestión de archivos
+        menus: Getión de menús
+        sections: Gestión de secciones
+        backend: Gestión de backend
+        pdf: Adjuntos (PDF)
+        images: Imagenes
+        slider: Galerias
+        videos: Videos(Youtube)
+        users: Usuarios
+        newsletter: Newsletter
+        news: Gestor de noticias
+        noticiascategoria: Categorias
+        noticias: Noticias
+        historias: Historias
+        habilidades: Habilidades
+        personajes: Personajes
+        sistema: Sistema
+
+empresaRedesSociales:
+    list:
+        title: Redes sociales
+        name: Red social
+        status: Estado
+        new: Añadir red social
+        save: Guardar Red social
+        back: Volver al listado
+    form:
+        nombre: Red social
+        icono: Icono FontAwesome
+        url: URL
+        estado: Estado
+
+empresaContacto:
+    list:
+        name: Nombre
+        status: Visible
+        title: Datos fisicos de la empresa
+        edit: Actual
+        back: Volver
+        save: Guardar datos
+
+    form:
+        nombre: Nombre
+        direccion: Direccion de la empresa
+        ciudad: Ciudad
+        provincia: Provincia
+        pais: Pais
+        telefono: Telefono de contacto
+        movil: Movil
+        fax: Fax
+        estado: Visible
+
+empresaWeb:
+    list:
+        title: Datos de la web
+        edit: Actual
+        back: Volver
+        save: Guaradar
+        image: Logo actual
+
+    form:
+        file: Logo empresa
+
+empresaEmails:
+    list:
+        title: Emails
+        edit: Actual
+        back: Volver
+        save: Guaradar
+        image: Imagen actual
+
+    form:
+        file: Imagen de cabezera email
+        textoCabecera: Texto de cabecera del email
+        textoPie: Texto del pie del email
+
+adjuntos:
+    list:
+        title: Adjuntos (PDF)
+        new: Añadir PDF
+        name: PDF
+        status: Estado
+        back: Volver
+        save: Guardar
+        file: Archivo
+
+    form:
+        name: Nombre del archivo
+        alt: Texto Alt
+        description: Descripción del archivo
+        file: PDF
+        status: Estado
+
+videos:
+    list:
+        title: Videos
+        name: Nombre
+        status: Estado
+        new: Nuevo video
+        back: Volver
+        save: Guardar video
+        edit: Editando
+
+    form:
+        name: Nombre
+        alt: Alt
+        description: Descripcion
+        url: Url del video (Youtube)
+        status: Estado
+
+imagenes:
+    list:
+        title: Imagenes
+        name: Nombre
+        status: Estado
+        new: Nueva imagen
+        back: Volver
+        file: Imagen
+        save: Guardar imagen
+        image: Imagen actual:
+        edit: Imagen actual
+
+    form:
+        name: Nombre
+        alt: Alt
+        description: Descripcion
+        file: Imagen
+        status: Estado
+
+sliders:
+    list:
+        title: Sldiers
+        name: Nombre
+        status: Estado
+        new: Nuevo slider
+        back: Volver
+        save: Guardar slider
+        edit: Editando slider
+
+    form:
+        name: Nombre
+        alt: Alt
+        description: Descripcion
+        status: Estado
+        group: Imagenes
+
+menus:
+    list:
+        title: Menus
+        name: Nombre
+        status: Estado
+        new: Nuevo menu
+        back: Volver
+        save: Guardar menu
+        edit: Editando menu
+        limit: Limite de secciones
+
+    form:
+        name: Nombre
+        limit: Limite de secciones
+        submenus: ¿Las secciones van a tener subsecciones?
+        yes: Si
+        not: No
+
+secciones:
+    list:
+        title: Secciones de la web
+        name: Nombre
+        status: Estado
+        new: Nueva sección
+        newgroup: Añadir seccion al menú
+        back: Volver
+        posicion: Posición
+        changePosition: Mover
+        save: Guardar sección
+        edit: Editando la seccion
+        contenido: Contenido
+
+
+    form:
+        name: Nombre
+        url: URL de la seccion
+        titulo: Titulo de la noticia
+        tagMenu: Nombre que se mostrara en el menú
+        webTitle: Frase que se verá en la barrra del navegador
+        sectionTitle: Titulo de la sección H1
+        seoTitle: Titulo SEO de la sección
+        seoDescription: Descripción SEO de la sección
+        padre: Seccion padre
+        tipo: Tipo de sección
+
+noticias:
+    list:
+        title: Noticias de la web
+        new: Añadir noticia
+        name: Titulo noticia
+        status: Estado
+        back: Volver
+        save: Guardar noticia
+
+
+    form:
+        title: Titulo de la noticia
+        seoTitle: Titulo SEO de la noticia
+        seoDescription: Descripción SEO de la noticia
+        status: Estado
+        categoria: Categoria
+
+noticiasContenido:
+    list:
+        title: Contenido de la noticia
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        video: Video
+        imagenes: Imagen
+        sliders: Slider
+        adjuntos: Adjuntos
+        articulos: Articulo
+        showInYoutube: Youtube
+        download: Descargar
+        back: Volver al listado de noticias
+        save: Guardar
+
+seccionesContenido:
+    list:
+        title: Contenido de la sección
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        video: Video
+        imagenes: Imagen
+        sliders: Slider
+        adjuntos: Adjuntos
+        articulos: Articulo
+        showInYoutube: Youtube
+        download: Descargar
+        back: Volver al listado de secciones
+        save: Guardar
+
+videosContenido:
+    list:
+        title: Contenido de la sección
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        newButton: Añadir contenido
+        video: Video
+        save: Guardar video
+        back: Volver al listado
+
+    form:
+        name: Nombre del video
+
+imagenesContenido:
+    list:
+        title: Contenido de la sección
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        newButton: Añadir contenido
+        imagen: Imagen
+        save: Guardar imagen
+        back: Volver al listado
+
+    form:
+        name: Nombre de la imagen
+
+slidersContenido:
+    list:
+        title: Contenido de la sección
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        newButton: Añadir contenido
+        slider: Slider
+        save: Guardar slider
+        back: Volver al listado
+
+    form:
+        name: Nombre del Slider
+
+adjuntosContenido:
+    list:
+        title: Contenido de la sección
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        newButton: Añadir contenido
+        slider: Slider
+        save: Guardar pdf
+        back: Volver al listado
+
+    form:
+        name: Nombre del pdf
+
+articulos:
+    list:
+        title: Contenido de la sección
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        newButton: Añadir contenido
+        save: Guardar articulo
+        back: Volver al listado
+
+    form:
+        name: nombre
+        title: Titulo
+        description: Cuerpo del articulo
+
+articulosContenido:
+    list:
+        title: Contenido de la sección
+        name: Nombre
+        status: Estado
+        new: Añadir contenido
+        newButton: Añadir contenido
+        save: Guardar articulo
+        back: Volver al listado
+
+    form:
+        name: nombre
+        title: Titulo
+        description: Cuerpo del articulo
+
+noticiasCategorias:
+    list:
+        title: Categorias de las noticias
+        name: Nombre
+        status: Estado
+        new: Nueva categoria
+        back: Volver
+        save: Guardar categoria
+        edit: Editando la categoria
+
+    form:
+        name: Nombre
+        status: Estado
+
+
+
+usuariosEmails:
+    list:
+        name: Emails para los usuarios
+        status: Estado
+        back: Volver al listado.
+        save: Guardar correo
+        title: Emails usuarios
+
+    form:
+        title: Asunto del mensaje
+        description: Cuerpo del email
+
+backendGruposSecciones:
+    list:
+        name: Nombre
+        new: Añadir grupo
+        title: Grupos de las secciones
+        status: Estado
+        back: Volver al listado.
+        save: Guardar grupo
+
+    form:
+        nombre: Nombre
+        etiqueta: Etiqueta
+        estado: Estado
+
+BackendSecciones:
+    list:
+        name: Nombre
+        newgroup: Añadir seccion al grupo
+        title: Secciones del backend
+        status: Estado
+        back: Volver al listado.
+        save: Guardar seccion
+        grupos: Grupo Backend
+
+    form:
+        nombre: Nombre
+        etiqueta: Etiqueta
+        destino: Destino
+        icono: Icono
+        grupo: Grupo
+        estado: Estado
+
+backendPermisos:
+    list:
+        title: Gestión de permisos
+        name: Entidad
+        status: Acceso
+        back: Volver
+        save: Guardar permisos
+
+    form:
+        name: Nombre
+        list: Acceso
+        create: Crear
+        edit: Editar
+        delete: Borrar
+        grups: Grupos de usuario autorizados
+        root: Administradores
+        status: Acceso
+        yes: Si
+        no: No
+
+email:
+    redes: Nuestras redes sociales
+    contacto:
+        mensaje: Datos de contacto
+        telefono: Telefono de contacto
+        email: Email

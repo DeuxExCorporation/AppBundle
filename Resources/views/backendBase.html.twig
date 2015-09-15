@@ -1,0 +1,224 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('asset/backend/css/AdminLTE.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/backend/css/skin-blue.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/common/css/modal.css') }}" rel="stylesheet">
+	<!-- Font Awesome Icons -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<!-- Ionicons -->
+	<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block title %}{{ empresa.web.nombre }}{% endblock %}
+{% block bodyclass %}skin-blue{% endblock %}
+{% block body %}
+	<div class="wrapper">
+
+		<!-- Main Header -->
+		<header class="main-header">
+
+			<!-- Logo -->
+			<a href="{{ path('portadaBackend') }}" class="logo">{{ empresa.web.nombre }}</a>
+
+			<!-- Header Navbar -->
+			<nav class="navbar navbar-static-top" role="navigation">
+				<!-- Sidebar toggle button-->
+				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+					<span class="sr-only">Toggle navigation</span>
+				</a>
+				<!-- Navbar Right Menu -->
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<!-- Messages: style can be found in dropdown.less-->
+						<li class="dropdown messages-menu">
+							<!-- Menu toggle button -->
+							{% set mensajes = mensajes.mensajesSinLeer %}
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-envelope-o"></i>
+								{{ 'mensajes.list.title' | trans }}
+								{% if  mensajes | length > 0 %}
+								<span class="label label-success">{{ mensajes | length }}</span>
+								{% endif %}
+							</a>
+							<ul class="dropdown-menu">
+								<li class="header">
+									{% if  mensajes | length > 0 %}
+										{{ 'mensajes.list.cant' | trans({'%cantidad%': mensajes | length }) }}
+									{% else %}
+										{{ 'mensajes.list.noread' | trans () }}
+									{% endif %}
+								</li>
+								<li>
+									<!-- inner menu: contains the messages -->
+									<ul class="menu">
+										{%  for mensaje in mensajes %}
+										<li><!-- start message -->
+
+												<!-- Message title and timestamp -->
+
+													<a href="{{ path('editBackend',{'entity':'mensajes','element':mensaje.slug }) }}">
+														{{ mensaje.asunto }}
+
+													<small><i class="fa fa-clock-o"></i> {{ mensaje.fechaCreacion | date ('d/m/Y H:i') }}</small>
+											</a>
+												<!-- The message -->
+
+										</li><!-- end message -->
+										{% endfor %}
+									</ul><!-- /.menu -->
+								</li>
+								<li class="footer">
+									<a href="{{ path('listBackend',{'entity':'mensajes'}) }}">
+										{{ 'mensajes.list.all' | trans  }}
+									</a>
+								</li>
+							</ul>
+						</li><!-- /.messages-menu -->
+						<li class="dropdown messages-menu">
+							<!-- Menu toggle button -->
+
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-database"></i>
+								{{ 'configuration.list.title' | trans }}
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{{ path('listBackend',{'entity':'idiomas'}) }}">
+										<i class="fa fa-flag-o"></i>
+										{{ 'configuration.list.language' | trans }}
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('listBackend',{'entity':'empresaRedesSociales'}) }}">
+										<i class="fa fa-globe"></i>{{ 'configuration.list.redesSociales' | trans }}
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('editBackend',{'entity':'empresaContacto','element':'default'}) }}">
+										<i class="fa fa-building"></i>{{ 'configuration.list.contacto' | trans }}
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('editBackend',{'entity':'empresaWeb','element':'default'}) }}">
+										<i class="fa fa-cloud"></i>{{ 'configuration.list.web' | trans }}
+									</a>
+								</li>
+							</ul>
+						</li><!-- /.messages-menu -->
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!-- Left side column. contains the logo and sidebar -->
+		<aside class="main-sidebar">
+
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar">
+
+				<!-- Sidebar user panel (optional) -->
+				<div class="user-panel">
+					<div class="pull-left info">
+						<p>
+							<a href="{{ path('portadaBackend') }}">
+							<img class="img-circle img-responsive"  width="160px" src="{{ asset (empresa.web.webpath | imagine_filter('image_logo')) }}">
+						</a></p>
+						<p>{{ 'dashboard.saludo' | trans }} {{ app.user | capitalize }}</p>
+						<!-- Status -->
+						<i class="fa fa-circle text-success"></i> {{ 'dashboard.status' | trans }}
+						<a href="{{ path('fos_user_security_logout') }}">({{ 'dashboard.logout' | trans  }})</a>
+						<a target="_blank" href="{{ path('_portadaWeb') }}"><i class="fa fa-globe"></i> {{ 'dashboard.gotfront' | trans }}</a>
+					</div>
+				</div>
+
+				<!-- Sidebar Menu -->
+				<ul class="sidebar-menu">
+					<!-- Optionally, you can add icons to the links -->
+					{% for menus in backend.menu %}
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-bars"></i>
+								<span>{{ menus.etiqueta | trans }}</span>
+								<i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+
+								{% for seccion in menus.secciones %}
+
+										<li>
+											<a href="{{ path('listBackend',{'entity':seccion.destino}) }}">
+												{{ seccion.icono | raw }}
+												{{ seccion.nombre | trans }}
+											</a>
+										</li>
+								{% endfor %}
+
+							</ul>
+						</li>
+					{% endfor %}
+				</ul><!-- /.sidebar-menu -->
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					{% block titleBackend %}
+						{%  set actual = (type != null) ? entity ~ 'Contenido.list.title':entity ~ '.list.title' %}
+						{{ actual | trans }}
+						{% block newButton %}
+					{% if (cantCreate == false)
+						and (app.request.attributes.get('_route') != 'portadaBackend')
+						and (group.limite is not  defined)
+                    %}
+
+					{% set newEntity = entity ~'.list.new' %}
+					<a class="btn btn-success pull-right" href="{{ path('createBackend',{'entity':entity}) }}">
+						<i class="fa fa-plus-circle"></i>
+
+						{{ newEntity | trans }}
+						</a>
+					{% endif %}
+					{% endblock %}
+					{% endblock %}
+				</h1>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+			<div class="row">
+				<div class="col-md-12 alerta">
+					{% for type, flashMessage in app.session.flashbag.all() %}
+						<div class="alert alert-{{ type }} fade in">
+							<a data-dismiss="alert" class="pull-right" href="" type="button">
+								<i class="fa fa-times"></i>
+							</a>
+							{% if flashMessage.title is defined %}
+								<strong>{{ flashMessage.title }}</strong><br>
+								{{ flashMessage.message }}
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+				{% block backendBody %}
+
+				{% endblock %}
+				<!-- Your Page Content Here -->
+				</div>
+			</section><!-- /.content -->
+		</div><!-- /.content-wrapper -->
+
+		<!-- Main Footer -->
+		<footer class="main-footer">
+			<!-- To the right -->
+			<!-- Default to the left -->
+			<strong>Copyright &copy; 2015 <a href="#">{{ 'dashboard.name' | trans }}</a>.</strong>
+		</footer>
+
+	</div><!-- ./wrapper -->
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('asset/backend/js/app.min.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{{ empresa }} ~ {{ 'block.web' | trans}}</title>
+
+	<link href="{{ asset('asset/block/css/style.css') }}" rel="stylesheet">
+	<script src="{{ asset('asset/block/js/jquery.tipsy.js') }}"></script>
+
+
+
+	<script type='text/javascript'>
+		$(function() {
+			$('#tipsy').tipsy({fade: true, gravity: 's'});
+		});
+	</script>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+<div class="wrapper">
+		<img src="{{ asset(empresa.webPath ) | imagine_filter('image_logo') }}">
+	<div class="hr"></div>
+	<h1>{{ empresa }}</h1>
+	<p>{{ empresa.mensajeBloqueo }}</p>
+
+	<section class="progress">
+		<div class="progress-bar-container" id="tipsy" title="99% Complete"> <!-- Edit this title for the tooltip pop up -->
+			<article class="progress-bar" style="width:99%"  ></article> <!-- Edit the width percentage value to indicate progress -->
+		</div>
+		<article class="txt-launch-day-hat"></article>
+	</section>
+	<div class="hr"></div>
+	<div><small><a class="btn btn-success" href="{{ path("portadaBackend") }}">{{ 'block.login' | trans }}</a> </small></div>
+</div>
+</body>
+</html>

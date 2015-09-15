@@ -1,0 +1,255 @@
+
+language:
+    name:
+        notblank: Tiene que indicar un nombre para el idioma.
+        min: El idioma tiene que tener como minimo {{ limit }} caracteres.
+        min: El idioma tiene que tener como maximo {{ limit }} caracteres.
+        notnumber: El nombre del idioma no puede contener un numero.
+
+    isocode:
+        notblank: Tiene que indicar un codigo iso para el idioma.
+        min: El codigo iso tiene que tener como minimo {{ limit }} caracteres.
+        min: El codigo iso tiene que tener como maximo {{ limit }} caracteres.
+        notnumber: El codigo iso del idioma no puede contener un numero.
+
+    flag:
+        notimage: El icono de la bandera tiene que ser una imagen.
+        maxSize: El icono de la bandera tiene que tener como maximo {{ limit }} {{ suffix }}.
+
+newsletter:
+    email:
+        email: Tiene que indicar un email valido.
+        notBlank: Tiene que indicar un email.
+        min: El email tiene que tener como minimo {{ limit }} caracteres.
+        max: El email tiene que tener como maximo {{ limit }} caracteres.
+
+messages:
+    email:
+        email: Tiene que indicar un email valido.
+        notBlank: Tiene que indicar un email.
+        min: El email tiene que tener como minimo {{ limit }} caracteres.
+        max: El email tiene que tener como maximo {{ limit }} caracteres.
+
+    subject:
+        notBlank: Tiene que indicar un asunto.
+        min: El asunto tiene que tener como minimo {{ limit }} caracteres.
+        max: El asunto tiene que tener como maximo {{ limit }} caracteres.
+
+    body:
+        min: El cuerpo del mensaje tiene que tener como minimo {{ limit }} caracteres.
+
+    telephone:
+        min: El telefono tiene que tener como minimo {{ limit }} caracteres.
+        number: El telefono tiene que ser un numero.
+
+usuarios:
+    email:
+        email: Tiene que indicar un email valido.
+        notBlank: Tiene que indicar un email.
+        min: El nombre del usuario tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre del usuario tiene que tener como maximo {{ limit }} caracteres.
+
+    username:
+        notBlank: Tiene que indicar un email.
+        min: El email tiene que tener como minimo {{ limit }} caracteres.
+        max: El email tiene que tener como maximo {{ limit }} caracteres.
+
+
+    password:
+        notBlank: Tiene que indicar un password.
+        min: El password tiene que tener como minimo {{ limit }} caracteres.
+        max: El password tiene que tener como maximo {{ limit }} caracteres.
+
+empresa:
+    name:
+        notBlank: Tiene que indicar un nombre de la empresa.
+        min: El nombre de la empresa tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre de la empresa tiene que tener como maximo {{ limit }} caracteres.
+
+
+    email:
+        notBlank: Tiene que indicar un email.
+        min: El email tiene que tener como minimo {{ limit }} caracteres.
+        max: El email tiene que tener como maximo {{ limit }} caracteres.
+
+    slogan:
+        notBlank: Tiene que indicar un eslogan para la empresa.
+        min: El eslogan de la empresa tiene que tener como minimo {{ limit }} caracteres.
+        max: El eslogan de la empresa tiene que tener como maximo {{ limit }} caracteres.
+
+    mensajeBloqueo:
+        notBlank: Tiene que indicar un mensaje bloqueo para la empresa.
+        min: El mensaje de bloqueo de la web tiene que tener como minimo {{ limit }} caracteres.
+
+    logo:
+        notimage: El logo de la empresa tiene que ser una imagen.
+        maxSize: El logo de la empresa tiene que tener como maximo {{ limit }} {{ suffix }}.
+
+contacto:
+    name:
+        notBlank: Tiene que indicar un nombre para la direccion de la empresa.
+        min: El nombre de la direccion de la empresa tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre de la direccion de la empresa tiene que tener como maximo {{ limit }} caracteres.
+
+
+
+    direccion:
+        notBlank: Tiene que indicar una direccion.
+        min: La direccion de la empresa tiene que tener como minimo {{ limit }} caracteres.
+
+    ciudad:
+        notBlank: Tiene que indicar una ciudad.
+        min: El nombre de la ciudad tiene que tener como minimo {{ limit }} caracteres.
+
+    provincia:
+        notBlank: Tiene que indicar una provincia.
+        min: El nombre de la provincia tiene que tener como minimo {{ limit }} caracteres.
+
+    pais:
+        notBlank: Tiene que indicar una pais.
+        min: El nombre del pais tiene que tener como minimo {{ limit }} caracteres.
+
+    numero: Este campo solo puede contener numeros
+
+redes:
+    name:
+        notBlank: Tiene que indicar un nombre para la red social.
+        min: El nombre de la red social tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre de la red social tiene que tener como maximo {{ limit }} caracteres.
+
+adjunto:
+    name:
+        notblank: Tiene que indicar un nombre para el adjunto.
+        min: El nombre del adjunto tiene que tener como minimo {{ limit }} caracteres.
+        max: El idioma nombre del adjunto que tener como maximo {{ limit }} caracteres.
+        notnumber: El nombre del adjunto no puede contener un numero.
+
+    alt:
+        notblank: Tiene que indicar un texto alternativo para el adjunto.
+        min: El texto alternativo del adjunto tiene que tener como minimo {{ limit }} caracteres.
+        max: El texto alternativo nombre del adjunto que tener como maximo {{ limit }} caracteres.
+        notnumber: El texto alternativo del adjunto no puede contener un numero.
+
+    descripcion:
+        notblank: Tiene que indicar una descripción para el adjunto.
+        min: La descripción del adjunto tiene que tener como minimo {{ limit }} caracteres.
+        max: La descripción nombre del adjunto que tener como maximo {{ limit }} caracteres.
+
+videos:
+    name:
+        notblank: Tiene que indicar un nombre para el video.
+        min: El nombre del video tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre del video que tener como maximo {{ limit }} caracteres.
+        notnumber: El nombre del video no puede contener un numero.
+
+    alt:
+        notblank: Tiene que indicar un texto alternativo para el video.
+        min: El texto alternativo del video tiene que tener como minimo {{ limit }} caracteres.
+        max: El texto alternativo nombre del video que tener como maximo {{ limit }} caracteres.
+        notnumber: El texto alternativo del video no puede contener un numero.
+
+    descripcion:
+        notblank: Tiene que indicar una descripción para el video.
+        min: La descripción del video tiene que tener como minimo {{ limit }} caracteres.
+        max: La descripción del video que tener como maximo {{ limit }} caracteres.
+
+imagenes:
+    name:
+        notblank: Tiene que indicar un nombre para la imagen.
+        min: El nombre de la imagen tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre de la imagen que tener como maximo {{ limit }} caracteres.
+        notnumber: El nombre de la imagen no puede contener un numero.
+
+    alt:
+        notblank: Tiene que indicar un texto alternativo para la imagen.
+        min: El texto alternativo de la imagen tiene que tener como minimo {{ limit }} caracteres.
+        max: El texto alternativo de la imagen que tener como maximo {{ limit }} caracteres.
+        notnumber: El texto alternativo de la imagen no puede contener un numero.
+
+    descripcion:
+        notblank: Tiene que indicar una descripción para la imagen.
+        min: La descripción de la imagen tiene que tener como minimo {{ limit }} caracteres.
+        max: La descripción de la imagen que tener como maximo {{ limit }} caracteres.
+
+sliders:
+    name:
+        notblank: Tiene que indicar un nombre para el slider.
+        min: El nombre del slider tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre del slider que tener como maximo {{ limit }} caracteres.
+        notnumber: El nombre del slider no puede contener un numero.
+
+    descripcion:
+        notblank: Tiene que indicar una descripción para el slider.
+        min: La descripción del slider tiene que tener como minimo {{ limit }} caracteres.
+        max: La descripción del slider que tener como maximo {{ limit }} caracteres.
+
+menu:
+    name:
+        notblank: Tiene que indicar un nombre para el menu.
+        min: El nombre del menu tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre del menu que tener como maximo {{ limit }} caracteres.
+        notnumber: El nombre del menu no puede contener un numero.
+
+    limite:
+        min: Tiene que ser mayor que {{ limit }}.
+        max: Tiene que ser menor que {{ limit }}.
+        numero: Tiene que ser un numero
+
+secciones:
+    name:
+        notblank: Tiene que indicar un nombre para la sección.
+        min: El nombre de la sección tiene que tener como minimo {{ limit }} caracteres.
+        max: El nombre de la sección que tener como maximo {{ limit }} caracteres.
+        notnumber: El nombre de la sección no puede contener un numero.
+
+    etiquetaMenu:
+        notblank: Tiene que indicar un nombre, el cual se mostrara en el menú para identificar la sección la sección.
+        min: La etiqueta de la sección tiene que tener como minimo {{ limit }} caracteres.
+        max: La etiqueta de la sección que tener como maximo {{ limit }} caracteres.
+
+    tituloWeb:
+        notblank: Tiene que indicar un titulo para la sección.
+        min: El titulo de la sección tiene que tener como minimo {{ limit }} caracteres.
+        max: El titulo de la sección que tener como maximo {{ limit }} caracteres.
+
+    tituloSeccion:
+        notblank: Tiene que indicar un titulo(H1) para la sección.
+        min: El titulo(H1) de la sección tiene que tener como minimo {{ limit }} caracteres.
+        max: El titulo(H1) de la sección que tener como maximo {{ limit }} caracteres.
+
+    tituloSeo:
+        notblank: Tiene que indicar el titulo SEO para la sección.
+        min: El titulo SEO de la sección tiene que tener como minimo {{ limit }} caracteres.
+        max: El titulo SEO de la sección que tener como maximo {{ limit }} caracteres.
+
+    descripcionSeo:
+        notblank: Tiene que indicar una descripción SEO para la sección.
+        min: La descripción SEO de la sección tiene que tener como minimo {{ limit }} caracteres.
+        max: La descripción SEO de la sección que tener como maximo {{ limit }} caracteres.
+
+noticias:
+    titulo:
+        notblank: Tiene que indicar un titulo de la noticia.
+        min: El titulo de la noticia tiene que tener como minimo {{ limit }} caracteres.
+        max: El titulo de la noticia que tener como maximo {{ limit }} caracteres.
+
+    tituloSeo:
+        notblank: Tiene que indicar el titulo SEO para la noticia.
+        min: El titulo SEO de la noticia tiene que tener como minimo {{ limit }} caracteres.
+        max: El titulo SEO de la noticia que tener como maximo {{ limit }} caracteres.
+
+    descripcionSeo:
+        notblank: Tiene que indicar una descripción SEO para la noticia.
+        min: La descripción SEO de la noticia tiene que tener como minimo {{ limit }} caracteres.
+        max: La descripción SEO de la noticia que tener como maximo {{ limit }} caracteres.
+
+
+UsuariosEmails:
+    asset:
+        notblank: Tiene que indicar un asunto para el correo
+        min: El asunto del email tiene que tener como minimo {{ limit }} caracteres.
+        max: El asunto del email que tener como maximo {{ limit }} caracteres.
+
+    descripcion:
+        notblank: Tiene que indicar el contenido del email.
+        min: El cuerpo del email tiene que tener como minimo {{ limit }} caracteres.

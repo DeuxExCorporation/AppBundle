@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+	<link href="{{ asset('asset/backend/css/AdminLTE.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('asset/common/css/modal.css') }}" rel="stylesheet">
+{% endblock %}
+{% block title %}Destiny Dashboard{% endblock %}
+
+{% block body %}
+	<div class="col-md-12 main">
+		
+		<h1 class="page-header">{% block backendTitle %}{% endblock %}</h1>
+
+		<div class="col-md-12 alerta">
+			{% for type, flashMessage in app.session.flashbag.all() %}
+				<div class="alert alert-{{ type }} fade in">
+					<a data-dismiss="alert" class="pull-right" href="" type="button">
+						<i class="fa fa-times"></i>
+					</a>
+					{% if flashMessage.title is defined %}
+						<strong>{{ flashMessage.title }}</strong><br>
+						{{ flashMessage.message }}
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+
+
+		{% block  backendBody %}
+		{% endblock %}
+
+	</div>
+
+{% endblock %}

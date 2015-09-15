@@ -1,0 +1,154 @@
+{% set entidadActual = (type != null) ? element.type : entity %}
+{% if type == null %}
+    {% set changeStatus = path('changeStatusBackend',{'entity': entity,'element':element.slug}) %}
+    {% set edit = path('editBackend',{'entity':entity,'element':element.slug})  %}
+    {% set delete =  path('deleteBackend',{'entity':entidadActual,'element':element.slug}) %}
+    {% set sube = path('changePositionBackend',{'entity':entidadActual,'element':element.slug,'position':loop.index + 1}) %}
+    {% set baja = path('changePositionBackend',{'entity':entidadActual,'element':element.slug,'position':loop.index - 1}) %}
+{% else %}
+    {% set changeStatus = path('changeStatusContentBackend',{'entity': entity,'element':element.slug,'type': section.slug, 'group':element.type}) %}
+    {% set edit =  path('editContentBackend',{'entity':entity,'element':element.slug, 'type': section.slug, 'group':element.type}) %}
+    {% set delete =  path('deleteContentBackend',{'entity':entity,'element':element.slug, 'type': section.slug, 'group':element.type}) %}
+    {% set sube = path('changeContentPositionBackend',{'entity':entity,'element':element.slug, 'type': section.slug, 'group':element.type,'position':loop.index + 1}) %}
+    {% set baja = path('changeContentPositionBackend',{'entity':entity,'element':element.slug, 'type': section.slug, 'group':element.type,'position':loop.index - 1}) %}{% set changeStatus = path('changeStatusContentBackend',{'entity': entity,'element':element.slug,'type': section.slug, 'group':element.type}) %}
+{% endif %}
+<tr>
+    <td>
+        {% if actual == element.slug  %}
+            <i class="fa fa-paint-brush"></i>
+        {% else %}
+            {% set posicionPadre = (element.padre.posicion is defined) ? element.padre.posicion ~ '.' :''  %}
+            {{ posicionPadre }}{{ loop.index }}
+        {% endif %}
+    </td>
+    <td>
+        <a href="{{ edit}}">
+            <i class="fa fa-pencil"></i>
+            {% if element.type is defined %}
+                {% set typeElement = element.type %}
+                {% if typeElement == 'imagenes' %}
+                    {% set rutaImagen = (element.imagenes.webPath is defined) ? element.imagenes.webPath : element.webPath %}
+                    <img src="{{ asset(rutaImagen) | imagine_filter('image_backend')  }}" >
+                    {{ element | raw }}
+                {% endif %}
+                {% if typeElement == 'adjuntos' %}
+                    <i class="fa fa-file-pdf-o"></i>
+                    <i class="fa fa-arrow-circle-o-down"></i>
+                    {{ element | raw }}
+                {% endif %}
+                {% if typeElement == 'sliders' %}
+                    <i class="fa fa-slideshare"></i>
+                    {{ element | raw }}
+                {% endif %}
+                {% if typeElement == 'articulos' %}
+                    <i class="fa fa-file-text-o"></i>
+                    {{ element | raw }}
+                {% endif %}
+                {% if typeElement == 'videos' %}
+                    <i class="fa fa-youtube-play"></i>
+                    {{ element | raw }}
+                {% endif %}
+            {% else %}
+                {{ element | raw }}
+            {% endif %}
+        </a>
+    </td>
+    {% for type in listElements %}
+        {% if type == 'imagenes' %}
+            <td>
+                <img src="{{ asset(element.webPath) | imagine_filter('image_backend')  }}" >
+            </td>
+        {% elseif type == 'changeStatus' %}
+            <td>
+                {% if element.defecto == true %}
+                    <i class="fa fa-check element-active" style="color: red "></i>
+                {% else %}
+                    <i class="fa fa-ban element-disabled"></i>
+                {% endif %}
+            </td>
+        {% elseif type == 'file' %}
+            <td>
+                <a target="_blank" href="{{ asset(element.webPath) }}">
+                    <i class="fa fa-arrow-circle-o-down"></i>
+                    {{ 'dashboard.download' | trans }}
+                </a>
+            </td>
+        {% elseif type == null %}
+        {% else %}
+            <td>
+                {{ attribute(element, type) }}
+            </td>
+        {% endif %}
+    {% endfor %}
+    {% if element.posicion is defined  %}
+        <td>
+            {{ element.posicion }}
+            {% if list |length == 1  %}
+                <i class="fa fa-ban"></i>
+            {% else %}
+                {% if loop.first %}
+                    <a href="{{ sube }}">
+                        <i class="fa fa-chevron-circle-down "></i>
+                    </a>
+                {% elseif loop.last %}
+                    <a href="{{ baja }}">
+                        <i class="fa fa-chevron-circle-up "></i>
+                    </a>
+                {% else %}
+                    <a href="{{ sube}}">
+                        <i class="fa fa-chevron-circle-down "></i>
+                    </a>
+                    <a href="{{baja }}">
+                        <i class="fa fa-chevron-circle-up "></i>
+                    </a>
+                {% endif %}
+            {% endif %}
+        </td>
+    {% endif %}
+    <td>
+        <a href="{{ changeStatus }}">
+            {% if element.estado == true %}
+                <i class="fa fa-check element-active"></i>
+            {% else %}
+                <i class="fa fa-ban element-disabled"></i>
+            {% endif %}
+        </a>
+    </td>
+    <td>{{ element.fechaModificacion | date ('d/m/y H:i') }}</td>
+    <td>
+        {% if actual == element.slug  %}
+            <i class="fa fa-trash"></i>
+        {% else %}
+            <a href="#borrar-{{ element.slug }}">
+                <i class="fa fa-trash"></i>
+            </a>
+            <div class="modalDialog" id="borrar-{{ element.slug }}">
+                <div>
+                    <a href="#close" title="Close" class="close">X</a>
+                    <h3 class="alerta">
+                        {{ 'list.caution' | trans }}
+                    </h3>
+                    <p class="mensaje">
+                        {{ 'list.predelte' | trans }}
+                    </p>
+                    <a class="btn btn-danger"
+                       href="{{ delete }}">
+                        <i class="fa fa-trash"></i>
+                        {{ 'form.delete' | trans }}
+                    </a>
+                    <a class="btn btn-success" href="#close">
+                        <i class="fa fa-reply"></i>
+                        {{ 'form.back' | trans }}
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </td>
+    {% if listButton is defined and listButton != false %}
+        <td>
+            <a href="{{ path(listButton.action,{'type':listButton.type,'entity':element.slug}) }}" class="{{ listButton.class }}">
+                {{ listButton.tag }}
+            </a>
+        </td>
+    {% endif %}
+</tr>

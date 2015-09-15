@@ -1,0 +1,39 @@
+{% for contenido in content %}
+
+	{% if contenido.type == 'videos' and contenido.estado == true %}
+		{% include "@DestinyApp/Frontend/includes/video.html.twig"
+			with {'video': (contenido.videos is defined)
+							? contenido.videos : contenido }%}
+	{% endif %}
+
+	{% if contenido.type == 'articulos' and contenido.estado == true %}
+
+		{% include "@DestinyApp/Frontend/includes/articulo.html.twig"
+				with {'articulo': (contenido.articulos is defined)
+							      ? contenido.articulos : contenido }%}
+	{% endif %}
+
+
+
+	{% if contenido.type == 'slider' and contenido.estado == true %}
+
+
+		{% include "@DestinyApp/Frontend/includes/slider.html.twig" with {'slider': (contenido.sliders is defined)
+		? contenido.sliders : contenido }%}
+
+	{% endif %}
+
+	{% if contenido.type == 'imagenes' and contenido.estado == true %}
+
+		{% include "@DestinyApp/Frontend/includes/imagen.html.twig" with {'imagen': (contenido.imagenes is defined)
+							      ? contenido.imagenes : contenido }%}
+
+	{% endif %}
+
+	{% if contenido.type == 'adjuntos' and contenido.estado == true %}
+		{% include "@DestinyApp/Frontend/includes/adjunto.html.twig" with {'adjunto': (contenido.adjuntos is defined)
+		? contenido.adjuntos : contenido  }%}
+	{% endif %}
+
+{% endfor %}
+

@@ -1,0 +1,17 @@
+{% extends "DestinyAppBundle::instalacionBase.html.twig" %}
+
+{% block backendTitle %}{{ 'instalacion.datosEmpresa.titulo' | trans }}{% endblock %}
+
+
+{% block backendBody %}
+
+	<h2>{{ 'instalacion.datosEmpresa.info' | trans }}</h2>
+	<div class="progress">
+		<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+			<span class="sr-only">0% Complete</span>
+		</div>
+	</div>
+	<div class="col-md-6">
+	{% include 'DestinyAppBundle:Instalaccion:form.html.twig' %}
+	</div>
+{% endblock %}

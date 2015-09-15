@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+
+	{% for field in form.children if field.vars.name != '_token' %}
+		<div class="form-group {% if not field.vars.valid %}has-error{% endif %}">
+			{% set field_label = entity_fields[field.vars.name]['label']|default(null) %}
+			{{ form_label(field, field_label|trans, { label_attr: { class: 'col-sm-12 control-label' } }) }}
+			<div class="col-sm-12">
+				{{ form_widget (field,{'attr':{'class':'form-control'}}) }}
+				{% if form_errors(field)  != '' %}
+					<br>
+					<div class="alert alert-danger fade in">
+						<a data-dismiss="alert" class="pull-right" href="" type="button">
+							<i class="fa fa-times"></i>
+						</a>
+						<strong>Error</strong><br>
+						{{ form_errors(field) }}
+
+					</div>
+
+				{% endif %}
+			</div>
+		</div>
+	{% endfor %}
+	<div class="clearfix"></div>
+	<br><br>
+	<button type="submit" class="btn btn-success pull-right" value="Submit">{{ 'form.save' | trans }}</button>
+{{ form_end(form) }}
