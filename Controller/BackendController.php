@@ -89,8 +89,7 @@ class BackendController extends Controller
         }
 
 		$new = $this->get(strtolower($entity))->newEntity($group, $type);
-        $permiso = $this->get('backend')->checkPermisions('create',$new);
-        if (false === $permiso)  throw $this->createAccessDeniedException('Unauthorized access!');
+        if (false === $this->get('backend')->checkPermisions('create',$new))  throw $this->createAccessDeniedException('Unauthorized access!');
 
 		$formulario = $this->createForm ($this->get (strtolower ($entity)), $new);
 		$formulario->handleRequest ($request);
