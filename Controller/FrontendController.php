@@ -4,12 +4,12 @@ namespace Destiny\AppBundle\Controller;
 
 use Destiny\AppBundle\Entity\Idiomas;
 use Destiny\AppBundle\Entity\Mensajes;
-use Destiny\AppBundle\Entity\Noticias;
-use Destiny\AppBundle\Entity\Secciones;
+
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class FrontendController extends Controller

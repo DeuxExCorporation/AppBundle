@@ -2,16 +2,12 @@
 namespace Destiny\AppBundle\Services;
 
 
-use Destiny\AppBundle\Entity\BackendGruposSecciones;
-use Doctrine\ORM\EntityManager;
 
-use SensioLabs\Security\SecurityChecker;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 
 class BackendService
 {

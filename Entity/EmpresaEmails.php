@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -152,7 +152,7 @@ class EmpresaEmails
         }
 
 
-        // aquí usa el nombre de archivo original pero lo debes
+        // aquï¿½ usa el nombre de archivo original pero lo debes
         // sanear al menos para evitar cualquier problema de seguridad
 
         // move takes the target directory and then the
@@ -173,7 +173,7 @@ class EmpresaEmails
         // set the path property to the filename where you've saved the file
         $this->ruta = $nombreArchivo;
 
-        // limpia la propiedad «file» ya que no la necesitas más
+        // limpia la propiedad ï¿½fileï¿½ ya que no la necesitas mï¿½s
         $this->archivo = null;
     }
 
