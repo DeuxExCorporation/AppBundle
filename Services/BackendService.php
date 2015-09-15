@@ -9,6 +9,7 @@ use SensioLabs\Security\SecurityChecker;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -88,7 +89,7 @@ class BackendService
 
     }
 
-    public function getTranslations($entity,$element,$language)
+    public function getTranslations($entity,$element,Idiomas $language)
     {
         $repository = $this->em->getRepository ('DestinyAppBundle:' . ucfirst ($entity).'Traducciones');
 

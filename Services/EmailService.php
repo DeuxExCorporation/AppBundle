@@ -8,6 +8,8 @@
 namespace Destiny\AppBundle\Services;
 
 
+use Destiny\AppBundle\Entity\EmpresaContacto;
+use Destiny\AppBundle\Entity\EmpresaWeb;
 use Destiny\AppBundle\Entity\Mensajes;
 use Destiny\AppBundle\Entity\Usuarios;
 use Doctrine\ORM\EntityManager;
@@ -83,7 +85,7 @@ class EmailService
 
 	}
 
-	public function enviarEmailInstalacion ($empresa, $usuario, $contacto, $redes)
+	public function enviarEmailInstalacion (EmpresaWeb $empresa, Usuarios $usuario, $contacto, $redes)
 	{
 
 		$email = \Swift_Message::newInstance ()

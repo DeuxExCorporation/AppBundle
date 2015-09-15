@@ -37,7 +37,7 @@ services:
 
 
     destiny_appbundle.form.type.idiomas:
-        class: Destiny\AppBundle\Form\IdiomasType
+        class:  Destiny\AppBundle\Form\Type\IdiomasType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default"]
         tags:
             - { name: form.type }
@@ -45,7 +45,7 @@ services:
     idiomas: "@destiny_appbundle.form.type.idiomas"
 
     destiny_appbundle.form.type.permisos:
-        class: Destiny\AppBundle\Form\BackendPermisosType
+        class:  Destiny\AppBundle\Form\Type\BackendPermisosType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default"]
         tags:
             - { name: form.type }
@@ -53,7 +53,7 @@ services:
     backendPermisos: "@destiny_appbundle.form.type.permisos"
 
     destiny_appbundle.form.type.newsletter:
-        class: Destiny\AppBundle\Form\NewsletterType
+        class:  Destiny\AppBundle\Form\Type\NewsletterType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default"]
         tags:
             - { name: form.type }
@@ -61,7 +61,7 @@ services:
     newsletter: "@destiny_appbundle.form.type.newsletter"
 
     destiny_appbundle.form.type.mensajes:
-        class: Destiny\AppBundle\Form\MensajesType
+        class:  Destiny\AppBundle\Form\Type\MensajesType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default"]
         tags:
             - { name: form.type }
@@ -69,7 +69,7 @@ services:
     mensajes: "@destiny_appbundle.form.type.mensajes"
 
     destiny_appbundle.form.type.contacto:
-        class: Destiny\AppBundle\Form\ContactoType
+        class:  Destiny\AppBundle\Form\Type\ContactoType
         arguments: [ "@translator.default"]
         tags:
             - { name: form.type }
@@ -77,7 +77,7 @@ services:
     contacto: "@destiny_appbundle.form.type.contacto"
 
     destiny_appbundle.form.type.usuarios:
-        class: Destiny\AppBundle\Form\UsuariosType
+        class:  Destiny\AppBundle\Form\Type\UsuariosType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -85,7 +85,7 @@ services:
     usuarios: "@destiny_appbundle.form.type.usuarios"
 
     destiny_appbundle.form.type.usuarios.emails:
-        class: Destiny\AppBundle\Form\UsuariosEmailsType
+        class:  Destiny\AppBundle\Form\Type\UsuariosEmailsType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default"]
         tags:
             - { name: form.type }
@@ -93,7 +93,7 @@ services:
     usuariosemails: "@destiny_appbundle.form.type.usuarios.emails"
 
     destiny_appbundle.form.type.empresa.web:
-        class: Destiny\AppBundle\Form\EmpresaWebType
+        class:  Destiny\AppBundle\Form\Type\EmpresaWebType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -103,7 +103,7 @@ services:
 
 
     destiny_appbundle.form.type.empresa.web.traduccion:
-        class: Destiny\AppBundle\Form\EmpresaWebTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\EmpresaWebTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -111,7 +111,7 @@ services:
     empresaWeb-traducciones: "@destiny_appbundle.form.type.empresa.web.traduccion"
 
     destiny_appbundle.form.type.empresa.contacto:
-        class: Destiny\AppBundle\Form\EmpresaContactoType
+        class:  Destiny\AppBundle\Form\Type\EmpresaContactoType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -119,7 +119,7 @@ services:
     empresaContacto: "@destiny_appbundle.form.type.empresa.contacto"
 
     destiny_appbundle.form.type.empresa.redes.sociales:
-        class: Destiny\AppBundle\Form\EmpresaRedesSocialesType
+        class:  Destiny\AppBundle\Form\Type\EmpresaRedesSocialesType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -127,7 +127,7 @@ services:
     empresaRedesSociales: "@destiny_appbundle.form.type.empresa.redes.sociales"
 
     destiny_appbundle.form.type.empresa.emails:
-        class: Destiny\AppBundle\Form\EmpresaEmailsType
+        class:  Destiny\AppBundle\Form\Type\EmpresaEmailsType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default"]
         tags:
             - { name: form.type }
@@ -135,7 +135,7 @@ services:
     empresaemails: "@destiny_appbundle.form.type.empresa.emails"
 
     destiny_appbundle.form.type.adjuntos:
-        class: Destiny\AppBundle\Form\AdjuntosType
+        class:  Destiny\AppBundle\Form\Type\AdjuntosType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -143,7 +143,7 @@ services:
     adjuntos: "@destiny_appbundle.form.type.adjuntos"
 
     destiny_appbundle.form.type.adjuntos.traducciones:
-        class: Destiny\AppBundle\Form\AdjuntosTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\AdjuntosTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -151,7 +151,7 @@ services:
     adjuntos-traducciones: "@destiny_appbundle.form.type.adjuntos.traducciones"
 
     destiny_appbundle.form.type.videos:
-        class: Destiny\AppBundle\Form\VideosType
+        class:  Destiny\AppBundle\Form\Type\VideosType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -159,7 +159,7 @@ services:
     videos: "@destiny_appbundle.form.type.videos"
 
     destiny_appbundle.form.type.videos.traducciones:
-        class: Destiny\AppBundle\Form\VideosTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\VideosTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -167,7 +167,7 @@ services:
     videos-traducciones: "@destiny_appbundle.form.type.videos.traducciones"
 
     destiny_appbundle.form.type.imagenes:
-        class: Destiny\AppBundle\Form\ImagenesType
+        class:  Destiny\AppBundle\Form\Type\ImagenesType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -175,7 +175,7 @@ services:
     imagenes: "@destiny_appbundle.form.type.imagenes"
 
     destiny_appbundle.form.type.imagenes.traducciones:
-        class: Destiny\AppBundle\Form\ImagenesTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\ImagenesTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -183,7 +183,7 @@ services:
     imagenes-traducciones: "@destiny_appbundle.form.type.imagenes.traducciones"
 
     destiny_appbundle.form.type.sliders:
-        class: Destiny\AppBundle\Form\SlidersType
+        class:  Destiny\AppBundle\Form\Type\SlidersType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -191,7 +191,7 @@ services:
     sliders: "@destiny_appbundle.form.type.sliders"
 
     destiny_appbundle.form.type.sliders.traducciones:
-        class: Destiny\AppBundle\Form\SlidersTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\SlidersTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -199,7 +199,7 @@ services:
     sliders-traducciones: "@destiny_appbundle.form.type.sliders.traducciones"
 
     destiny_appbundle.form.type.menu:
-        class: Destiny\AppBundle\Form\MenusType
+        class:  Destiny\AppBundle\Form\Type\MenusType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -207,7 +207,7 @@ services:
     menus: "@destiny_appbundle.form.type.menu"
 
     destiny_appbundle.form.type.secciones:
-        class: Destiny\AppBundle\Form\SeccionesType
+        class:  Destiny\AppBundle\Form\Type\SeccionesType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -215,7 +215,7 @@ services:
     secciones: "@destiny_appbundle.form.type.secciones"
 
     destiny_appbundle.form.type.grupos.backend:
-        class: Destiny\AppBundle\Form\BackendGruposSeccionesType
+        class:  Destiny\AppBundle\Form\Type\BackendGruposSeccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -223,7 +223,7 @@ services:
     backendgrupossecciones: "@destiny_appbundle.form.type.grupos.backend"
 
     destiny_appbundle.form.type.menus.backend:
-        class: Destiny\AppBundle\Form\BackendSeccionesType
+        class:  Destiny\AppBundle\Form\Type\BackendSeccionesType
         arguments: ["@translator.default","@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type }
@@ -232,7 +232,7 @@ services:
 
 
     destiny_appbundle.form.type.secciones.traduccion:
-        class: Destiny\AppBundle\Form\SeccionesTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\SeccionesTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -240,7 +240,7 @@ services:
     secciones-traducciones: "@destiny_appbundle.form.type.secciones.traduccion"
 
     destiny_appbundle.form.type.seccionescontenido:
-        class: Destiny\AppBundle\Form\SeccionesContenidoType
+        class:  Destiny\AppBundle\Form\Type\SeccionesContenidoType
         arguments: ["@doctrine.orm.entity_manager","@translator.default"]
         tags:
             - { name: form.type }
@@ -248,7 +248,7 @@ services:
     seccionescontenido: "@destiny_appbundle.form.type.seccionescontenido"
 
     destiny_appbundle.form.type.videoscontenido:
-        class: Destiny\AppBundle\Form\VideosContenidoType
+        class:  Destiny\AppBundle\Form\Type\VideosContenidoType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -256,7 +256,7 @@ services:
     videoscontenido: "@destiny_appbundle.form.type.videoscontenido"
 
     destiny_appbundle.form.type.imagenescontenido:
-        class: Destiny\AppBundle\Form\ImagenesContenidoType
+        class:  Destiny\AppBundle\Form\Type\ImagenesContenidoType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -264,7 +264,7 @@ services:
     imagenescontenido: "@destiny_appbundle.form.type.imagenescontenido"
 
     destiny_appbundle.form.type.sliderscontenido:
-        class: Destiny\AppBundle\Form\SlidersContenidoType
+        class:  Destiny\AppBundle\Form\Type\SlidersContenidoType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -272,7 +272,7 @@ services:
     sliderscontenido: "@destiny_appbundle.form.type.sliderscontenido"
 
     destiny_appbundle.form.type.articuloscontenido:
-        class: Destiny\AppBundle\Form\ArticulosContenidoType
+        class:  Destiny\AppBundle\Form\Type\ArticulosContenidoType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -281,7 +281,7 @@ services:
     articulos: "@destiny_appbundle.form.type.articuloscontenido"
 
     destiny_appbundle.form.type.articulos.traducciones:
-        class: Destiny\AppBundle\Form\ArticulosContenidoTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\ArticulosContenidoTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -289,7 +289,7 @@ services:
     articulos-traducciones: "@destiny_appbundle.form.type.articulos.traducciones"
 
     destiny_appbundle.form.type.noticiascategoria:
-        class: Destiny\AppBundle\Form\NoticiasCategoriasType
+        class:  Destiny\AppBundle\Form\Type\NoticiasCategoriasType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -297,7 +297,7 @@ services:
     noticiascategorias: "@destiny_appbundle.form.type.noticiascategoria"
 
     destiny_appbundle.form.type.noticiascategoria.traducciones:
-        class: Destiny\AppBundle\Form\NoticiasCategoriasTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\NoticiasCategoriasTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -305,7 +305,7 @@ services:
     noticiascategorias-traducciones: "@destiny_appbundle.form.type.noticiascategoria.traducciones"
 
     destiny_appbundle.form.type.noticias:
-        class: Destiny\AppBundle\Form\NoticiasType
+        class:  Destiny\AppBundle\Form\Type\NoticiasType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -313,7 +313,7 @@ services:
     noticias: "@destiny_appbundle.form.type.noticias"
 
     destiny_appbundle.form.type.noticias.traducciones:
-        class: Destiny\AppBundle\Form\NoticiasTraduccionesType
+        class:  Destiny\AppBundle\Form\Type\NoticiasTraduccionesType
         arguments: ["@translator.default"]
         tags:
             - { name: form.type }
@@ -321,7 +321,7 @@ services:
     noticias-traducciones: "@destiny_appbundle.form.type.noticias.traducciones"
 
     destiny_appbundle.form.type.adjuntoscontenido:
-        class: Destiny\AppBundle\Form\AdjuntosContenidoType
+        class:  Destiny\AppBundle\Form\Type\AdjuntosContenidoType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
@@ -329,7 +329,7 @@ services:
     adjuntoscontenido: "@destiny_appbundle.form.type.adjuntoscontenido"
 
     destiny_appbundle.form.type.noticiascontenido:
-        class: Destiny\AppBundle\Form\NoticiasContenidoType
+        class:  Destiny\AppBundle\Form\Type\NoticiasContenidoType
         arguments: ["@doctrine.orm.entity_manager", "@translator.default","@service_container"]
         tags:
             - { name: form.type }
