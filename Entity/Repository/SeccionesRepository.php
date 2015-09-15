@@ -73,7 +73,7 @@ class SeccionesRepository extends EntityRepository
 
 		$query = $em->createQueryBuilder ();
 
-		if ($language->getDefecto() == false)
+		if ($language->getDefecto() === false)
 		{
 			return $this->getseccionPortadaTraducida($language);
 		}
@@ -94,7 +94,7 @@ class SeccionesRepository extends EntityRepository
 		$em = $this->getEntityManager ();
 		$query = $em->createQueryBuilder ();
 
-		if ($language->getDefecto() == false)
+		if ($language->getDefecto() === false)
 		{
 			return $this->getSeccionTraducida($section, $language);
 		}
@@ -124,7 +124,7 @@ class SeccionesRepository extends EntityRepository
 
 
 
-		($seccionTraducida != null)
+		(!is_null($seccionTraducida))
 			?$seccionTraducida->setContenidos($this->getAlterneContent($seccionTraducida, $language))
 			: NULL;
 
@@ -145,7 +145,7 @@ class SeccionesRepository extends EntityRepository
 													 ':idioma' => $language->getIsoCode()])
 									->getQuery()->getOneOrNullResult();
 
-		($seccionTraducida != null)
+        (!is_null($seccionTraducida))
 			?$seccionTraducida->setContenidos($this->getAlterneContent($seccionTraducida, $language))
 			: NULL;
 
@@ -157,7 +157,7 @@ class SeccionesRepository extends EntityRepository
 		$contenido = array();
 		foreach ($seccionTraducida->getCanonica()->getContenidos()->getValues() as $contenidoSeccion)
 		{
-			if ($contenidoSeccion->getEntity() != null)
+			if (!is_null($contenidoSeccion->getEntity()))
 			{
 				foreach ($contenidoSeccion->getEntity()->getTraducciones() as $traduccion)
 				{

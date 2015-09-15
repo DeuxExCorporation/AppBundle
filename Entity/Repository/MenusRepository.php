@@ -19,7 +19,7 @@ class MenusRepository extends EntityRepository
 
 		$query = $em->createQueryBuilder ();
 
-		if ($language->getDefecto() == false)
+		if ($language->getDefecto() === false)
 		{
 
 		return $this->getMenuAlternativo($menu,$language);

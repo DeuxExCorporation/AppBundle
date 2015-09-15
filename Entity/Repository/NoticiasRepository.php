@@ -64,7 +64,7 @@ class NoticiasRepository extends EntityRepository
 
 
 
-			($noticiaTraducida != null)
+			(!is_null($noticiaTraducida))
 				?$noticiaTraducida->setContenidos($this->getAlterneContent($noticiaTraducida, $language))
 				: NULL;
 
@@ -92,7 +92,7 @@ class NoticiasRepository extends EntityRepository
 		$contenido = array();
 		foreach ($seccionTraducida->getCanonica()->getContenidos()->getValues() as $contenidoSeccion)
 		{
-			if ($contenidoSeccion->getEntity() != null)
+			if (!is_null($contenidoSeccion->getEntity()))
 			{
 				foreach ($contenidoSeccion->getEntity()->getTraducciones() as $traduccion)
 				{

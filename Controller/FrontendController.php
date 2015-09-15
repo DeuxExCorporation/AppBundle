@@ -185,7 +185,7 @@ class FrontendController extends Controller
      */
     public function newsCategoryWebAction($category, Idiomas $language = null, $section = null )
     {
-        if (is_null($language)|| is_null($section)) throw  $this->createNotFoundException();
+        if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
         $em = $this->getDoctrine()->getManager();
         return $this->render ('DestinyAppBundle:Frontend:listado de categorias.html.twig',
             [

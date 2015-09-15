@@ -38,7 +38,7 @@ class SeccionesTraduccionesType extends AbstractType
             ->add('descripcionSeo', 'text', ['label' => $this->translator->trans ('secciones.form.seoDescription')])
         ;
 
-        if ($options['data']->getCanonica()->getPortada()== true)
+        if ($options['data']->getCanonica()->getPortada()=== true)
         {
             $builder->remove('url');
         }

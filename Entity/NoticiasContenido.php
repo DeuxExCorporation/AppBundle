@@ -235,7 +235,7 @@ class NoticiasContenido
     public function setPosicion($posicion)
     {
 
-	    if ($this->getArticulos() != null)
+	    if (!is_null(($this->getArticulos())))
 	    {
 		    $this->posicion = $this->getArticulos()->getPosicion();
 	    } else
@@ -255,7 +255,7 @@ class NoticiasContenido
      */
     public function getPosicion()
     {
-	    if ($this->getArticulos() != null)
+        if (!is_null(($this->getArticulos())))
 	    {
 		    return $this->getArticulos()->getPosicion();
 	    }

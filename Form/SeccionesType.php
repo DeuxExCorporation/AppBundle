@@ -103,7 +103,7 @@ class SeccionesType extends AbstractType
 
 		$seccion = new Secciones();
 
-		if ($menu != null)
+		if (!is_null($menu) )
 		{
 			$secciones = $this->em->getRepository('DestinyAppBundle:Secciones')
 					->getSeccionesBackend($menu);
@@ -152,7 +152,7 @@ class SeccionesType extends AbstractType
 	{
 		$seccionesMenu = $seccion->getMenu()->getSecciones()->getValues();
 
-		if ($seccion->getPadre() != null)
+		if (!is_null($seccion->getPadre()))
 		{
 			$secciones = $seccion->getPadre()->getSubsecciones();
 
@@ -187,7 +187,7 @@ class SeccionesType extends AbstractType
 
 
 
-		if ($seccion->getPadre() != null)
+        if (!is_null($seccion->getPadre()))
 		{
 			$secciones = $seccion->getPadre()->getSubsecciones();
 
