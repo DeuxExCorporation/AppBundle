@@ -89,7 +89,7 @@ class NoticiasContenidoRepository extends EntityRepository
 
 		$em = $this->getEntityManager ();
 
-		if (method_exists($contenido,'getType') and $contenido->getType() === 'articulos')
+		if (method_exists($contenido,'getType') && $contenido->getType() === 'articulos')
 		{
 			$query = $em->createQueryBuilder();
 			$contenido = $query->select(['sc','a'])

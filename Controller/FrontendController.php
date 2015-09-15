@@ -39,7 +39,7 @@ class FrontendController extends Controller
 		$idioma = $em->getRepository('DestinyAppBundle:Idiomas')->getLanguageDefault();
 		$empresa = $em->getRepository('DestinyAppBundle:EmpresaWeb')->getEmpresaActiva();
 
-		if (is_null($idioma) or is_null($empresa)) return $this->redirect($this->generateUrl('portadaInstalacion'));
+		if (is_null($idioma) || is_null($empresa)) return $this->redirect($this->generateUrl('portadaInstalacion'));
 
 
 		return $this->redirect($this->generateUrl('portadaWeb',['language' =>$idioma->getIsoCode() ]));
@@ -60,7 +60,7 @@ class FrontendController extends Controller
 	    $this->get('translator')->setLocale($language->getIsoCode());
 	    $section = $em->getRepository('DestinyAppBundle:Secciones')->getPortada($language);
 
-		if (is_null($language) or is_null($section) ) throw  $this->createNotFoundException();
+		if (is_null($language) || is_null($section) ) throw  $this->createNotFoundException();
 
 		return $this->render ('DestinyAppBundle:Frontend:contenido.html.twig',
 			[
@@ -86,7 +86,7 @@ class FrontendController extends Controller
 	public function seccionWebAction(Request $request, $section= null , Idiomas $language = null)
 	{
 
-		if (is_null($language)or is_null($section)) throw  $this->createNotFoundException();
+		if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
 
 		$em = $this->getDoctrine()->getManager();
 		switch ($tipo = $section->getTipo() )
@@ -150,7 +150,7 @@ class FrontendController extends Controller
 	 */
 	public function newsWebAction($section= null , Idiomas $language = null, $news = null)
 	{
-		if (is_null($language)or is_null($section) or is_null($news)) throw  $this->createNotFoundException();
+		if (is_null($language)|| is_null($section) or is_null($news)) throw  $this->createNotFoundException();
 
 		return $this->render ('DestinyAppBundle:Frontend:noticias.html.twig',
 			[
@@ -185,7 +185,7 @@ class FrontendController extends Controller
      */
     public function newsCategoryWebAction($category, Idiomas $language = null, $section = null )
     {
-        if (is_null($language)or is_null($section)) throw  $this->createNotFoundException();
+        if (is_null($language)|| is_null($section)) throw  $this->createNotFoundException();
         $em = $this->getDoctrine()->getManager();
         return $this->render ('DestinyAppBundle:Frontend:listado de categorias.html.twig',
             [

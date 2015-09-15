@@ -479,7 +479,7 @@ class InstalaccionController extends Controller
 		$em->flush();
 	}
 
-	public function createPermisos()
+	private function createPermisos()
 	{
 		$entidades =['Menus','Secciones','Pdf','Videos','Imagenes','Sliders','Noticias','Usuarios','Newsletter','Backend','backendPermisos'];
 		$em = $this->getDoctrine()->getManager();

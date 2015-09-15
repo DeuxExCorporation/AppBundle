@@ -245,7 +245,7 @@ class BackendController extends Controller
                     ? $this->get('backend')->getElements($entity.'Contenido','one',$element,$type)
                     : $this->get('backend')->getElements($entity,'one',$element);
 
-		if ((NULL != $change) and ($this->get ($entity)->isChangeable ($change) == TRUE))
+		if ((NULL != $change) && ($this->get ($entity)->isChangeable ($change) == TRUE))
 		{
 
             $this->get('backend')->changeEstatus($change,$entity);
