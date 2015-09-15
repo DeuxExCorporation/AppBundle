@@ -2,10 +2,8 @@
 
 namespace Destiny\AppBundle\Form\Type;
 
-use Destiny\AppBundle\Entity\Secciones;
+
 use Destiny\AppBundle\Entity\SeccionesTraducciones;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

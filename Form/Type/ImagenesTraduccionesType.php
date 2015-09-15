@@ -2,10 +2,8 @@
 
 namespace Destiny\AppBundle\Form\Type;
 
-use Destiny\AppBundle\Entity\Imagenes;
-use Destiny\AppBundle\Entity\ImagenesTraducciones;
-use Doctrine\ORM\EntityManager;
 
+use Destiny\AppBundle\Entity\ImagenesTraducciones;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

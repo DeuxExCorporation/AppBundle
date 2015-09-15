@@ -4,8 +4,6 @@ namespace Destiny\AppBundle\Security;
 
 
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
-use Destiny\AppBundle\Entity\Usuarios;
-
 use Doctrine\ORM\EntityRepository;
 
 class AccessVoter extends AbstractVoter

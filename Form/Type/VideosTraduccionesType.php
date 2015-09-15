@@ -2,10 +2,8 @@
 
 namespace Destiny\AppBundle\Form\Type;
 
-use Destiny\AppBundle\Entity\Videos;
-use Destiny\AppBundle\Entity\VideosTraducciones;
-use Doctrine\ORM\EntityManager;
 
+use Destiny\AppBundle\Entity\VideosTraducciones;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

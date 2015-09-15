@@ -2,10 +2,7 @@
 
 namespace Destiny\AppBundle\Form\Type;
 
-use Destiny\AppBundle\Entity\Noticias;
 use Destiny\AppBundle\Entity\NoticiasTraducciones;
-use Destiny\AppBundle\Entity\Secciones;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
