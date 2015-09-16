@@ -96,7 +96,7 @@ class BackendController extends Controller
 
 		if (($formulario->isSubmitted ()) && ($formulario->isValid ()))
 		{
-            $backend->postCreate($new,$entity,$type,$element);
+            $backend->postCreate($new,$entity,$type,isset($element) ? $element : null);
             $backend->processForm($new);
 
 			$this->get ('session')->getFlashBag()->set ('success', [
