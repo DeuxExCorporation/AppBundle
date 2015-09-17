@@ -1,6 +1,6 @@
-# AppBundle
+# AppBundle, mi CMS
 
-AppBundle es mi gestor de paginas web vainilla.Incluye:
+AppBundle es mi CMS de paginas web vainilla, altamente personalizable y relativamente sencillo de configurar.Incluye:
 * Gestión de Usuarios.
 * Gestión de Secciones con SEO altamente personalizable.
 * Gestión de Noticias con SEO altamente personalizable.
