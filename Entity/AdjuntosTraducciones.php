@@ -43,13 +43,6 @@ class AdjuntosTraducciones
 	 */
 	private $nombre;
 
-	/**
-	 * @var string
-	 * @ORM\Column(name="slug", type="string", length=255)
-	 * @Gedmo\Slug(fields={"nombre"})
-	 */
-	private $slug;
-
     /**
      * @var string
      * @ORM\Column(name="alt", type="string", length=255)

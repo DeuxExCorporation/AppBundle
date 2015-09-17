@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Yaml\Parser;
 
 class FrontendController extends Controller
 {
@@ -244,15 +245,14 @@ class FrontendController extends Controller
 
         foreach($em->getRepository('DestinyAppBundle:Idiomas')->getAllLanguagesBackend() as $idioma)
         {
-            foreach($em->getRepository('DestinyAppBundle:Idiomas')->getAllLanguagesBackend() as $idioma)
-                foreach ($menus as $menu)
-                {
-                    $urls[$idioma->getIsoCode()][$menu->getSlug()] = ['idioma' => $idioma,
-                        'menu' => $menu,
-                        'secciones' => $em->getRepository('DestinyAppBundle:Menus')->getMenuFrontend($menu->getSlug(),$idioma)
-                    ];
+            foreach ($menus as $menu)
+            {
+                $urls[$idioma->getIsoCode()][$menu->getSlug()] = ['idioma' => $idioma,
+                    'menu' => $menu,
+                    'secciones' => $em->getRepository('DestinyAppBundle:Menus')->getMenuFrontend($menu->getSlug(),$idioma)
+                ];
 
-                }
+            }
 
         }
 

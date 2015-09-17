@@ -18,7 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class BackendController extends Controller
 {
 
-
 	/**
 	 * @Route("/",name="portadaBackend")
 	 */
