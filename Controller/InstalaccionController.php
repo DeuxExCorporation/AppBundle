@@ -2,6 +2,7 @@
 
 namespace Destiny\AppBundle\Controller;
 
+use Destiny\AppBundle\Entity\BackendPermisos;
 use Destiny\AppBundle\Entity\EmpresaContacto;
 use Destiny\AppBundle\Entity\EmpresaEmails;
 use Destiny\AppBundle\Entity\EmpresaRedesSociales;
@@ -185,6 +186,9 @@ class InstalaccionController extends Controller
 			    'message' => $traductor->trans ('flash.idioma.message', ['entidad' => $idioma])
 		    ]);
 
+            $this->createMenusBackend();
+            $this->createPermisos();
+
 		    return $this->redirect($this->generateUrl('empresaUsuarioAdmin',
 			    [
 				    'empresa'  => $empresa->getSlug(),
@@ -223,14 +227,17 @@ class InstalaccionController extends Controller
 		$formulario->remove('estado');
 		$formulario->handleRequest($request);
 		$redes = $em->getRepository ("DestinyAppBundle:EmpresaRedesSociales")->findAll ();
+
+
 		if (($formulario->isSubmitted ()) && ($formulario->isValid ()))
 		{
-
+            $this->createEmails();
 			$usuarios->setRoles(['ROLE_ROOT']);
 			$usuarios->setEstado(true);
-			$this->get('email')->enviarEmailInstalacion($empresa,$usuarios, $contacto, $redes);
+
 			$em->persist ($usuarios);
 			$em->flush ();
+
 
 			$traductor = $this->get('translator');
 
@@ -240,12 +247,11 @@ class InstalaccionController extends Controller
 			]);
 
 
-			$this->createEmails();
-			$this->createMenus();
-			$this->createMenusBackend();
-			$this->createPermisos();
 
-			return $this->redirect($this->generateUrl('_portadaWeb'));
+			$this->createMenus();
+
+
+            return $this->redirect($this->generateUrl('portadaBackend'));
 
 		}
 
@@ -483,13 +489,51 @@ class InstalaccionController extends Controller
 
 	private function createPermisos()
 	{
-		$entidades =['Menus','Secciones','Pdf','Videos','Imagenes','Sliders','Noticias','Usuarios','Newsletter','Backend','backendPermisos'];
+        $entidades =[['nombre' => 'Menus (Front)',
+            'entidad'=> 'Menus'],
+            ['nombre' => 'Secciones(Front)',
+                'entidad'=> 'Secciones'],
+            ['nombre' => 'Contenido secciones(Front)',
+                'entidad'=> 'SeccionesContenido'],
+            ['nombre' => 'Videos',
+                'entidad'=> 'Videos'],
+            ['nombre' => 'Adjuntos(PDF)',
+                'entidad'=> 'Adjuntos'],
+            ['nombre' => 'Imagenes',
+                'entidad'=> 'Imagenes'],
+            ['nombre' => 'Sliders',
+                'entidad'=> 'Sliders'],
+            ['nombre' => 'Articulos',
+                'entidad'=> 'Articulos'],
+            ['nombre' => 'Noticias',
+                'entidad'=> 'Noticias'],
+            ['nombre' => 'Contenido noticias(Front)',
+                'entidad'=> 'NoticiasContenido'],
+            ['nombre' => 'Categorias de las Noticias',
+                'entidad'=> 'NoticiasCategorias'],
+
+            ['nombre' => 'Usuarios',
+                'entidad'=> 'Usuarios'],
+            ['nombre' => 'Emails',
+                'entidad'=> 'UsuariosEmail'],
+            ['nombre' => 'Newsletter',
+                'entidad'=> 'Newsletter'],
+            ['nombre' => 'Secciones del Backend',
+                'entidad'=> 'BackendSecciones'],
+            ['nombre' => 'Permisos',
+                'entidad'=> 'BackendPermisos'],
+            ['nombre' => 'Idiomas',
+                'entidad'=> 'Idiomas'],
+            ['nombre' => 'Mensajes de la web',
+                'entidad'=> 'Mensajes'],
+            ['nombre' => 'Redes Sociales',
+                'entidad'=> 'EmpresaRedesSociales'],
+        ];
 		$em = $this->getDoctrine()->getManager();
 		foreach ($entidades as $entidad)
 		{
 			$permiso = new BackendPermisos();
-			$permiso->setEntidad($entidad)->setCrear(true)->setEditar(true)->setBorrar(true)->setEstado(true);
-
+            $permiso->setNombre($entidad['nombre'])->setEntidad($entidad['entidad'])->setCrear(true)->setEditar(true)->setBorrar(true)->setEstado(true);
 			$em->persist($permiso);
 		}
 
