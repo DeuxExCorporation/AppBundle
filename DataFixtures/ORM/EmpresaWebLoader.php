@@ -22,7 +22,7 @@ class EmpresaWebLoader extends AbstractFixture implements FixtureInterface, Orde
 		$empresa->setMensajeBloqueo ('La web esta bloqueada, no toques los cojones');
 		$empresa->setEstado (TRUE);
 		$empresa->setRuta ('destiny-proyect.jpg');
-
+        $empresa->setPlantilla('destiny');
 		$email = new EmpresaEmails();
 		$email->setnombre('Email')->setTextocabecera('cabecera')->setTextoPie('pie')->setRuta ('destiny-proyect.jpg');
 

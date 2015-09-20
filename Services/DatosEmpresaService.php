@@ -44,6 +44,11 @@ class DatosEmpresaService
 		return $contacto;
 	}
 
+    public function getPlantilla()
+    {
+        return $this->getEmpresa()->getPlantilla();
+    }
+
 
 
 

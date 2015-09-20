@@ -1,4 +1,4 @@
-{% extends "@DestinyApp/frontendBase.html.twig" %}
+{% extends "@DestinyApp/Frontend/destiny/destinyBase.html.twig" %}
 
 
 {% block h1Title %}
@@ -9,7 +9,7 @@
 {% block  frontBody %}
 	{{ empresa.web }}<br>
 
-	{%  include "@DestinyApp/Frontend/includes/contenido.html.twig" %}
+    {%  include "@DestinyApp/Frontend/destiny/includes/contenido.html.twig" %}
 
 	{{ form_start(form) }}
 	<div class="box-body clearfix">

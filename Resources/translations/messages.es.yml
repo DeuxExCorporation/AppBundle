@@ -252,6 +252,7 @@ empresa:
         archivo: Logo de la empresa
         estado: Estado
         mensajeBloqueo: Mensaje de bloqueo de la web
+        plantilla: Nombre de la plantilla
 
 configuration:
     list:

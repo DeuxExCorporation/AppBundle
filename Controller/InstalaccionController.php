@@ -38,6 +38,7 @@ class InstalaccionController extends Controller
 
 	    $formulario = $this->createForm($this->get('empresaWeb'),$empresa);
 		$formulario->remove('estado');
+        $formulario->add ('plantilla', 'text', ['label' => $this->get('translator')->trans ('empresa.form.plantilla')]);
 	    $formulario->handleRequest($request);
 
 	    if (($formulario->isSubmitted ()) && ($formulario->isValid ()))

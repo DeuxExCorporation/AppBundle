@@ -80,6 +80,20 @@ class EmpresaWeb
 	private $slogan;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="plantilla", type="string", length=255)
+     * @Assert\NotBlank(message="empresa.name.notblank")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "empresa.name.min",
+     *      maxMessage = "empresa.name.max"
+     * )
+     *
+     */
+    private $plantilla;
+    /**
      * @var boolean
      *
      * @ORM\Column(name="estado", type="boolean")
@@ -423,5 +437,28 @@ class EmpresaWeb
     public function getFechaModificacion()
     {
         return $this->fechaModificacion;
+    }
+
+    /**
+     * Set plantilla
+     *
+     * @param string $plantilla
+     * @return EmpresaWeb
+     */
+    public function setPlantilla($plantilla)
+    {
+        $this->plantilla = $plantilla;
+
+        return $this;
+    }
+
+    /**
+     * Get plantilla
+     *
+     * @return string 
+     */
+    public function getPlantilla()
+    {
+        return $this->plantilla;
     }
 }

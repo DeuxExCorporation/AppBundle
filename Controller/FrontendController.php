@@ -63,7 +63,7 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section) ) throw  $this->createNotFoundException();
 
-		return $this->render ('DestinyAppBundle:Frontend:contenido.html.twig',
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/contenido.html.twig',
 			[
 				'seccion'   => $section,
 				'language'  => $language,
@@ -113,7 +113,7 @@ class FrontendController extends Controller
 
 		$this->get('translator')->setLocale($language->getIsoCode());
 
-		return $this->render ('DestinyAppBundle:Frontend:'.strtolower($tipo).'.html.twig',
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($tipo).'.html.twig',
 			[
 				'seccion'   => $section,
 				'language'  => $language,
@@ -153,7 +153,7 @@ class FrontendController extends Controller
 	{
 		if (is_null($language) || is_null($section) || is_null($news)) throw  $this->createNotFoundException();
 
-		return $this->render ('DestinyAppBundle:Frontend:noticias.html.twig',
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/noticias.html.twig',
 			[
 				'seccion' => $section,
 				'language'  => $language,
@@ -188,7 +188,7 @@ class FrontendController extends Controller
     {
         if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
         $em = $this->getDoctrine()->getManager();
-        return $this->render ('DestinyAppBundle:Frontend:listado de categorias.html.twig',
+        return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/listado de categorias.html.twig',
             [
                 'seccion'    => $section,
                 'language'   => $language,
