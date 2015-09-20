@@ -418,11 +418,11 @@ menus:
         back: Volver
         save: Guardar menu
         edit: Editando menu
-        limit: Limite de secciones
+        limite: Limite de secciones
 
     form:
         name: Nombre
-        limit: Limite de secciones
+        limite: Limite de secciones
         submenus: ¿Las secciones van a tener subsecciones?
         yes: Si
         not: No
@@ -649,7 +649,7 @@ BackendSecciones:
         grupo: Grupo
         estado: Estado
 
-backendPermisos:
+BackendPermisos:
     list:
         title: Gestión de permisos
         name: Entidad

@@ -1,0 +1,28 @@
+{% extends "@DestinyApp/Frontend/destiny/destinyBase.html.twig" %}
+
+
+{% block h1Title %}
+
+	<a href="{{ path('portadaBackend') }}" class="btn btn-info">Ir al backend</a>
+
+{% endblock %}
+{% block  frontBody %}
+	{{ empresa.web }}<br>
+	{{ seccion.tituloSeo }}<br>
+
+	{%  include "@DestinyApp/Frontend/destiny/includes/contenido.html.twig" %}
+
+	{% if histories is defined %}
+		{% for history in histories %}
+			<a href="{{ path('firstChapterHistoryFrontend',
+			{'history':history.slug,'language':language.isoCode, 'system':history.sistema.slug}) }}">
+				{{ history.nombre }}
+			</a>
+				<br>
+		{% endfor %}
+	{% endif %}
+
+
+
+
+{% endblock %}

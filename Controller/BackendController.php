@@ -155,15 +155,21 @@ class BackendController extends Controller
 				'title'   => $traductor->trans ('flash.edit.title'),
 				'message' => $traductor->trans ('flash.edit.message', ['entidad' => $edit])
 			]);
-		}
 
+            $url = (is_null($type))
+                ? $this->generateUrl('editBackend', ['entity' => $entity, 'element'=> $edit->getSlug(),])
+                :$this->generateUrl('editContentBackend', ['type'=>$group, 'entity' => $type, 'element'=> $edit->getSlug(), 'group' => $this->get('backend')->removeContenidos($entity)]);
+            return $this->redirect($url);
+
+		}
+        $entidad = (is_null($type)) ? $entity : $entity .'Contenido';
 		return $this->render ('DestinyAppBundle:Backend:editCreate.html.twig',
 			[
                 'list'         => (!is_null($type))
                                     ?  $this->get('backend')->getElements($entity.'Contenido','content',$type)
-                                    : $this->get('backend')->listElements($entity),
-                'group'        => $backend->methodExist($this->get($entity),'groups',$entity),
-                'listElements' => $backend->methodExist($this->get((is_null($type)) ? $entity : $entity .'Contenido'),'listElements'),
+                                    :  $this->get('backend')->listElements($entity),
+                'group'        => $backend->methodExist($this->get($entidad),'groups',$entidad),
+                'listElements' => $backend->methodExist($this->get($entidad),'listElements'),
                 'cantCreate'   => $backend->methodExist($this->get($entity),'cantCreate',$entity),
                 'listButton'   => $backend->methodExist($this->get($entity),'listButton',$entity),
                 'translatable' => (property_exists($this->get((is_null($type) ? $entity : $group)),'translatable')) ? true : false,

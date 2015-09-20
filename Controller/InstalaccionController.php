@@ -278,6 +278,7 @@ class InstalaccionController extends Controller
 		{
 			$menu = new Menus();
 			$menu->setNombre($listadoMenus['nombre']);
+			$menu->setLimite($listadoMenus['limite']);
 			$menu->setHaveSubsecciones($listadoMenus['subsecciones']);
 			$menu->setEstado(true);
 
@@ -363,102 +364,89 @@ class InstalaccionController extends Controller
 
 	private function createMenusBackend()
 	{
-		$grupos = [['nombre'    => 'Contenido',
-				   'etiqueta'  => 'configuration.list.content',
-				   'secciones' => [['destino'  => 'menus',
-					                'icono'    => '<i class="fa fa-list-alt"></i>',
-					                'nombre'   => 'Menus',
-					                'etiqueta' => 'configuration.list.menus'],
-					               ['destino'  => 'secciones',
-								    'icono'    => '<i class="fa fa-file-text"></i>',
-									'nombre'   => 'Secciones',
-									'etiqueta' => 'configuration.list.sections']]],
-				  ['nombre'    => 'Gestion backend',
-				   'etiqueta'  => 'configuration.list.backend',
-				   'secciones' => [['destino' => 'gruposMenusBackend',
-					               'icono'    => '<i class="fa fa-list-alt"></i>',
-					               'nombre'   => 'Grupos',
-					               'etiqueta' => 'configuration.list.gruposMenusBackend'],
-					              ['destino'  => 'menusBackend',
-						           'icono'    => '<i class="fa fa-file-text"></i>',
-						           'nombre'   => 'Secciones backens',
-						           'etiqueta' => 'configuration.list.menusBackend']]],
-
-			     ['nombre'   => 'Media',
-				  'etiqueta' => 'configuration.list.contentMedia',
-				  'secciones' => [['destino' => 'adjuntos',
-					               'icono'   => '<i class="fa fa-file-pdf-o"></i>',
-					               'nombre'  => 'PDF',
-					'etiqueta' => 'configuration.list.pdf']
-
-					,['destino' => 'videos',
-						'icono'   => '<i class="fa fa-youtube"></i>',
-						'nombre'  => 'Videos',
-						'etiqueta' => 'configuration.list.videos'],
-
-					['destino' => 'imagenes',
-						'icono'   => '<i class="fa fa-file-image-o"></i>',
-						'nombre'  => 'Imagenes',
-						'etiqueta' => 'configuration.list.images'],
-
-					['destino' => 'sliders',
-						'icono'   => '<i class="fa fa-slideshare"></i>',
-						'nombre'  => 'Sliders',
-						'etiqueta' => 'configuration.list.slider']
-				]],
-			['nombre'   => 'Noticias',
-				'etiqueta' => 'configuration.list.news',
-				'secciones' => [['destino' => 'noticiasCategorias',
-					'icono'   => '<i class="fa fa-list-alt"></i>',
-					'nombre'  => 'Categorias Noticias',
-					'etiqueta' => 'configuration.list.noticiascategoria']
-
-					,['destino' => 'noticias',
-						'icono'   => '<i class="fa fa-newspaper-o"></i>',
-						'nombre'  => 'Noticias',
-						'etiqueta' => 'configuration.list.noticias'],
-
-				]],
-			['nombre'   => 'Usuarios',
-				'etiqueta' => 'configuration.list.users',
-				'secciones' => [['destino' => 'usuarios',
-					'icono'   => '<i class="fa fa-users"></i>',
-					'nombre'  => 'Usuarios',
-					'etiqueta' => 'configuration.list.users']
-
-					,['destino' => 'usuariosEmails',
-						'icono'   => '<i class="fa fa-envelope-o"></i>',
-						'nombre'  => 'Emails usuarios',
-						'etiqueta' => 'configuration.list.userEmails'],
-
-				]],
-			['nombre'   => 'Newsletter',
-				'etiqueta' => 'configuration.list.newsletter',
-				'secciones' => [['destino' => 'newsletter',
-					'icono'   => '<i class="fa fa-newspaper-o"></i>',
-					'nombre'  => 'Newsletter',
-					'etiqueta' => 'configuration.list.newsletter']
-
-				]],
-			['nombre'   => 'Historias',
-				'etiqueta' => 'configuration.list.historias',
-				'secciones' => [['destino' => 'historias',
-					'icono'   => '<i class="fa fa-leanpub"></i>',
-					'nombre'  => 'Historias',
-					'etiqueta' => 'configuration.list.historias']
-
-					,['destino' => 'accionesHabilidades',
-						'icono'   => '<i class="fa fa-sliders"></i>',
-						'nombre'  => 'Habilidades',
-						'etiqueta' => 'configuration.list.habilidades'],
-
-					['destino' => 'sistemas',
-						'icono'   => '<i class="fa fa-cog"></i>',
-						'nombre'  => 'Sistemas',
-						'etiqueta' => 'configuration.list.sistema'],
+        $grupos = [
+            ['nombre'    => 'Contenido web',
+                'etiqueta'  => 'configuration.list.content',
+                'secciones' => [['destino' => 'menus',
+                    'icono'   => '<i class="fa fa-list-alt"></i>',
+                    'nombre'  => 'Menus',
+                    'etiqueta' => 'configuration.list.menus']
+                    ,['destino' => 'secciones',
+                        'icono'   => '<i class="fa fa-file-text"></i>',
+                        'nombre'  => 'Secciones',
+                        'etiqueta' => 'configuration.list.sections']]],
 
 
-				]] ];
+            ['nombre'   => 'Media',
+                'etiqueta' => 'configuration.list.contentMedia',
+                'secciones' => [['destino' => 'adjuntos',
+                    'icono'   => '<i class="fa fa-file-pdf-o"></i>',
+                    'nombre'  => 'Adjuntos',
+                    'etiqueta' => 'configuration.list.pdf']
+
+                    ,['destino' => 'videos',
+                        'icono'   => '<i class="fa fa-youtube"></i>',
+                        'nombre'  => 'Videos',
+                        'etiqueta' => 'configuration.list.videos'],
+
+                    ['destino' => 'imagenes',
+                        'icono'   => '<i class="fa fa-file-image-o"></i>',
+                        'nombre'  => 'Imagenes',
+                        'etiqueta' => 'configuration.list.images'],
+
+                    ['destino' => 'sliders',
+                        'icono'   => '<i class="fa fa-slideshare"></i>',
+                        'nombre'  => 'Sliders',
+                        'etiqueta' => 'configuration.list.slider']
+                ]],
+            ['nombre'   => 'Noticias',
+                'etiqueta' => 'configuration.list.news',
+                'secciones' => [['destino' => 'noticiasCategorias',
+                    'icono'   => '<i class="fa fa-list-alt"></i>',
+                    'nombre'  => 'Categorias Noticias',
+                    'etiqueta' => 'configuration.list.noticiascategoria']
+
+                    ,['destino' => 'noticias',
+                        'icono'   => '<i class="fa fa-newspaper-o"></i>',
+                        'nombre'  => 'Noticias',
+                        'etiqueta' => 'configuration.list.noticias'],
+
+                ]],
+            ['nombre'   => 'Usuarios',
+                'etiqueta' => 'configuration.list.users',
+                'secciones' => [['destino' => 'usuarios',
+                    'icono'   => '<i class="fa fa-users"></i>',
+                    'nombre'  => 'Usuarios',
+                    'etiqueta' => 'configuration.list.users']
+
+                    ,['destino' => 'usuariosEmails',
+                        'icono'   => '<i class="fa fa-envelope-o"></i>',
+                        'nombre'  => 'Emails usuarios',
+                        'etiqueta' => 'configuration.list.userEmails'],
+
+                ]],
+            ['nombre'   => 'Newsletter',
+                'etiqueta' => 'configuration.list.newsletter',
+                'secciones' => [['destino' => 'newsletter',
+                    'icono'   => '<i class="fa fa-newspaper-o"></i>',
+                    'nombre'  => 'Newsletter',
+                    'etiqueta' => 'configuration.list.newsletter']
+
+                ]],
+
+            ['nombre'    => 'Gestion backend',
+                'etiqueta'  => 'configuration.list.backend',
+                'secciones' => [
+                    ['destino' => 'BackendSecciones',
+                        'icono'   => '<i class="fa fa-file-text"></i>',
+                        'nombre'  => 'Secciones backend',
+                        'etiqueta' => 'configuration.list.menusBackend'],
+                    ['destino' => 'BackendPermisos',
+                        'icono'   => '<i class="fa fa-lock"></i>',
+                        'nombre'  => 'Permisos',
+                        'etiqueta' => 'configuration.list.permisos']
+                ]],
+        ];
 
 		$em = $this->getDoctrine()->getManager();
 		foreach($grupos as $menu)

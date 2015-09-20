@@ -50,6 +50,13 @@ class Menus
 	private $slug;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="limite", type="integer")
+     */
+    private $limite;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="haveSubsecciones", type="boolean")
@@ -272,5 +279,28 @@ class Menus
     public function getHaveSubsecciones()
     {
         return $this->haveSubsecciones;
+    }
+
+    /**
+     * Set limite
+     *
+     * @param integer $limite
+     * @return Menus
+     */
+    public function setLimite($limite)
+    {
+        $this->limite = $limite;
+
+        return $this;
+    }
+
+    /**
+     * Get limite
+     *
+     * @return integer 
+     */
+    public function getLimite()
+    {
+        return $this->limite;
     }
 }

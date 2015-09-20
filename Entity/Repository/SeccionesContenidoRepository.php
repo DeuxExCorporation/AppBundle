@@ -14,6 +14,7 @@ class SeccionesContenidoRepository extends EntityRepository
 {
 	public function getContent($seccion)
 	{
+
 		$em = $this->getEntityManager();
 
 		$query = $em->createQueryBuilder();

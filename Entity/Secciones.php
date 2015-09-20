@@ -741,6 +741,6 @@ class Secciones
      */
     public function getUrl()
     {
-        return $this->url;
+        return strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->url));
     }
 }
