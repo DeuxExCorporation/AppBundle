@@ -1,0 +1,25 @@
+{% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
+
+
+{% block h1Title %}
+
+	{{ seccion.tituloSeccion }}
+
+{% endblock %}
+{% block  frontBody %}
+    {%  include "@DestinyApp/Frontend/jvieites/includes/contenido.html.twig" %}
+{% endblock %}
+ {% block contacto %}
+
+     <div class="modulo">
+         <div class="titulo-modulo">Contacte con nosotros</div>
+         <div class="contenido-modulo">
+        <span>
+            <i class="fa fa-envelope"></i>
+            <a href="mailto:{{ empresa.web.email }}">{{ empresa.web.email }}</a>
+        </span>
+             {% include "@DestinyApp/Frontend/jvieites/includes/formulario.html.twig" with {'form':typeContent} %}
+         </div>
+     </div>
+
+ {% endblock %}

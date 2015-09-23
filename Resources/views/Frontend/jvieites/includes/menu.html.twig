@@ -1,0 +1,33 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only"></span>
+                        <span class="col-md-12" id="nombre-empresa-movil">
+                            {# @todo Pendiente de traducir#}
+                            <i class="fa fa-bars"></i>
+                            Menú de navegación
+
+                        </span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!-- secciones de la web -->
+                {% for seccion in plantilla.menu('principal',language) %}
+                    {% set rutaActual =   (app.request.attributes.get('_route_params').section is defined )
+                                        and (app.request.attributes.get('_route_params').section == seccion.url )?'active':'' %}
+                    <li class="{{ rutaActual  }}">
+                        <a href="{{ path('seccionWeb',{'section':seccion.url,'language':language.isoCode}) }}">
+                            {{ seccion.etiquetaMenu }}
+                        </a>
+                    </li>
+
+                {% endfor %}
+                <!-- /secciones de la web -->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<!-- Fin del menu de la web-->

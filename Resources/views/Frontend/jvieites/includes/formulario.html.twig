@@ -1,0 +1,35 @@
+
+{{ form_start(form, {'action':'#', 'attr': {'class': 'contacto' } }) }}
+
+{% for field in form.children if (field.vars.name != '_token') %}
+    <div class="form-group {% if not field.vars.valid %}has-error{% endif %}">
+        {% set field_label = entity_fields[field.vars.name]['label']|default(null) %}
+
+        {{ form_widget (field,{'attr':{'placeholder':field.vars.name |capitalize}}) }}
+    </div>
+    {% for attrname,attrvalue in  field.vars.attr %}
+        {% if attrname == 'help' %}
+            <span class="help-block">{{ attrvalue }}</span>
+        {% endif %}
+    {% endfor %}
+
+        {%  if form_errors(field)  %}
+
+            <div class="alert alert-danger fade in">
+                <a data-dismiss="alert" class="pull-right" href="" type="button">
+                    <i class="fa fa-times"></i>
+                </a>
+                <strong>Error</strong><br>
+                {{ form_errors(field)}}
+
+            </div>
+
+        {%  endif %}
+
+
+{% endfor %}
+<div class="form-group">
+    <button type="submit" class="btn btn-default btn-sm">Enviar</button>
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}

@@ -221,7 +221,7 @@ class BackendService
 
     public function methodExist($class,$metodo,$variable = null)
     {
-        return (method_exists($class,$metodo)) ? $class->$metodo($variable) : false;
+        return (method_exists($class,$metodo)) ? $class->$metodo($variable) : null;
     }
 
 

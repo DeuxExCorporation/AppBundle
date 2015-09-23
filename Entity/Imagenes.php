@@ -79,7 +79,7 @@ class Imagenes
 
     /**
      * @return string
-     * @Assert\File(maxSize="1M",mimeTypes = {
+     * @Assert\File(mimeTypes = {
      *          "image/png",
      *          "image/jpeg",
      *          "image/jpg",

@@ -23,7 +23,6 @@
     </td>
     <td>
         <a href="{{ edit}}">
-            <i class="fa fa-pencil"></i>
             {% if element.type is defined %}
                 {% set typeElement = element.type %}
                 {% if typeElement == 'imagenes' %}
@@ -33,7 +32,6 @@
                 {% endif %}
                 {% if typeElement == 'adjuntos' %}
                     <i class="fa fa-file-pdf-o"></i>
-                    <i class="fa fa-arrow-circle-o-down"></i>
                     {{ element | raw }}
                 {% endif %}
                 {% if typeElement == 'sliders' %}
@@ -144,7 +142,7 @@
             </div>
         {% endif %}
     </td>
-    {% if listButton is defined and listButton != false %}
+    {% if listButton is defined and listButton == true %}
         <td>
             <a href="{{ path(listButton.action,{'type':listButton.type,'entity':element.slug}) }}" class="{{ listButton.class }}">
                 {{ listButton.tag }}

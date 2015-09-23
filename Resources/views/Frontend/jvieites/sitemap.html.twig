@@ -1,0 +1,33 @@
+{% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
+
+{% block  frontBody %}
+<div class="articulo">
+    <div class="contenido-articulo">
+        <div class=" col-md-12 col-xs-12">
+<ul>
+
+{% for url in typeContent %}
+    {% for menusWeb in url %}
+    <li>{{ menusWeb.menu }}&nbsp;&nbsp;&nbsp;&nbsp;<img class="flagIcon defecto" src="{{ asset(menusWeb.idioma.webPath) }}"></li>
+    <ul>
+        {% for seccion in menusWeb.secciones if  seccion.url != null %}
+            <li>
+                <a href="{{ path('seccionWeb',{'language':language.isoCode,'section':seccion.url}) }}">
+                    {{ seccion }}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('portadaWeb',{'language':language.isoCode}) }}">
+                    {{ seccion }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endfor %}
+</ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

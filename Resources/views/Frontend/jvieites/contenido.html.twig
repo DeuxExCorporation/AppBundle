@@ -1,0 +1,14 @@
+{% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
+
+{% block h1Title %}
+
+	<a href="{{ path('portadaBackend') }}" class="btn btn-info">Ir al backend</a>
+
+{% endblock %}
+{% block  frontBody %}
+	{{ empresa.web }}<br>
+	{{ seccion.tituloSeo }}<br>
+
+	{%  include "@DestinyApp/Frontend/jvieites/includes/contenido.html.twig" %}
+
+{% endblock %}

@@ -29,7 +29,7 @@ class AdjuntosType extends AbstractType
     {
         $builder
 	        ->add ('nombre', 'text', ['label' => $this->translator->trans ('adjuntos.form.name'),
-		                              'max_length' => 10])
+		                              'max_length' => 100])
 	        ->add ('alt', 'text', ['label' => $this->translator->trans ('adjuntos.form.alt'),
 		                              'max_length' => 150])
             ->add('descripcion', 'textarea', ['label' => $this->translator->trans ('adjuntos.form.description'),

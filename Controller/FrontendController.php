@@ -6,6 +6,7 @@ use Destiny\AppBundle\Entity\Idiomas;
 use Destiny\AppBundle\Entity\Mensajes;
 
 
+use Destiny\AppBundle\Entity\Newsletter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,7 +18,7 @@ class FrontendController extends Controller
 {
 
     /**
-     * @Route("/sitemap.xml")
+     * @Route("/sitemap.xml",name="sitemapXml")
      *
      */
     public function sitemapAction()
@@ -54,7 +55,7 @@ class FrontendController extends Controller
      * options={"language" = "isoCode", "repository_method" = "findOneByIsoCode"})
      *
      */
-    public function portadaAction(Idiomas $language = null)
+    public function portadaAction(Idiomas $language = null, Request $request)
     {
 	    $em = $this->getDoctrine()->getManager();
 
@@ -63,11 +64,14 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section) ) throw  $this->createNotFoundException();
 
-		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/contenido.html.twig',
+
+        return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($section->getTipo()).'.html.twig',
 			[
-				'seccion'   => $section,
-				'language'  => $language,
-				'content'   => $section->getContenidos()
+				'seccion'     => $section,
+				'language'    => $language,
+				'content'     => $section->getContenidos(),
+                'typeContent' => $this->getTipoPlantilla($section->getTipo(),$request, $language ),
+                'newsletter'  => $this->suscribirseNewsletter($request)
 			]);
 
     }
@@ -90,38 +94,17 @@ class FrontendController extends Controller
 		if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
 
 		$em = $this->getDoctrine()->getManager();
-		switch ($tipo = $section->getTipo() )
-		{
-		case($tipo->getSlug() == 'contacto'):
 
-			$form = $this->seccionTipoContacto($request);
-
-			break;
-
-		case ($tipo->getSlug() == 'sitemap'):
-
-            $urls = $this->getSitemap();
-
-			break;
-
-		case(!is_null($tipo->getEntidad())):
-
-			$list = $em->getRepository('DestinyAppBundle:'.$tipo->getEntidad())->getAllFront($language);
-
-			break;
-		}
 
 		$this->get('translator')->setLocale($language->getIsoCode());
 
-		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($tipo).'.html.twig',
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($section->getTipo()).'.html.twig',
 			[
 				'seccion'   => $section,
 				'language'  => $language,
 				'content'   => $section->getContenidos(),
-				'form'      => (isset($form)) ? $form : null,
-				'urls'      => (isset($urls)) ? $urls : null,
-				'list'      => (isset($list)) ? $list : null
-
+                'typeContent' => $this->getTipoPlantilla($section->getTipo(),$request, $language ),
+                'newsletter'  => $this->suscribirseNewsletter($request),
 			]);
 
 	}
@@ -199,6 +182,33 @@ class FrontendController extends Controller
             ]);
     }
 
+    private function getTipoPlantilla($tipoSeccion, Request $request, $language)
+    {
+        switch ($tipoSeccion)
+        {
+            case($tipoSeccion->getSlug() == 'contacto'):
+
+                return $this->seccionTipoContacto($request);
+
+
+                break;
+
+            case ($tipoSeccion->getSlug() == 'sitemap'):
+
+                return $this->getSitemap();
+
+                break;
+
+            case(!is_null($tipoSeccion->getEntidad())):
+
+                return $this->getDoctrine()->getManager()->getRepository('DestinyAppBundle:'.$tipoSeccion->getEntidad())->getAllFront($language);
+
+                break;
+        }
+
+        return;
+    }
+
 	private function seccionTipoContacto(Request $request)
 	{
 
@@ -237,6 +247,37 @@ class FrontendController extends Controller
 
 		return $formulario->createView();
 	}
+
+    private function suscribirseNewsletter(Request $request)
+    {
+
+        $newsletter = new Newsletter();
+
+        $formulario = $this->createForm ($this->get ('newsletter'), $newsletter);
+
+        $formulario->handleRequest ($request);
+
+        if (($formulario->isSubmitted ()) && ($formulario->isValid ()))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $newsletter->setEstado(true);
+
+            $em->persist ($newsletter);
+            $em->flush ();
+
+
+            $traductor = $this->get('translator');
+
+            $this->get ('session')->getFlashBag()->set ('success', [
+                'title'   => $traductor->trans ('flash.newsletter.front.title'),
+                'message' => $traductor->trans ('flash.newsletter.front.message')
+            ]);
+
+
+        }
+
+        return $formulario->createView();
+    }
 
     private function getSitemap()
     {

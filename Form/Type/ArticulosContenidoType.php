@@ -34,6 +34,14 @@ class ArticulosContenidoType extends AbstractType
 	        ->add('descripcion', 'textarea', ['label' => $this->translator->trans ('articulosContenido.form.description'),
 		        'max_length' => 150,
 	        ])
+            ->add('imagen', 'entity', array(
+                'class' => 'DestinyAppBundle:Imagenes',
+                'label' => $this->translator->trans ('articulosContenido.form.imagen'),
+                'required' => true,
+                'expanded' => true,
+                'multiple' => false,
+
+                'choice_label' => 'webPath',))
 
         ;
     }

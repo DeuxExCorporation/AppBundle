@@ -28,7 +28,7 @@ class SlidersType extends AbstractType
     {
         $builder
 	        ->add ('nombre', 'text', ['label' => $this->translator->trans ('sliders.form.name'),
-		        'max_length' => 10])
+		        'max_length' => 100])
 	        ->add('descripcion', 'text', ['label' => $this->translator->trans ('sliders.form.description'),
 		        'max_length' => 150])
 	        ->add ('estado', 'choice', ['label' => $this->translator->trans ('sliders.form.status'),
