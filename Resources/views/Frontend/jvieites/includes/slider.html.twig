@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <div class="col-md-12 slider">
     <ul class="rslides" id="slider">
@@ -25,3 +26,30 @@
 
     </ul>
 </div>
+=======
+{{ slider }}<br>
+{{ slider.descripcion | raw }}<br>
+
+{% for imagen in slider.group.values %}
+	{% if language.defecto == true %}
+
+		<img src="{{ asset(imagen.webPath) }}" alt="{{ imagen.alt }}"
+		     title="{{ imagen.descripcion }}">
+
+	{% else %}
+		{% for imagenTraduccion in  imagen.traducciones.values  %}
+			{% if imagenTraduccion.idioma.isoCode == language.isoCode %}
+
+				<img src="{{ asset((imagenTraduccion.webPath is null
+									? imagenTraduccion.canonica.webPath
+									: imagenTraduccion.webPath)) }}"
+					 alt="{{ imagenTraduccion.alt }}"
+				     title="{{ imagenTraduccion.descripcion }}">
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	
+{% endfor %}
+
+<br>
+>>>>>>> origin/master

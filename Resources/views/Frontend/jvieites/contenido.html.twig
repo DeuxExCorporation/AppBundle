@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 {% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
+=======
+{% extends "@DestinyApp/Frontend/destiny/destinyBase.html.twig" %}
+
+>>>>>>> origin/master
 
 {% block h1Title %}
 
@@ -9,6 +14,23 @@
 	{{ empresa.web }}<br>
 	{{ seccion.tituloSeo }}<br>
 
+<<<<<<< HEAD
 	{%  include "@DestinyApp/Frontend/jvieites/includes/contenido.html.twig" %}
+=======
+	{%  include "@DestinyApp/Frontend/destiny/includes/contenido.html.twig" %}
+
+	{% if histories is defined %}
+		{% for history in histories %}
+			<a href="{{ path('firstChapterHistoryFrontend',
+			{'history':history.slug,'language':language.isoCode, 'system':history.sistema.slug}) }}">
+				{{ history.nombre }}
+			</a>
+				<br>
+		{% endfor %}
+	{% endif %}
+
+
+
+>>>>>>> origin/master
 
 {% endblock %}

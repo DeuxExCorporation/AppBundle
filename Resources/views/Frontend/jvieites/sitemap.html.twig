@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
 
 {% block  frontBody %}
@@ -21,13 +22,40 @@
                 <a href="{{ path('portadaWeb',{'language':language.isoCode}) }}">
                     {{ seccion }}
                 </a>
+=======
+{% extends "@DestinyApp/Frontend/destiny/destinyBase.html.twig" %}
+
+
+{% block h1Title %}
+
+	<a href="{{ path('portadaBackend') }}" class="btn btn-info">Ir al backend</a>
+
+{% endblock %}
+{% block  frontBody %}
+	{{ empresa.web }}<br>
+
+    {%  include "@DestinyApp/Frontend/jvieites/includes/contenido.html.twig" %}
+
+
+<ul>
+{% for url in urls %}
+    {% for menusWeb in url %}
+    <li>{{ menusWeb.menu }}<img class="flagIcon defecto" src="{{ asset(menusWeb.idioma.webPath) }}"></li>
+    <ul>
+        {% for seccion in menusWeb.secciones if  seccion.url != null %}
+            <li>
+                <a href="{{ path('seccionWeb',{'language':language.isoCode,'section':seccion.url}) }}">{{ seccion }}</a>
+>>>>>>> origin/master
             </li>
         {% endfor %}
     </ul>
     {% endfor %}
 {% endfor %}
 </ul>
+<<<<<<< HEAD
         </div>
     </div>
 </div>
+=======
+>>>>>>> origin/master
 {% endblock %}
