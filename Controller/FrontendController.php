@@ -93,7 +93,6 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
 
-		$em = $this->getDoctrine()->getManager();
 
 
 		$this->get('translator')->setLocale($language->getIsoCode());
