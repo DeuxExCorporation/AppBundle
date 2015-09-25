@@ -31,12 +31,12 @@ class NoticiasContenido
 	 **/
 	private $seccion;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Destiny\AppBundle\Entity\Articulos",
-     *     cascade={"persist"})
-     * @ORM\JoinColumn(name="articulos_id", nullable=true, referencedColumnName="id", onDelete="CASCADE")
-     **/
-    private $articulos;
+	/**
+	 * @ORM\ManyToOne(targetEntity="Destiny\AppBundle\Entity\Articulos",
+	 *     cascade={"persist"})
+	 * @ORM\JoinColumn(name="articulos_id", nullable=true, referencedColumnName="id", onDelete="CASCADE")
+	 **/
+	private $articulos;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Destiny\AppBundle\Entity\Videos",

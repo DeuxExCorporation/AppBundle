@@ -23,35 +23,34 @@
     </td>
     <td>
         <a href="{{ edit}}">
+            <i class="fa fa-pencil"></i>
             {% if element.type is defined %}
                 {% set typeElement = element.type %}
                 {% if typeElement == 'imagenes' %}
                     {% set rutaImagen = (element.imagenes.webPath is defined) ? element.imagenes.webPath : element.webPath %}
                     <img src="{{ asset(rutaImagen) | imagine_filter('image_backend')  }}" >
+                    {{ element | raw }}
                 {% endif %}
                 {% if typeElement == 'adjuntos' %}
                     <i class="fa fa-file-pdf-o"></i>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
+                    <i class="fa fa-arrow-circle-o-down"></i>
                     {{ element | raw }}
->>>>>>> origin/master
->>>>>>> origin/master
                 {% endif %}
                 {% if typeElement == 'sliders' %}
                     <i class="fa fa-slideshare"></i>
+                    {{ element | raw }}
                 {% endif %}
                 {% if typeElement == 'articulos' %}
                     <i class="fa fa-file-text-o"></i>
+                    {{ element | raw }}
                 {% endif %}
                 {% if typeElement == 'videos' %}
                     <i class="fa fa-youtube-play"></i>
-
+                    {{ element | raw }}
                 {% endif %}
             {% else %}
+                {{ element | raw }}
             {% endif %}
-            {{ element | raw }}
         </a>
     </td>
     {% for type in listElements %}
@@ -145,7 +144,7 @@
             </div>
         {% endif %}
     </td>
-    {% if listButton is defined and listButton == true %}
+    {% if listButton is defined and listButton != false %}
         <td>
             <a href="{{ path(listButton.action,{'type':listButton.type,'entity':element.slug}) }}" class="{{ listButton.class }}">
                 {{ listButton.tag }}
