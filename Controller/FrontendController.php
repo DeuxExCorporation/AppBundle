@@ -64,6 +64,10 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section) ) throw  $this->createNotFoundException();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
         return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($section->getTipo()).'.html.twig',
 			[
 				'seccion'     => $section,
@@ -92,9 +96,17 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
 
+<<<<<<< HEAD
 		$this->get('translator')->setLocale($language->getIsoCode());
 
 		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.$section->getTipo()->getSlug().'.html.twig',
+=======
+
+
+		$this->get('translator')->setLocale($language->getIsoCode());
+
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($section->getTipo()).'.html.twig',
+>>>>>>> origin/master
 			[
 				'seccion'   => $section,
 				'language'  => $language,

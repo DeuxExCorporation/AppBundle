@@ -29,6 +29,7 @@
         </div>
         <div class="col-md-3 col-xs-12">
             <ul class="menu-inferior pull-right" id="idiomas">
+<<<<<<< HEAD
 
                 {% for idioma in plantilla.idiomas %}
                     {% set url = '' %}
@@ -80,6 +81,16 @@
                                  class="bandera {{ (language == idioma) ? 'bandera-actual' :''}}"></a>
                     </li>
                     {% endif %}
+=======
+                {% for idioma in plantilla.idiomas %}
+                    {% set ruta = (seccion.portada == true)
+                        ?  path('portadaWeb',{'language':idioma.isoCode})
+                        :  path('seccionWeb',{'section':seccion.url,'language':idioma.isoCode})
+                    %}
+                <li>
+                    <a href="{{ ruta }}"><img src="{{ asset(idioma.webPath) }}" title="{{ idioma }}" alt="{{ idioma.isoCode }}"></a>
+                </li>
+>>>>>>> origin/master
                 {% endfor %}
             </ul>
             <div class="clearfix"></div>
@@ -97,7 +108,11 @@
     <div class="principal">
         <div class="contenido-web col-md-9 col-xs-12">
 
+<<<<<<< HEAD
             <h1>{% block h1Title %}{{ seccion.tituloSeccion | capitalize }}{% endblock %}</h1>
+=======
+            <h1>{% block h1Title %}{{ seccion.tituloSeccion }}{% endblock %}</h1>
+>>>>>>> origin/master
 
 
 
@@ -123,6 +138,7 @@
         <div class="izquierda col-md-3 col-xs-12">
             {% block izquierda %}
                 <div class="modulo">
+<<<<<<< HEAD
 
                     <div class="titulo-modulo">{{ 'front.llamanos' | trans}}</div>
                     <div class="contenido-modulo">
@@ -133,6 +149,18 @@
                 <div class="modulo">
 
                     <div class="titulo-modulo">{{ 'front.donde' | trans}}</div>
+=======
+                   {# @todo cambiar por traducción#}
+                    <div class="titulo-modulo">Llamanos</div>
+                    <div class="contenido-modulo">
+                        <i class="fa fa-phone"></i><span><a href="telf:{{ empresa.contacto.telefono }}">{{ empresa.contacto.telefono }}</a></span><br>
+                        <i class="fa fa-phone"></i><span><a href="telf:{{ empresa.contacto.movil }}">{{ empresa.contacto.movil }}</a></span><br>
+                    </div>
+                </div>
+                <div class="modulo">
+                    {# @todo cambiar por traducción#}
+                    <div class="titulo-modulo">Donde estamos</div>
+>>>>>>> origin/master
                     <div class="contenido-modulo">
                         <i class="fa fa-map-marker"></i>
                         {{ empresa.contacto.direccionCompleta }}
@@ -140,12 +168,20 @@
                 </div>
             {% block contacto %}{% endblock %}
                 <div class="modulo">
+<<<<<<< HEAD
                     <div class="titulo-modulo">{{ 'front.newsletter' | trans}}</div>
+=======
+                    {# @todo cambiar por traducción#}
+                    <div class="titulo-modulo">Suscribete a nuestra newsletter</div>
+>>>>>>> origin/master
                     <div class="contenido-modulo">
                         {% include "@DestinyApp/Frontend/jvieites/includes/formulario.html.twig" with {'form':newsletter} %}
                     </div>
                 </div>
+<<<<<<< HEAD
                 {% block categorias %}{% endblock %}
+=======
+>>>>>>> origin/master
             {% endblock %}
         </div>
 	</div>
@@ -169,7 +205,11 @@
         </div>
         <div class="col-md-5 col-xs-12">
             <a href="mailto:carlos.sgude@gmail.com">
+<<<<<<< HEAD
                 {{ 'front.diseigned' | trans}} Carlos Gude
+=======
+            Designed by Calos Gude
+>>>>>>> origin/master
             </a>
         </div>
         <div class="col-md-3 col-xs-12">

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -19,7 +23,11 @@
                                         and (app.request.attributes.get('_route_params').section == seccion.url )?'active':'' %}
                     <li class="{{ rutaActual  }}">
                         <a href="{{ path('seccionWeb',{'section':seccion.url,'language':language.isoCode}) }}">
+<<<<<<< HEAD
                             {{ seccion.etiquetaMenu | capitalize }}
+=======
+                            {{ seccion.etiquetaMenu }}
+>>>>>>> origin/master
                         </a>
                     </li>
 
@@ -30,4 +38,32 @@
         <!--/.nav-collapse -->
     </div>
 </nav>
+<<<<<<< HEAD
 <!-- Fin del menu de la web-->
+=======
+<!-- Fin del menu de la web-->
+=======
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+{			{% for seccion in plantilla.menu('principal',language) %}
+
+
+					<li><a href="{{ path('seccionWeb',{'section':seccion.url,'language':language.isoCode}) }}">{{ seccion.etiquetaMenu }}</a></li>
+
+				{% endfor %}
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+>>>>>>> origin/master
+>>>>>>> origin/master

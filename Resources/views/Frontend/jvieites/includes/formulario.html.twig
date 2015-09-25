@@ -5,7 +5,11 @@
     <div class="form-group {% if not field.vars.valid %}has-error{% endif %}">
         {% set field_label = entity_fields[field.vars.name]['label']|default(null) %}
 
+<<<<<<< HEAD
         {{ form_widget (field,{'attr':{'placeholder':field.vars.label |capitalize}}) }}
+=======
+        {{ form_widget (field,{'attr':{'placeholder':field.vars.name |capitalize}}) }}
+>>>>>>> origin/master
     </div>
     {% for attrname,attrvalue in  field.vars.attr %}
         {% if attrname == 'help' %}
@@ -29,7 +33,11 @@
 
 {% endfor %}
 <div class="form-group">
+<<<<<<< HEAD
     <button type="submit" class="btn btn-default btn-sm">{{ 'front.send' | trans }}</button>
+=======
+    <button type="submit" class="btn btn-default btn-sm">Enviar</button>
+>>>>>>> origin/master
 </div>
 {{ form_rest(form) }}
 {{ form_end(form) }}
