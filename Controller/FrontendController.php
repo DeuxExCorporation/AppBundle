@@ -6,6 +6,7 @@ use Destiny\AppBundle\Entity\Idiomas;
 use Destiny\AppBundle\Entity\Mensajes;
 
 
+use Destiny\AppBundle\Entity\Newsletter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,7 +18,7 @@ class FrontendController extends Controller
 {
 
     /**
-     * @Route("/sitemap.xml")
+     * @Route("/sitemap.xml",name="sitemapXml")
      *
      */
     public function sitemapAction()
@@ -54,7 +55,7 @@ class FrontendController extends Controller
      * options={"language" = "isoCode", "repository_method" = "findOneByIsoCode"})
      *
      */
-    public function portadaAction(Idiomas $language = null)
+    public function portadaAction(Idiomas $language = null, Request $request)
     {
 	    $em = $this->getDoctrine()->getManager();
 
@@ -63,11 +64,13 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section) ) throw  $this->createNotFoundException();
 
-		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/contenido.html.twig',
+        return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.$section->getTipo()->getSlug().'.html.twig',
 			[
-				'seccion'   => $section,
-				'language'  => $language,
-				'content'   => $section->getContenidos()
+				'seccion'     => $section,
+				'language'    => $language,
+				'content'     => $section->getContenidos(),
+                'typeContent' => $this->getTipoPlantilla($section->getTipo(),$request, $language ),
+                'newsletter'  => $this->suscribirseNewsletter($request)
 			]);
 
     }
@@ -89,39 +92,15 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
 
-		$em = $this->getDoctrine()->getManager();
-		switch ($tipo = $section->getTipo() )
-		{
-		case($tipo->getSlug() == 'contacto'):
-
-			$form = $this->seccionTipoContacto($request);
-
-			break;
-
-		case ($tipo->getSlug() == 'sitemap'):
-
-            $urls = $this->getSitemap();
-
-			break;
-
-		case(!is_null($tipo->getEntidad())):
-
-			$list = $em->getRepository('DestinyAppBundle:'.$tipo->getEntidad())->getAllFront($language);
-
-			break;
-		}
-
 		$this->get('translator')->setLocale($language->getIsoCode());
 
-		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($tipo).'.html.twig',
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.$section->getTipo()->getSlug().'.html.twig',
 			[
 				'seccion'   => $section,
 				'language'  => $language,
 				'content'   => $section->getContenidos(),
-				'form'      => (isset($form)) ? $form : null,
-				'urls'      => (isset($urls)) ? $urls : null,
-				'list'      => (isset($list)) ? $list : null
-
+                'typeContent' => $this->getTipoPlantilla($section->getTipo(),$request, $language ),
+                'newsletter'  => $this->suscribirseNewsletter($request),
 			]);
 
 	}
@@ -149,16 +128,24 @@ class FrontendController extends Controller
      *
 	 *
 	 */
-	public function newsWebAction($section= null , Idiomas $language = null, $news = null)
+	public function newsWebAction($section= null , Idiomas $language = null, $news = null, Request $request)
 	{
 		if (is_null($language) || is_null($section) || is_null($news)) throw  $this->createNotFoundException();
+        $this->get('translator')->setLocale($language->getIsoCode());
 
-		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/noticias.html.twig',
+        $em = $this->getDoctrine()->getManager();
+
+        return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/noticias.html.twig',
 			[
-				'seccion' => $section,
-				'language'  => $language,
-				'news'      => $news,
-				'content'   => $news->getContenidos()
+				'seccion'     => $section,
+				'language'    => $language,
+				'noticia'     => $news,
+				'content'     => $news->getContenidos(),
+                'typeContent' => $this->getTipoPlantilla($news->getTipo(),$request, $language ),
+                'newsletter'  => $this->suscribirseNewsletter($request),
+                'categorias' => ($language->getDefecto() === true)
+                    ? $em->getRepository('DestinyAppBundle:NoticiasCategorias')->findAll()
+                    : $em->getRepository('DestinyAppBundle:NoticiasCategorias')->getCategoriasIdioma($language)
 			]);
 
 
@@ -184,19 +171,51 @@ class FrontendController extends Controller
      * @ParamConverter("category", class="DestinyAppBundle:NoticiasCategorias",
      * options={"category" = "slug", "repository_method" = "findOneBySlug"})
      */
-    public function newsCategoryWebAction($category, Idiomas $language = null, $section = null )
+    public function newsCategoryWebAction($category, Idiomas $language = null, $section = null, Request $request )
     {
         if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
         $em = $this->getDoctrine()->getManager();
-        return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/listado de categorias.html.twig',
+        $this->get('translator')->setLocale($language->getIsoCode());
+        return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/listado-de-noticias.html.twig',
             [
                 'seccion'    => $section,
                 'language'   => $language,
                 'content'    => $section->getContenidos(),
-                'list'       => $em->getRepository('DestinyAppBundle:NoticiasCategorias')->getNoticiasCategoria($category->getSlug()),
-                'categorias' => $em->getRepository('DestinyAppBundle:NoticiasCategorias')->findAll()
+                'newsletter'  => $this->suscribirseNewsletter($request),
+                'typeContent' => $this->getTipoPlantilla($section->getTipo(),$request, $language ),
+                'list'       => $em->getRepository('DestinyAppBundle:NoticiasCategorias')->getNoticiasCategoria($category->getSlug(), $language),
+                'categorias' => ($language->getDefecto() === true)
+                                    ? $em->getRepository('DestinyAppBundle:NoticiasCategorias')->findAll()
+                                    : $em->getRepository('DestinyAppBundle:NoticiasCategorias')->getCategoriasIdioma($language)
 
             ]);
+    }
+
+    private function getTipoPlantilla($tipoSeccion, Request $request, $language)
+    {
+        switch ($tipoSeccion)
+        {
+            case($tipoSeccion->getSlug() == 'contacto'):
+
+                return $this->seccionTipoContacto($request);
+
+
+                break;
+
+            case ($tipoSeccion->getSlug() == 'sitemap'):
+
+                return $this->getSitemap();
+
+                break;
+
+            case(!is_null($tipoSeccion->getEntidad())):
+
+                return $this->getDoctrine()->getManager()->getRepository('DestinyAppBundle:'.$tipoSeccion->getEntidad())->getAllFront($language);
+
+                break;
+        }
+
+        return;
     }
 
 	private function seccionTipoContacto(Request $request)
@@ -237,6 +256,37 @@ class FrontendController extends Controller
 
 		return $formulario->createView();
 	}
+
+    private function suscribirseNewsletter(Request $request)
+    {
+
+        $newsletter = new Newsletter();
+
+        $formulario = $this->createForm ($this->get ('newsletter'), $newsletter);
+
+        $formulario->handleRequest ($request);
+
+        if (($formulario->isSubmitted ()) && ($formulario->isValid ()))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $newsletter->setEstado(true);
+
+            $em->persist ($newsletter);
+            $em->flush ();
+
+
+            $traductor = $this->get('translator');
+
+            $this->get ('session')->getFlashBag()->set ('success', [
+                'title'   => $traductor->trans ('flash.newsletter.front.title'),
+                'message' => $traductor->trans ('flash.newsletter.front.message')
+            ]);
+
+
+        }
+
+        return $formulario->createView();
+    }
 
     private function getSitemap()
     {

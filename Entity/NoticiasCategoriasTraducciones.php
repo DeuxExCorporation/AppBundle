@@ -147,4 +147,14 @@ class NoticiasCategoriasTraducciones
     {
         return $this->idioma;
     }
+
+    public function getFechaCreacion()
+    {
+        return $this->getCanonica()->getFechaCreacion();
+    }
+
+    public function getFechaModificacion()
+    {
+        return $this->getCanonica()->getFechaModificacion();
+    }
 }

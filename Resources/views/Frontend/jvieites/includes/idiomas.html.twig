@@ -1,0 +1,54 @@
+<ul class="menu-inferior pull-right" id="idiomas">
+
+    {% for idioma in plantilla.idiomas %}
+        {% set url = '' %}
+
+        {% if noticia is defined %}
+
+            {% set traducciones = (noticia.traducciones is defined)
+            ? noticia.traducciones
+            : noticia.canonica.traducciones
+            %}
+
+        {% else %}
+            {% set traducciones = (seccion.traducciones is defined)
+            ? seccion.traducciones
+            : seccion.canonica.traducciones
+            %}
+
+        {% endif %}
+        {% for  traduccion in traducciones  %}
+
+            {% if idioma.defecto == true %}
+                {% set url = (seccion.canonica is defined) ? seccion.canonica.url : seccion.url  %}
+                {% set url = (noticia is defined) ? noticia.slug : url %}
+            {% elseif idioma.isoCode == traduccion.idioma.isoCode %}
+
+                {% set url = (noticia is defined) ? noticia.slug : traduccion.url %}
+            {% endif %}
+
+        {% endfor %}
+
+
+        {%  if url != '' or seccion.portada == true  %}
+            {% set ruta = (seccion.portada == true)
+            ?  path('portadaWeb',{'language':idioma.isoCode})
+            :  (noticia is defined)
+            ?  path ('newsWeb',{'section': seccion.url,
+            'language':idioma.isoCode,
+            'news':noticia.slug,
+            'year':noticia.fechaCreacion | date ('Y')})
+
+            :  path('seccionWeb',{'section':url,'language':idioma.isoCode})
+            %}
+
+
+            <li>
+
+                <a href="{{ ruta }}">
+                    <img src="{{ asset(idioma.webPath) | imagine_filter('flag_front') }}" title="{{ idioma }}" alt="{{ idioma.isoCode }}"
+                         class="bandera {{ (language == idioma) ? 'bandera-actual' :''}}"></a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

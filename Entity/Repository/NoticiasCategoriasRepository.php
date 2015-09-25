@@ -2,6 +2,7 @@
 
 namespace Destiny\AppBundle\Entity\Repository;
 
+use Destiny\AppBundle\Entity\Idiomas;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,19 +13,58 @@ use Doctrine\ORM\EntityRepository;
  */
 class NoticiasCategoriasRepository extends EntityRepository
 {
-    public function getNoticiasCategoria($categoria)
+    public function getNoticiasCategoria($categoria, Idiomas $language)
     {
         $em = $this->getEntityManager();
 
         $query = $em->createQueryBuilder();
 
-        return $query->select(['n','nc'])
-                    ->from('DestinyAppBundle:Noticias','n')
-                    ->innerJoin('n.categorias','nc')
-                    ->where($query->expr()->eq('nc.slug',':categoria'))
-                    ->andWhere($query->expr()->eq('n.estado',':activada'))
-                    ->setParameters([':categoria' => $categoria,':activada' => true])
-                    ->getQuery()->getResult()
-            ;
+        if ($language->getDefecto() === true)
+        {
+            return $query->select(['n','nc'])
+                ->from('DestinyAppBundle:Noticias','n')
+                ->innerJoin('n.categorias','nc')
+                ->where($query->expr()->eq('nc.slug',':categoria'))
+                ->andWhere($query->expr()->eq('n.estado',':activada'))
+                ->setParameters([':categoria' => $categoria,':activada' => true])
+                ->getQuery()->getResult()
+                ;
+        }else{
+            return $this->getCategoriaPorIdioma($categoria, $language);
+        }
+
+
+    }
+    public function getCategoriaPorIdioma($categoria, Idiomas $idiomas)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+
+        return $query->select(['ct','i','c'])
+            ->from('DestinyAppBundle:NoticiasCategoriasTraducciones','ct')
+            ->innerJoin('ct.idioma','i')
+            ->innerJoin('ct.canonica','c')
+            ->where($query->expr()->eq('i.isoCode',':idioma'))
+            ->andWhere($query->expr()->eq('c.estado',':activada'))
+            ->andWhere($query->expr()->eq('c.slug',':slug'))
+            ->setParameters([':idioma' => $idiomas->getIsoCode(),':activada' => true,'slug' => $categoria])
+            ->getQuery()->getResult();
+    }
+
+    public function getCategoriasIdioma(Idiomas $idiomas)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+
+        return $query->select(['ct','i','c'])
+                     ->from('DestinyAppBundle:NoticiasCategoriasTraducciones','ct')
+                     ->innerJoin('ct.idioma','i')
+                     ->innerJoin('ct.canonica','c')
+                     ->where($query->expr()->eq('i.isoCode',':idioma'))
+                     ->andWhere($query->expr()->eq('c.estado',':activada'))
+                     ->setParameters([':idioma' => $idiomas->getIsoCode(),':activada' => true])
+                     ->getQuery()->getResult();
     }
 }

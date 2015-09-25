@@ -102,7 +102,7 @@ class SeccionesTraducciones
 	/**
 	 * @ORM\ManyToOne(targetEntity="Destiny\AppBundle\Entity\Secciones",
 	 *     cascade={"persist"}, inversedBy="traducciones")
-	 * @ORM\JoinColumn(name="traduccion_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(name="traduccion_id", nullable=true, referencedColumnName="id", onDelete="CASCADE")
 	 **/
 	private $canonica;
 
@@ -317,7 +317,7 @@ class SeccionesTraducciones
     public function getUrl()
     {
 
-        return strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->url));
+        return $this->url;
     }
 
     public function getTipo()

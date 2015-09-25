@@ -1,0 +1,26 @@
+front:
+    contacte: Contacte con nos
+    llamanos: Chamenos
+    donde: Onde estamos
+    newsletter: Suscribase a nosa newslleter
+    diseigned: Diseñado por
+    send: Enviar
+    categorias: Categorias das noticias
+
+mensajes:
+    form:
+        email: Email
+        telephone: Telefono
+        subject: Asunto
+        body: Mensaxe
+
+flash:
+    message:
+        front:
+            title: ¡Hemos recibido a sua pregunta!
+            message: En breves, nos pondremos en contacto con vostede.
+
+    newsletter:
+            front:
+                title: ¡Gracias por suscribirse!
+                message: En breves, les mandaremos mais información.

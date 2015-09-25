@@ -1,0 +1,47 @@
+{% extends "::base.html.twig" %}
+{% block links %}
+    {% set idioma = plantilla.idiomaDefecto.isoCode %}
+    {% set rutaSeccion = (seccion.canonica is defined) ? seccion.canonica.url : seccion.url %}
+    {% set ruta = (seccion.portada == true)
+            ? path('portadaWeb',{'language':idioma})
+            :  path('seccionWeb',{'section':rutaSeccion,'language':idioma})
+    %}
+    <link rel="canonical" href="{{ ruta }}">
+{% endblock %}
+{% block stylesheets %}
+	<link href="{{ asset('asset/frontend/css/front.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+	{% include ('DestinyAppBundle:Frontend/destiny/includes:menu.html.twig') %}
+	<div class="logo">
+		<a href="{{ path('portadaWeb',{'language':language.isoCode}) }}">
+
+			<img src="{{ asset(empresa.web.webPath | imagine_filter('image_logo'))  }}">
+		</a>
+	</div>
+	<div class="col-md-12 main">
+
+		<h1 class="page-header">{% block h1Title %}{% endblock %}</h1>
+
+
+
+		<div class="col-md-12 alerta">
+			{% for type, flashMessage in app.session.flashbag.all() %}
+				<div class="alert alert-{{ type }} fade in">
+					<a data-dismiss="alert" class="pull-right" href="" type="button">
+						<i class="fa fa-times"></i>
+					</a>
+					{% if flashMessage.title is defined %}
+						<strong>{{ flashMessage.title }}</strong><br>
+						{{ flashMessage.message }}
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+
+		{% block  frontBody %}
+
+		{% endblock %}
+
+	</div>
+{% endblock %}

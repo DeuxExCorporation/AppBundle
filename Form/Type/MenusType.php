@@ -30,6 +30,9 @@ class MenusType extends AbstractType
         $builder
 	        ->add ('nombre', 'text', ['label' => $this->translator->trans ('menus.form.name'),
 		                              'max_length' => 10])
+            ->add ('nombre', 'text', ['label' => $this->translator->trans ('menus.form.name'),
+                'max_length' => 10])
+            ->add('limite','integer',['label' => $this->translator->trans('menus.form.limite'),'attr'=>['min' => 0]])
 	        ->add ('haveSubsecciones', 'choice', ['label' => $this->translator->trans ('menus.form.submenus'),
 								          'choices' => [TRUE => $this->translator->trans ('menus.form.yes'),
 										                FALSE => $this->translator->trans ('menus.form.not')]])

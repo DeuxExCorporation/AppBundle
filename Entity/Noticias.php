@@ -78,6 +78,18 @@ class Noticias
      */
     private $descripcionSeo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text")
+     * @Assert\NotBlank(message="articulo.descripcion.notblank")
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "articulo.descripcion.min",
+     * )
+     */
+    private $descripcion;
+
 	/**
 	 * @var string
 	 *
@@ -522,5 +534,51 @@ class Noticias
     public function getTraducciones()
     {
         return $this->traducciones;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Noticias
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param \Destiny\AppBundle\Entity\Imagenes $imagen
+     * @return Noticias
+     */
+    public function setImagen(\Destiny\AppBundle\Entity\Imagenes $imagen = null)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return \Destiny\AppBundle\Entity\Imagenes 
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
     }
 }
