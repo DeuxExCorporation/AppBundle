@@ -23,4 +23,8 @@ flash:
     newsletter:
             front:
                 title: ¡Gracias por suscribirse!
+<<<<<<< HEAD
                 message: En breves, les mandaremos mais información.
+=======
+                message: En breves, les mandaremos mais información.
+>>>>>>> origin/master

@@ -64,7 +64,15 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section) ) throw  $this->createNotFoundException();
 
+<<<<<<< HEAD
         return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.$section->getTipo()->getSlug().'.html.twig',
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
+        return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($section->getTipo()).'.html.twig',
+>>>>>>> origin/master
 			[
 				'seccion'     => $section,
 				'language'    => $language,
@@ -92,9 +100,23 @@ class FrontendController extends Controller
 
 		if (is_null($language) || is_null($section)) throw  $this->createNotFoundException();
 
+<<<<<<< HEAD
 		$this->get('translator')->setLocale($language->getIsoCode());
 
 		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.$section->getTipo()->getSlug().'.html.twig',
+=======
+<<<<<<< HEAD
+		$this->get('translator')->setLocale($language->getIsoCode());
+
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.$section->getTipo()->getSlug().'.html.twig',
+=======
+
+
+		$this->get('translator')->setLocale($language->getIsoCode());
+
+		return $this->render ('DestinyAppBundle:Frontend:'.$this->get('datosEmpresa')->getPlantilla().'/'.strtolower($section->getTipo()).'.html.twig',
+>>>>>>> origin/master
+>>>>>>> origin/master
 			[
 				'seccion'   => $section,
 				'language'  => $language,

@@ -23,4 +23,8 @@ flash:
     newsletter:
             front:
                 title: Thanks for subscribing !
+<<<<<<< HEAD
                 message: In short , we will send more information.
+=======
+                message: In short , we will send more information.
+>>>>>>> origin/master

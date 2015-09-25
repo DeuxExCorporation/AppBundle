@@ -39,7 +39,11 @@ class NoticiasRepository extends EntityRepository
 
 
         $noticias['noticias'] = $query->getQuery()->getResult();
+<<<<<<< HEAD
         $noticias['categorias'] = ($language->getDefecto() === true)
+=======
+        $noticias['categorias'] = ($language->getDefecto() == true)
+>>>>>>> origin/master
                                     ? $em->getRepository('DestinyAppBundle:NoticiasCategorias')->findAll()
                                     : $em->getRepository('DestinyAppBundle:NoticiasCategorias')->getCategoriasIdioma($language);
 

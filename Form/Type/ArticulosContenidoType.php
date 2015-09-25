@@ -36,7 +36,15 @@ class ArticulosContenidoType extends AbstractType
             ->add('imagen', 'entity', array(
                 'class' => 'DestinyAppBundle:Imagenes',
                 'label' => $this->translator->trans ('articulosContenido.form.imagen'),
+<<<<<<< HEAD
                 'required' => false,
+=======
+<<<<<<< HEAD
+                'required' => false,
+=======
+                'required' => true,
+>>>>>>> origin/master
+>>>>>>> origin/master
                 'expanded' => true,
                 'multiple' => false,
 

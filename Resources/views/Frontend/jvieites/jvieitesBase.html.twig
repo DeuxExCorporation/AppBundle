@@ -28,7 +28,75 @@
             {{ empresa.web.slogan | raw }}
         </div>
         <div class="col-md-3 col-xs-12">
+<<<<<<< HEAD
             {% include ('@DestinyApp/Frontend/jvieites/includes/idiomas.html.twig') %}
+=======
+            <ul class="menu-inferior pull-right" id="idiomas">
+<<<<<<< HEAD
+
+                {% for idioma in plantilla.idiomas %}
+                    {% set url = '' %}
+
+                    {% if noticia is defined %}
+
+                        {% set traducciones = (noticia.traducciones is defined)
+                                                    ? noticia.traducciones
+                                                    : noticia.canonica.traducciones
+                        %}
+
+                    {% else %}
+                    {% set traducciones = (seccion.traducciones is defined)
+                                            ? seccion.traducciones
+                                            : seccion.canonica.traducciones
+                    %}
+
+                    {% endif %}
+                    {% for  traduccion in traducciones  %}
+
+                       {% if idioma.defecto == true %}
+                            {% set url = (seccion.canonica is defined) ? seccion.canonica.url : seccion.url  %}
+                            {% set url = (noticia is defined) ? noticia.slug : url %}
+                        {% elseif idioma.isoCode == traduccion.idioma.isoCode %}
+
+                            {% set url = (noticia is defined) ? noticia.slug : traduccion.url %}
+                        {% endif %}
+
+                    {% endfor %}
+
+
+                    {%  if url != '' or seccion.portada == true  %}
+                    {% set ruta = (seccion.portada == true)
+                                ?  path('portadaWeb',{'language':idioma.isoCode})
+                                :  (noticia is defined)
+                                    ?  path ('newsWeb',{'section': seccion.url,
+                                                        'language':idioma.isoCode,
+                                                        'news':noticia.slug,
+                                                        'year':noticia.fechaCreacion | date ('Y')})
+
+                                    :  path('seccionWeb',{'section':url,'language':idioma.isoCode})
+                    %}
+
+
+                    <li>
+
+                        <a href="{{ ruta }}">
+                            <img src="{{ asset(idioma.webPath) | imagine_filter('flag_front') }}" title="{{ idioma }}" alt="{{ idioma.isoCode }}"
+                                 class="bandera {{ (language == idioma) ? 'bandera-actual' :''}}"></a>
+                    </li>
+                    {% endif %}
+=======
+                {% for idioma in plantilla.idiomas %}
+                    {% set ruta = (seccion.portada == true)
+                        ?  path('portadaWeb',{'language':idioma.isoCode})
+                        :  path('seccionWeb',{'section':seccion.url,'language':idioma.isoCode})
+                    %}
+                <li>
+                    <a href="{{ ruta }}"><img src="{{ asset(idioma.webPath) }}" title="{{ idioma }}" alt="{{ idioma.isoCode }}"></a>
+                </li>
+>>>>>>> origin/master
+                {% endfor %}
+            </ul>
+>>>>>>> origin/master
             <div class="clearfix"></div>
             <div class="logo-feni">
                 <a target="_blank" href="http://www.fenieenergia.es/">
@@ -44,7 +112,15 @@
     <div class="principal">
         <div class="contenido-web col-md-9 col-xs-12">
 
+<<<<<<< HEAD
             <h1>{% block h1Title %}{{ seccion.tituloSeccion | capitalize }}{% endblock %}</h1>
+=======
+<<<<<<< HEAD
+            <h1>{% block h1Title %}{{ seccion.tituloSeccion | capitalize }}{% endblock %}</h1>
+=======
+            <h1>{% block h1Title %}{{ seccion.tituloSeccion }}{% endblock %}</h1>
+>>>>>>> origin/master
+>>>>>>> origin/master
 
 
 
@@ -70,6 +146,10 @@
         <div class="izquierda col-md-3 col-xs-12">
             {% block izquierda %}
                 <div class="modulo">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
 
                     <div class="titulo-modulo">{{ 'front.llamanos' | trans}}</div>
                     <div class="contenido-modulo">
@@ -80,6 +160,21 @@
                 <div class="modulo">
 
                     <div class="titulo-modulo">{{ 'front.donde' | trans}}</div>
+<<<<<<< HEAD
+=======
+=======
+                   {# @todo cambiar por traducción#}
+                    <div class="titulo-modulo">Llamanos</div>
+                    <div class="contenido-modulo">
+                        <i class="fa fa-phone"></i><span><a href="telf:{{ empresa.contacto.telefono }}">{{ empresa.contacto.telefono }}</a></span><br>
+                        <i class="fa fa-phone"></i><span><a href="telf:{{ empresa.contacto.movil }}">{{ empresa.contacto.movil }}</a></span><br>
+                    </div>
+                </div>
+                <div class="modulo">
+                    {# @todo cambiar por traducción#}
+                    <div class="titulo-modulo">Donde estamos</div>
+>>>>>>> origin/master
+>>>>>>> origin/master
                     <div class="contenido-modulo">
                         <i class="fa fa-map-marker"></i>
                         {{ empresa.contacto.direccionCompleta }}
@@ -87,12 +182,28 @@
                 </div>
             {% block contacto %}{% endblock %}
                 <div class="modulo">
+<<<<<<< HEAD
                     <div class="titulo-modulo">{{ 'front.newsletter' | trans}}</div>
+=======
+<<<<<<< HEAD
+                    <div class="titulo-modulo">{{ 'front.newsletter' | trans}}</div>
+=======
+                    {# @todo cambiar por traducción#}
+                    <div class="titulo-modulo">Suscribete a nuestra newsletter</div>
+>>>>>>> origin/master
+>>>>>>> origin/master
                     <div class="contenido-modulo">
                         {% include "@DestinyApp/Frontend/jvieites/includes/formulario.html.twig" with {'form':newsletter} %}
                     </div>
                 </div>
+<<<<<<< HEAD
                 {% block categorias %}{% endblock %}
+=======
+<<<<<<< HEAD
+                {% block categorias %}{% endblock %}
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
             {% endblock %}
         </div>
 	</div>
@@ -116,7 +227,15 @@
         </div>
         <div class="col-md-5 col-xs-12">
             <a href="mailto:carlos.sgude@gmail.com">
+<<<<<<< HEAD
                 {{ 'front.diseigned' | trans}} Carlos Gude
+=======
+<<<<<<< HEAD
+                {{ 'front.diseigned' | trans}} Carlos Gude
+=======
+            Designed by Calos Gude
+>>>>>>> origin/master
+>>>>>>> origin/master
             </a>
         </div>
         <div class="col-md-3 col-xs-12">
