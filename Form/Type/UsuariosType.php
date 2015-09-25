@@ -5,13 +5,14 @@ namespace Destiny\AppBundle\Form\Type;
 
 
 use Destiny\AppBundle\Entity\Usuarios;
+use Destiny\AppBundle\Services\EmailService;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\Email;
+
 
 
 /**
@@ -24,7 +25,7 @@ class UsuariosType extends AbstractType
 {
 	protected $em, $translator, $email;
 
-	public function __construct (EntityManager $em, Translator $translator, Email $email)
+	public function __construct (EntityManager $em, Translator $translator, EmailService $email)
 	{
 		$this->em = $em;
 		$this->translator = $translator;

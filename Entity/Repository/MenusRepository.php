@@ -55,7 +55,7 @@ class MenusRepository extends EntityRepository
 			->setParameters([':menu'=> $menu,
 				':isoCode' => $language->getIsoCode(),
 				':estado' => true])
-
+            ->orderBy('s.posicion')
 			->getQuery()->getOneOrNullResult()
 		;
 

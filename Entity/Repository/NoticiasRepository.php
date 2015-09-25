@@ -21,7 +21,7 @@ class NoticiasRepository extends EntityRepository
 
 		if ($language->getDefecto() == FALSE)
 		{
-			return $query->select(['n'])
+			$query->select(['n'])
 						->from('DestinyAppBundle:NoticiasTraducciones','n')
 						->innerJoin('n.canonica','c')
 						->innerJoin('n.idioma','i')
@@ -37,8 +37,11 @@ class NoticiasRepository extends EntityRepository
 
 		}
 
+
         $noticias['noticias'] = $query->getQuery()->getResult();
-        $noticias['categorias'] = $em->getRepository('DestinyAppBundle:NoticiasCategorias')->findAll();
+        $noticias['categorias'] = ($language->getDefecto() == true)
+                                    ? $em->getRepository('DestinyAppBundle:NoticiasCategorias')->findAll()
+                                    : $em->getRepository('DestinyAppBundle:NoticiasCategorias')->getCategoriasIdioma($language);
 
 		return $noticias;
 	}

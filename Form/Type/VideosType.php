@@ -31,7 +31,7 @@ class VideosType extends AbstractType
     {
         $builder
 	        ->add ('nombre', 'text', ['label' => $this->translator->trans ('videos.form.name'),
-		        'max_length' => 10])
+		        'max_length' => 100])
 	        ->add ('alt', 'text', ['label' => $this->translator->trans ('videos.form.alt'),
 		        'max_length' => 150])
 	        ->add('descripcion', 'textarea', ['label' => $this->translator->trans ('videos.form.description'),

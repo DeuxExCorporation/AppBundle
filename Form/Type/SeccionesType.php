@@ -74,7 +74,9 @@ class SeccionesType extends AbstractType
 			        FALSE => $this->translator->trans ('form.desactive')]])
         ;
 
-	    if (method_exists($options['data'],'getPortada'))
+
+
+	    if (method_exists($options['data'],'getPortada') && ($options['data']->getPortada() === true))
 	    {
 		    $builder->remove('url');
 	    }

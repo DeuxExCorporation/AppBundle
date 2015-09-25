@@ -1,0 +1,16 @@
+<h2>{{ adjunto.nombre }} </h2>
+<div class="articulo">
+    <div class="contenido-articulo">
+        <div class=" col-md-12 col-xs-12">
+            {{ adjunto.descripcion | raw }}
+
+        </div>
+    </div>
+    <div class="boton-articulo">
+        <a target="_blank" class="btn btn-info"
+           href="{{ asset((adjunto.webPath is null) ? adjunto.canonica.webPath : adjunto.webPath) }}">
+            <i class="fa fa-file-pdf-o"></i>
+            {{ adjunto.alt }}
+        </a>
+    </div>
+</div>

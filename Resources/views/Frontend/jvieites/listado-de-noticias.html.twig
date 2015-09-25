@@ -1,0 +1,46 @@
+{% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
+
+{% block  frontBody %}
+    {%  include "@DestinyApp/Frontend/jvieites/includes/contenido.html.twig" %}
+
+
+
+{% for noticia in typeContent.noticias %}
+
+    <h2><a href="{{ path ('newsWeb',{'section':seccion.url,
+            'language':language.isoCode,
+            'news':noticia.slug,'year':noticia.fechaCreacion | date ('Y')}) }}">
+            {{ noticia.titulo }}
+        </a>| <small>{{ noticia.fechaCreacion | date ('d/m/y') }}</small> </h2>
+    <div class="articulo">
+        <div class="contenido-articulo">
+            <div class=" col-md-12 col-xs-12">
+                {{ noticia.descripcion | raw }}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endfor %}
+
+
+
+
+{% endblock %}
+{% block categorias %}
+<div class="modulo">
+    <div class="titulo-modulo">{{ 'front.categorias' | trans}}</div>
+    <div class="contenido-modulo">
+        <ul>
+            {% for category in typeContent.categorias  %}
+                <li><span>
+                    <a class="enlaze-moludo" href="{{ path ('newsCategoryWeb',{'section':seccion.url,'language':language.isoCode,'category':category.slug,'year':category.fechaCreacion | date ('Y')}) }}">
+                        {{ category }}
+                    </a></span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

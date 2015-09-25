@@ -44,6 +44,11 @@ class PlantillaService
         return $this->entityManager->getRepository('DestinyAppBundle:Idiomas')->getLanguageDefault();
     }
 
+    public function getRedesSociales()
+    {
+        return $this->entityManager->getRepository('DestinyAppBundle:EmpresaRedesSociales')->findAll();
+    }
+
 
 
 

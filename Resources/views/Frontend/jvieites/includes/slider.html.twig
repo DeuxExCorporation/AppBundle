@@ -1,0 +1,27 @@
+
+<div class="col-md-12 slider">
+    <ul class="rslides" id="slider">
+    {% for imagen in slider.group.values %}
+        {% if language.defecto == true %}
+
+            <li><img src="{{ asset(imagen.webPath) | imagine_filter('image_front') }}" alt="{{ imagen.alt }}"
+                 title="{{ imagen.descripcion }}">
+            </li>
+        {% else %}
+            {% for imagenTraduccion in  imagen.traducciones.values  %}
+                {% if imagenTraduccion.idioma.isoCode == language.isoCode %}
+                <li>
+                    <img src="{{ asset((imagenTraduccion.webPath is null
+                                        ? imagenTraduccion.canonica.webPath
+                                        : imagenTraduccion.webPath))| imagine_filter('image_front')  }}"
+                         alt="{{ imagenTraduccion.alt }}"
+                         title="{{ imagenTraduccion.descripcion }}">
+                         </li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    {% endfor %}
+
+    </ul>
+</div>
