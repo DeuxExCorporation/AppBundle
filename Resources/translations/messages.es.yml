@@ -1,6 +1,9 @@
 block:
     web: La pagina esta bloqueada.
     login: Acceso para administradores
+front:
+    send: Enviar
+    categorias: Categorias de las noticias
 
 dashboard:
     saludo: Hola,
@@ -82,6 +85,10 @@ flash:
             title: ¡Hemos recibido su pregunta!
             message: En breves, nos pondremos en contacto con usted.
 
+    newsletter:
+        front:
+            title: ¡Gracias por suscribirse!
+            message: En breves, les mandaremos más información.
     usuarioRoot:
         title: ¡Se ha añadido el usuario Administrador!
         message: Se ha finalizado la instalacion y se ha enviado un email con los datos de la instalacion.
@@ -418,11 +425,11 @@ menus:
         back: Volver
         save: Guardar menu
         edit: Editando menu
-        limit: Limite de secciones
+        limite: Limite de secciones
 
     form:
         name: Nombre
-        limit: Limite de secciones
+        limite: Limite de secciones
         submenus: ¿Las secciones van a tener subsecciones?
         yes: Si
         not: No
@@ -588,6 +595,7 @@ articulosContenido:
         name: nombre
         title: Titulo
         description: Cuerpo del articulo
+        imagen: Imagen
 
 noticiasCategorias:
     list:
@@ -649,7 +657,7 @@ BackendSecciones:
         grupo: Grupo
         estado: Estado
 
-backendPermisos:
+BackendPermisos:
     list:
         title: Gestión de permisos
         name: Entidad

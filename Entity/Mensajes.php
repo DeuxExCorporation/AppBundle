@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Mensajes
  *
- * @ORM\Table(name="Mensajes")
+ * @ORM\Table(name="mensajes")
  * @ORM\Entity(repositoryClass="Destiny\AppBundle\Entity\Repository\MensajesRepository")
  *
  */

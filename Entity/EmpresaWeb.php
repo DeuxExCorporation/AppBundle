@@ -191,8 +191,7 @@ class EmpresaWeb
 
 		// move takes the target directory and then the
 		// target filename to move to
-		$nombreArchivo = $this->getNombre().'.' .$this->getArchivo()->getClientOriginalExtension();
-
+        $nombreArchivo = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->getNombre())).'.' .$this->getArchivo()->getClientOriginalExtension();
 
 
 		$this->getArchivo()->move(

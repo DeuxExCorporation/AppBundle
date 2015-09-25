@@ -3,6 +3,7 @@ namespace Destiny\AppBundle\Services;
 
 
 
+use Destiny\AppBundle\Entity\Idiomas;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\DependencyInjection\Container;
@@ -87,6 +88,7 @@ class BackendService
 
     public function getTranslations($entity,$element,Idiomas $language)
     {
+
         $repository = $this->em->getRepository ('DestinyAppBundle:' . ucfirst ($entity).'Traducciones');
 
         $edit = $repository->getTranslation ($element,$language->getIsoCode());
@@ -94,10 +96,13 @@ class BackendService
         if (is_null($edit))
         {
             $edit = $this->container->get($entity.'-traducciones')->newEntity();
+
             $canonica = $this->getElements($entity,'one',$element);
+
             $edit->setCanonica($canonica);
             $edit->setIdioma($language);
         }
+
 
         return $edit;
     }
@@ -221,7 +226,7 @@ class BackendService
 
     public function methodExist($class,$metodo,$variable = null)
     {
-        return (method_exists($class,$metodo)) ? $class->$metodo($variable) : false;
+        return (method_exists($class,$metodo)) ? $class->$metodo($variable) : null;
     }
 
 

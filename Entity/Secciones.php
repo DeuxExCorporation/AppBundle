@@ -177,6 +177,7 @@ class Secciones
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Destiny\AppBundle\Entity\SeccionesContenido", mappedBy="seccion")
+     * @ORM\OrderBy({"posicion" = "ASC"})
 	 **/
 	private $contenidos;
 
@@ -741,6 +742,6 @@ class Secciones
      */
     public function getUrl()
     {
-        return $this->url;
+        return strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->url));
     }
 }

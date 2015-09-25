@@ -1,0 +1,38 @@
+<<<<<<< HEAD
+{% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
+=======
+{% extends "@DestinyApp/Frontend/destiny/destinyBase.html.twig" %}
+>>>>>>> origin/master
+
+
+{% block h1Title %}
+
+	<a href="{{ path('portadaBackend') }}" class="btn btn-info">Ir al backend</a>
+
+{% endblock %}
+{% block  frontBody %}
+	{{ empresa.web }}<br>
+	{{ seccion.tituloSeo }}<br>
+    {%  include "@DestinyApp/Frontend/jvieites/includes/contenido.html.twig" %}
+
+
+    <ul>
+        {% for category in categorias %}
+            <li>
+                <a href="{{ path ('newsCategoryWeb',{'section':seccion.url,'language':language.isoCode,'category':category.slug,'year':category.fechaCreacion | date ('Y')}) }}">
+                    {{ category }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+    {% for new in list %}
+        <li>
+            <a href="{{ path ('newsWeb',{'section':seccion.url,'language':language.isoCode,'news':new.slug,'year':new.fechaCreacion | date ('Y')}) }}">
+                {{ new.titulo }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,9 @@
+<div class="col-md-12">
+<img src="{{ asset((imagen.webPath is null
+          ? imagen.canonica.webPath
+          : imagen.webPath)) | imagine_filter('image_front') }}"
+     alt="{{ imagen.alt }}"
+     title="{{ imagen.descripcion }}"
+     class="responsive">
+    </div>
+

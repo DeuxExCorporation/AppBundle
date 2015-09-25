@@ -67,14 +67,7 @@ class IdiomasType extends AbstractType
 	public function newEntity ()
 	{
 		$idioma = new Idiomas();
-
-		return $idioma;
-	}
-
-	public function preCreateSave($idioma)
-	{
-		$idioma->setDefecto(FALSE);
-
+        $idioma->setDefecto(FALSE);
 		return $idioma;
 	}
 

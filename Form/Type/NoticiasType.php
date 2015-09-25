@@ -5,6 +5,7 @@ namespace Destiny\AppBundle\Form\Type;
 use Destiny\AppBundle\Entity\Noticias;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,6 +38,16 @@ class NoticiasType extends AbstractType
 		        'required'      => false,
 		        'multiple'      => true,
 		        ])
+            ->add('descripcion', 'textarea', ['label' => $this->translator->trans ('articulosContenido.form.description')])
+
+            ->add('tipo','entity',['label' => $this->translator->trans('secciones.form.tipo'),
+                'class'         => 'DestinyAppBundle:SeccionesTipo',
+                'required'      => true,
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('t')
+                        ->orderBy('t.slug');
+
+                } ])
 	        ->add ('estado', 'choice', ['label' => $this->translator->trans ('noticias.form.status'),
 		        'choices' => [TRUE => $this->translator->trans ('form.active'),
 			        FALSE => $this->translator->trans ('form.desactive')]])

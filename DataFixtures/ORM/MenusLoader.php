@@ -27,6 +27,7 @@ class MenusLoader extends AbstractFixture implements  FixtureInterface, OrderedF
 			$menu = new Menus();
 			$menu->setNombre($listadoMenus['nombre']);
 			$menu->setHaveSubsecciones($listadoMenus['subsecciones']);
+            $menu->setLimite($listadoMenus['limite']);
 			$menu->setEstado(true);
 
 			$manager->persist($menu);

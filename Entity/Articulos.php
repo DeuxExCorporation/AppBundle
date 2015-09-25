@@ -99,6 +99,13 @@ class Articulos
     private $traducciones;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Destiny\AppBundle\Entity\Imagenes",
+     *     cascade={"persist"})
+     * @ORM\JoinColumn(name="imagen_id", nullable=true, referencedColumnName="id", onDelete="CASCADE")
+     **/
+    private $imagen;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="estado", type="boolean")
@@ -381,5 +388,28 @@ class Articulos
     public function getTraducciones()
     {
         return $this->traducciones;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param \Destiny\AppBundle\Entity\Imagenes $imagen
+     * @return Articulos
+     */
+    public function setImagen(\Destiny\AppBundle\Entity\Imagenes $imagen = null)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return \Destiny\AppBundle\Entity\Imagenes 
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
     }
 }

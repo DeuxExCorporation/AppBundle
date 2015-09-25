@@ -68,6 +68,18 @@ class NoticiasTraducciones
      */
     private $descripcionSeo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text")
+     * @Assert\NotBlank(message="articulo.descripcion.notblank")
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "articulo.descripcion.min",
+     * )
+     */
+    private $descripcion;
+
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Destiny\AppBundle\Entity\Noticias",
@@ -231,5 +243,43 @@ class NoticiasTraducciones
     {
         $this->contenidos = $contenidos;
         return $this;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return NoticiasTraducciones
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    public function getFechaModificacion()
+    {
+        return $this->getCanonica()->getFechaModificacion();
+    }
+
+    public function getFechaCreacion()
+    {
+        return $this->getCanonica()->getFechaCreacion();
+    }
+
+    public function getTipo()
+    {
+        return $this->getCanonica()->getTipo();
     }
 }

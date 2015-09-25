@@ -30,7 +30,7 @@ class NoticiasTraduccionesType extends AbstractType
             ->add('titulo', 'text', ['label' => $this->translator->trans ('noticias.form.title')])
             ->add('tituloSeo', 'text', ['label' => $this->translator->trans ('noticias.form.seoTitle')])
             ->add('descripcionSeo', 'text', ['label' => $this->translator->trans ('noticias.form.seoDescription')])
-
+            ->add('descripcion', 'textarea', ['label' => $this->translator->trans ('articulosContenido.form.description')])
         ;
     }
     

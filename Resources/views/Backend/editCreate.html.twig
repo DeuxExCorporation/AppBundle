@@ -34,6 +34,7 @@
     {% if notList != true %}
         <div class="col-md-7 col-xs-12">
             {% include('@DestinyApp/Backend/Include/listContent.html.twig' ) %}
+
         </div>
     {% endif %}
 {% endblock %}
@@ -59,11 +60,11 @@
         {% endif %}
         {% if idioma.defecto == true %}
             <a href="{{ edit }}">
-                <img class="flagIcon defecto" src="{{ asset(idioma.webPath) }}">
+                <img class="bandera" src="{{ asset(idioma.webPath | imagine_filter('flag_front')) }}">
             </a>
         {% else %}
             <a href="{{ traduccion }}">
-                <img class="flagIcon" src="{{ asset(idioma.webPath) }}"></a>
+                <img class="bandera" src="{{ asset(idioma.webPath | imagine_filter('flag_front')) }}"></a>
         {% endif %}
     {% endfor %}
 {% endif %}
@@ -94,7 +95,7 @@
     {% endif %}
     {% if (form.vars.value.type == 'videos') and (form.vars.value.url != '')  %}
         <div class="col-sm-11">
-            <iframe width="400" height="315" src="https://www.youtube.com/embed/{{ form.vars.value.url }}" frameborder="0" allowfullscreen></iframe>
+            <iframe width="350" height="315" src="https://www.youtube.com/embed/{{ form.vars.value.url }}" frameborder="0" allowfullscreen></iframe>
         </div>
     {% endif %}
 {% endif %}
@@ -131,7 +132,7 @@
     {% endif %}
          {{ form_start(form) }}
          {% for field in form.children if (field.vars.name != '_token')
-and (field.vars.name != 'group') and (field.vars.name != 'imagenes') %}
+and (field.vars.name != 'group') and (field.vars.name != 'imagenes') and (field.vars.name != 'imagen') %}
     <div class="form-group {% if not field.vars.valid %}has-error{% endif %}">
         {% set field_label = entity_fields[field.vars.name]['label']|default(null) %}
         {{ form_label(field, field_label, { label_attr: { class: 'col-sm-12 control-label' } }) }}
@@ -150,8 +151,9 @@ and (field.vars.name != 'group') and (field.vars.name != 'imagenes') %}
         </div>
     </div>
 {% endfor %}
-         {% if form.imagenes is defined  or form.group is defined %}
-    {% set imagenes = (form.imagenes is defined) ? form.imagenes : form.group  %}
+         {% if form.imagenes is defined or form.imagen is defined or form.group is defined %}
+    {% set imagenes = (form.imagenes is defined) ? form.imagenes : (form.imagen is defined) ? form.imagen : form.group  %}
+
     <div class="form-group col-md-12 clearfix">
         <br>
         {% for single in imagenes %}
