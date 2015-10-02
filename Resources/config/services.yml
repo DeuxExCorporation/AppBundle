@@ -14,7 +14,11 @@ services:
 
     backend:
         class: Destiny\AppBundle\Services\BackendService
+<<<<<<< HEAD
         arguments: ["@doctrine.orm.entity_manager","@service_container","@translator.default","@security.authorization_checker","@session"]
+=======
+        arguments: ["@doctrine.orm.entity_manager","@service_container","@translator.default","@security.authorization_checker"]
+>>>>>>> origin/master
 
     app.permisos_repository:
         class:     Doctrine\ORM\EntityRepository

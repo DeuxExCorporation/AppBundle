@@ -3,7 +3,10 @@
 namespace Destiny\AppBundle\Controller;
 
 use Destiny\AppBundle\Entity\BackendPermisos;
+<<<<<<< HEAD
 use Destiny\AppBundle\Entity\BundlesActivos;
+=======
+>>>>>>> origin/master
 use Destiny\AppBundle\Entity\EmpresaContacto;
 use Destiny\AppBundle\Entity\EmpresaEmails;
 use Destiny\AppBundle\Entity\EmpresaRedesSociales;
@@ -232,13 +235,19 @@ class InstalaccionController extends Controller
 
 		if (($formulario->isSubmitted ()) && ($formulario->isValid ()))
 		{
+<<<<<<< HEAD
             $bundle = new BundlesActivos();
             $bundle->setNombre('AppBundle')->setEstado(true);
+=======
+>>>>>>> origin/master
             $this->createEmails();
 			$usuarios->setRoles(['ROLE_ROOT']);
 			$usuarios->setEstado(true);
 
+<<<<<<< HEAD
 			$em->persist ($bundle);
+=======
+>>>>>>> origin/master
 			$em->persist ($usuarios);
 			$em->flush ();
 

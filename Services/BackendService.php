@@ -9,23 +9,36 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Filesystem\Filesystem;
+<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\Session\Session;
+=======
+>>>>>>> origin/master
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 
 class BackendService
 {
+<<<<<<< HEAD
 	protected $em, $security, $container, $translator, $user, $sesion;
 
 
 	public function __construct (EntityManager $EntityManager, Container $container, Translator $translator, AuthorizationChecker $user, Session $session)
+=======
+	protected $em, $security, $container, $translator, $user;
+
+
+	public function __construct (EntityManager $EntityManager, Container $container, Translator $translator, AuthorizationChecker $user)
+>>>>>>> origin/master
 	{
 		$this->em         = $EntityManager;
         $this->security   = $container->get('security.authorization_checker');
         $this->container  = $container;
         $this->translator = $translator;
         $this->user       = $user;
+<<<<<<< HEAD
         $this->sesion     = $session;
+=======
+>>>>>>> origin/master
 	}
 
 	public function getMenu()
