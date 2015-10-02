@@ -18,7 +18,10 @@
             <br>
         </h2>
     {% else %}
+
         {{ parent() }}
+
+        {% if notBack != true %}
         <h2 class="sub-header">
             {% set back =  entity ~'.list.back'  %}
             <a class="btn btn-success pull-right"
@@ -27,6 +30,7 @@
                 {{ back | trans}}
             </a>
         </h2>
+        {% endif %}
     {% endif %}
 {% endblock %}
 {% block backendBody %}

@@ -54,7 +54,8 @@ class BackendPermisosType extends AbstractType
 							     					  FALSE => $this->translator->trans ('BackendPermisos.form.no')]])
 
 			->add ('grupos', 'choice', ['label' => $this->translator->trans ('BackendPermisos.form.grups'),
-										'choices' => [true => $this->translator->trans ('BackendPermisos.form.root')]])
+										'choices' => ['all'  => $this->translator->trans ('BackendPermisos.form.all'),
+                                                      'root' => $this->translator->trans ('BackendPermisos.form.root')]])
 			;
 
 	}

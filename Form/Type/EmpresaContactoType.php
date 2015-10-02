@@ -36,9 +36,6 @@ class EmpresaContactoType extends AbstractType
             ->add('telefono','integer',['label' =>$this->translator->trans ('empresaContacto.form.telefono'),'required' => false])
             ->add('movil','integer',['label' =>$this->translator->trans ('empresaContacto.form.movil'),'required' => false])
             ->add('fax','integer',['label' =>$this->translator->trans ('empresaContacto.form.fax'),'required' => false])
-	        ->add ('estado', 'choice', ['label' => $this->translator->trans ('empresaContacto.form.estado'),
-		        'choices' => [TRUE => $this->translator->trans ('form.yes'),
-			        FALSE => $this->translator->trans ('menus.form.not')]])
         ;
     }
     

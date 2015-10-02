@@ -12,20 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class BackendSeccionesRepository extends EntityRepository
 {
-	public function getActiveMenusBackend()
+	public function getActiveMenusBackend($IsRoot = false)
 	{
 
 		$em = $this->getEntityManager ();
 
 		$query = $em->createQueryBuilder();
+        if ($IsRoot === false)
+        {
+            $consulta =  $query->select(['s','g'])
+                ->from('DestinyAppBundle:BackendGruposSecciones','g')
+                ->innerJoin('g.secciones','s')
+                ->where($query->expr()->eq('g.estado',':grupo'))
+                ->andWhere($query->expr()->eq('s.estado',':seccion'))
+                ->setParameters([':grupo' => true,'seccion' => true]);
+        }else {
+            $consulta =  $query->select(['s','g'])
+                ->from('DestinyAppBundle:BackendGruposSecciones','g')
+                ->innerJoin('g.secciones','s')
+                ->where($query->expr()->eq('g.estado',':grupo'))
+                ->setParameters([':grupo' => true]);
+        }
 
-		return $query->select(['s','g'])
-			->from('DestinyAppBundle:BackendGruposSecciones','g')
-			->innerJoin('g.secciones','s')
-			->where($query->expr()->eq('g.estado',':grupo'))
-			->andWhere($query->expr()->eq('s.estado',':seccion'))
-			->setParameters([':grupo' => true,'seccion' => true])
-			->getQuery()->getResult();
+        return $consulta->getQuery()->getResult();
 
 
 	}

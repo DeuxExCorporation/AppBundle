@@ -52,7 +52,7 @@ class BackendController extends Controller
 
 
 
-        $permiso = $this->get('backend')->checkPermisions('view',$this->get($entity)->newEntity());
+        $permiso = $this->get('backend')->checkPermisions('view',$this->get($entity)->newEntity(),$this->getUser());
 
          if (false === $permiso)  throw $this->createAccessDeniedException('Unauthorized access!');
 
@@ -89,7 +89,8 @@ class BackendController extends Controller
         }
 
 		$new = $this->get(strtolower($entity))->newEntity($group, $type);
-        if (false === $this->get('backend')->checkPermisions('create',$new))  throw $this->createAccessDeniedException('Unauthorized access!');
+        if (false === $this->get('backend')->checkPermisions('create',$new,$this->getUser()))
+            throw $this->createAccessDeniedException('Unauthorized access!');
 
 		$formulario = $this->createForm ($this->get (strtolower ($entity)), $new);
 		$formulario->handleRequest ($request);
@@ -140,7 +141,8 @@ class BackendController extends Controller
         $actual = (is_null($type)) ? $entity : $group;
         $edit = $backend->getElements($actual,'one',$element, $group);
 
-		$formulario = $this->createForm ($this->get($actual),$edit,['read_only' => $backend->checkPermisions('edit',$edit)]);
+		$formulario = $this->createForm ($this->get($actual),$edit,
+            ['read_only' => $backend->checkPermisions('edit',$edit,$this->getUser())]);
 
         $backend->preEdit($edit, $actual, $formulario);
 
@@ -172,7 +174,7 @@ class BackendController extends Controller
                 'group'        => $backend->methodExist($this->get($entidad),'groups',$entidad),
                 'listElements' => $backend->methodExist($this->get($entidad),'listElements'),
                 'cantCreate'   => $backend->methodExist($this->get($entity),'cantCreate',$entity),
-                'listButton'   => $backend->methodExist($this->get($entity),'listButton',$entity),
+                'listButton'   => $backend->methodExist($this->get($entidad),'listButton',$entidad),
                 'translatable' => (property_exists($this->get((is_null($type) ? $entity : $group)),'translatable')) ? true : false,
                 'notBack'      => (property_exists($this->get ($entity), 'notBack')) ? True : false,
                 'notList'      => (property_exists($this->get ($actual), 'notList')) ? True : false,
@@ -194,7 +196,7 @@ class BackendController extends Controller
             ? $this->get('backend')->getElements($actual,'one',$element,$type)
             : $this->get('backend')->getElements($actual,'one',$element);
 
-        $permiso = $this->get('backend')->checkPermisions('create',$delete);
+        $permiso = $this->get('backend')->checkPermisions('create',$delete,$this->getUser());
 
         if (false === $permiso)  throw $this->createAccessDeniedException('Unauthorized access!');
 
@@ -318,13 +320,15 @@ class BackendController extends Controller
                 'listElements' => $backend->methodExist($this->get((is_null($type)) ? $entity : $entity .'Contenido'),'listElements'),
                 'cantCreate'   => $backend->methodExist($this->get($entity),'cantCreate',$entity),
                 'listButton'   => $backend->methodExist($this->get($entity),'listButton',$entity),
-				'notList'      => (property_exists($this->get ($actual), 'notList')) ? True : false,
+                'notBack'      => (property_exists($this->get ($entity), 'notBack')) ? True : false,
+                'notList'      => (property_exists($this->get ($actual), 'notList')) ? True : false,
                 'section'      => !is_null($type) ? $this->get('backend')->getElements($entity,'one',$type) : null,
                 'translatable' => true,
                 'type'         => $type,
                 'language'     => $language,
                 'entity'       => $entity,
                 'form'         => $formulario->createView(),
+
 			]);
 
 	}

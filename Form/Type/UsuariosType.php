@@ -118,10 +118,7 @@ class UsuariosType extends AbstractType
 
 	public function groups ()
 	{
-		return ['ROLE_NORMALUSER' =>['nombre'=>'Normal',
-									 'slug'  =>'normal',
-									 'rol'   => 'ROLE_NORMALUSER'],
-				'ROLE_ROOT'       =>['nombre'=>'Administrador',
+		return ['ROLE_ROOT'       =>['nombre'=>'Administrador',
 							         'slug'  =>'admin',
 									 'rol'   => 'ROLE_ROOT'],
                 'ROLE_GESTOR'       =>['nombre'=>'Gestores',

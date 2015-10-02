@@ -672,7 +672,8 @@ BackendPermisos:
         edit: Editar
         delete: Borrar
         grups: Grupos de usuario autorizados
-        root: Administradores
+        root: Solo Root
+        all: Todos
         status: Acceso
         yes: Si
         no: No

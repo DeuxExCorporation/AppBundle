@@ -43,33 +43,44 @@ class AccessVoter extends AbstractVoter
         $entidad = $this->permisos->findOneByEntidad($this->getClassName($entidad));
 
 
-        switch($accion) {
-            case self::VIEW:
+        if ($entidad->getGrupos()=== 'root' || $accion === self::EDIT )
+        {
+            $resultado = in_array('ROLE_ROOT',$user->getRoles()) ? null : false;
+            if (!is_null($resultado))
+            {
+                return false;
+            }
 
-                $resultado = ($entidad->getEstado() === true) ? true : false;
 
-                return $resultado;
-                break;
+            switch($accion)
+            {
+                case self::VIEW:
 
-            case self::EDIT:
-                $resultado = ($entidad->getEditar() === true) ? false : true;
+                    $resultado = ($entidad->getEstado() === true) ? true : false;
 
-                return $resultado;
+                    return $resultado;
+                    break;
 
-                break;
+                case self::EDIT:
+                    $resultado = ($entidad->getEditar() === true) ? false : true;
 
-            case self::DELETE:
-                $resultado = ($entidad->getBorrar() === true) ? true : false;
-                return $resultado;
-                break;
+                    return $resultado;
 
-            case self::CREATE:
-                $resultado = ($entidad->getCrear() === true) ? true : false;
-                return $resultado;
-                break;
+                    break;
+
+                case self::DELETE:
+                    $resultado = ($entidad->getBorrar() === true) ? true : false;
+                    return $resultado;
+                    break;
+
+                case self::CREATE:
+                    $resultado = ($entidad->getCrear() === true) ? true : false;
+                    return $resultado;
+                    break;
+
+            }
 
         }
-
         return true;
     }
 

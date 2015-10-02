@@ -5,27 +5,30 @@ namespace Destiny\AppBundle\Services;
 
 use Destiny\AppBundle\Entity\Idiomas;
 use Doctrine\ORM\EntityManager;
+
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 
 class BackendService
 {
-	protected $em, $security, $container, $translator;
+	protected $em, $security, $container, $translator, $user;
 
 
-	public function __construct (EntityManager $EntityManager, Container $container, Translator $translator)
+	public function __construct (EntityManager $EntityManager, Container $container, Translator $translator, AuthorizationChecker $user)
 	{
 		$this->em         = $EntityManager;
         $this->security   = $container->get('security.authorization_checker');
         $this->container  = $container;
         $this->translator = $translator;
+        $this->user       = $user;
 	}
 
 	public function getMenu()
 	{
-		return $this->em->getRepository('DestinyAppBundle:BackendSecciones')->getActiveMenusBackend();
+		return $this->em->getRepository('DestinyAppBundle:BackendSecciones')->getActiveMenusBackend($this->user->isGranted('ROLE_ROOT'));
 	}
 
     public function checkPermisions($metodo, $entidad, $usuario = null)

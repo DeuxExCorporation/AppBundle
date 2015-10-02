@@ -498,7 +498,6 @@ class InstalaccionController extends Controller
                 'entidad'=> 'NoticiasContenido'],
             ['nombre' => 'Categorias de las Noticias',
                 'entidad'=> 'NoticiasCategorias'],
-
             ['nombre' => 'Usuarios',
                 'entidad'=> 'Usuarios'],
             ['nombre' => 'Emails',
@@ -515,6 +514,8 @@ class InstalaccionController extends Controller
                 'entidad'=> 'Mensajes'],
             ['nombre' => 'Redes Sociales',
                 'entidad'=> 'EmpresaRedesSociales'],
+            ['nombre' => 'Configuración emails',
+                'entidad'=> 'emailsEmpresa'],
         ];
 		$em = $this->getDoctrine()->getManager();
 		foreach ($entidades as $entidad)
