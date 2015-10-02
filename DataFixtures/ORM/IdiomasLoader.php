@@ -1,6 +1,7 @@
 <?php
 namespace Argidomin\AppBundle\DataFixtures\ORM;
 
+
 use Destiny\AppBundle\Entity\Idiomas;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -40,6 +41,9 @@ class IdiomasLoader extends AbstractFixture implements  FixtureInterface, Ordere
 	    $manager->persist($idiomas);
 
         $manager->flush();
+
+
+
     }
 
     public function getOrder()

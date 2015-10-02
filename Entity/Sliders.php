@@ -71,7 +71,7 @@ class Sliders
 	 * @ORM\ManyToMany(targetEntity="Destiny\AppBundle\Entity\Imagenes")
 	 * @ORM\JoinTable(name="slider_imagen",
 	 *      joinColumns={@ORM\JoinColumn(name="slider_id", referencedColumnName="id")},
-	 *      inverseJoinColumns={@ORM\JoinColumn(name="imagen_id", referencedColumnName="id")}
+	 *      inverseJoinColumns={@ORM\JoinColumn(name="imagen_id", referencedColumnName="id", onDelete="CASCADE")}
 	 *      )
 	 **/
 	private $group;

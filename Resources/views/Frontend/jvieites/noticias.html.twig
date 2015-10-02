@@ -1,0 +1,50 @@
+{% extends "@DestinyApp/Frontend/jvieites/jvieitesBase.html.twig" %}
+{% block title %}
+    {{ noticia.titulo | capitalize }}
+{% endblock %}
+{% block h1Title %}{{ noticia.titulo | capitalize }} <small>{{ noticia.fechaCreacion | date ('d/m/y') }}</small>{% endblock %}
+{% block  frontBody %}
+
+
+    <div class="articulo">
+        <div class="contenido-articulo">
+            <div class=" col-md-12 col-xs-12">
+                {{ noticia.descripcion | raw }}
+            </div>
+        </div>
+    </div>
+
+
+    {%  include "@DestinyApp/Frontend/jvieites/includes/contenido.html.twig" %}
+
+{% endblock %}
+{% block contacto %}
+
+ <div class="modulo">
+     <div class="titulo-modulo">{{ 'front.contacte' | trans}}</div>
+     <div class="contenido-modulo">
+    <span>
+        <i class="fa fa-envelope"></i>
+        <a href="mailto:{{ empresa.web.email }}">{{ empresa.web.email }}</a>
+    </span>
+         {% include "@DestinyApp/Frontend/jvieites/includes/formulario.html.twig" with {'form':typeContent} %}
+     </div>
+ </div>
+
+{% endblock %}
+{% block categorias %}
+    <div class="modulo">
+        <div class="titulo-modulo">{{ 'front.categorias' | trans}}</div>
+        <div class="contenido-modulo">
+            <ul>
+                {% for category in categorias  %}
+                    <li><span>
+                    <a class="enlaze-moludo" href="{{ path ('newsCategoryWeb',{'section':seccion.url,'language':language.isoCode,'category':category.slug,'year':category.fechaCreacion | date ('Y')}) }}">
+                        {{ category }}
+                    </a></span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

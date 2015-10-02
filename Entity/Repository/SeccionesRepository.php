@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class SeccionesRepository extends EntityRepository
 {
-	public function getAllByGroup($group)
+	public function getAllByGroup($group, $orden)
 	{
 
 		$em = $this->getEntityManager ();
@@ -28,7 +28,7 @@ class SeccionesRepository extends EntityRepository
 			->where($query->expr()->eq('m.slug',':menu'))
 			->andWhere($query->expr()->isNull('s.padre'))
 			->setParameters([':menu' => $group,])
-			->orderBy('s.posicion')
+			->orderBy(is_null($orden) ? 's.posicion' : 's.'.$orden['order'], $orden['asc'])
 			->getQuery()->getResult();
 
 

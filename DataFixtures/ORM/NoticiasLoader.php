@@ -26,6 +26,7 @@ class NoticiasLoader extends AbstractFixture implements  FixtureInterface, Order
 				$noticia->setTituloSeo ('Noticia ' . $i);
 				$noticia->setDescripcionSeo ('Noticia ' . $i);
 				$noticia->setTitulo ('Noticia ' . $i);
+				$noticia->setDescripcion ('Noticia ' . $i);
 				$noticia->setEstado (TRUE);
 				$noticia->setTipo($manager->getRepository('DestinyAppBundle:SeccionesTipo')->findOneBySlug('noticias'));
 				$noticia->addCategoria($categoria);

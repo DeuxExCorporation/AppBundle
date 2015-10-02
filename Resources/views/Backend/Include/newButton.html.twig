@@ -8,42 +8,54 @@
 	</button>
 	<ul class="dropdown-menu" role="menu">
 		<li>
+
 			<a href="{{ path('createContentBackend',
 			{'type'  :entity,
 				'group' :element.slug,
 				'entity':'videos'}) }}">
+                <i class="fa fa-youtube-play"></i>
 				{{ 'seccionesContenido.list.video' | trans }}
 			</a>
 		</li>
 		<li>
-			<a href="{{ path('createContentBackend',
+
+
+            <a href="{{ path('createContentBackend',
 			{'type'  :entity,
 				'group' :element.slug,
 				'entity':'imagenes'}) }}">
+                <i class="fa fa-file-image-o"></i>
 				{{ 'seccionesContenido.list.imagenes' | trans }}
 			</a>
 		</li>
 		<li>
+
 			<a href="{{ path('createContentBackend',
 			{'type'  :entity,
 				'group' :element.slug,
 				'entity':'sliders'}) }}">
+                <i class="fa fa-slideshare"></i>
 				{{ 'seccionesContenido.list.sliders' | trans }}
 			</a>
 		</li>
 		<li>
-			<a href="{{ path('createContentBackend',
+
+
+            <a href="{{ path('createContentBackend',
 			{'type'  :entity,
 				'group' :element.slug,
 				'entity':'adjuntos'}) }}">
+                <i class="fa fa-file-pdf-o"></i>
 				{{ 'seccionesContenido.list.adjuntos' | trans }}
 			</a>
 		</li>
 		<li>
+
 			<a href="{{ path('createContentBackend',
 			{'type'  :entity,
 				'group': element.slug,
 				'entity':'articulos'}) }}">
+                <i class="fa fa-file-text-o"></i>
 				{{ 'seccionesContenido.list.articulos' | trans }}
 			</a>
 		</li>

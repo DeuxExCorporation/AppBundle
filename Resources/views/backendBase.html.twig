@@ -103,6 +103,12 @@
 										<i class="fa fa-cloud"></i>{{ 'configuration.list.web' | trans }}
 									</a>
 								</li>
+                                <li>
+                                    <a href="{{ path('editBackend',{'entity':'empresaEmails','element':'default'}) }}">
+                                        <i class="fa fa-envelope-o"></i>
+                                        {{ 'configuration.list.email' | trans }}
+                                    </a>
+                                </li>
 							</ul>
 						</li><!-- /.messages-menu -->
 					</ul>
@@ -120,7 +126,7 @@
 					<div class="pull-left info">
 						<p>
 							<a href="{{ path('portadaBackend') }}">
-							<img class="img-circle img-responsive"  width="160px" src="{{ asset (empresa.web.webpath | imagine_filter('image_logo')) }}">
+							<img class="img-responsive"  width="160px" src="{{ asset (empresa.web.webpath | imagine_filter('image_logo')) }}">
 						</a></p>
 						<p>{{ 'dashboard.saludo' | trans }} {{ app.user | capitalize }}</p>
 						<!-- Status -->
@@ -174,12 +180,15 @@
 						and (group.limite is not  defined)
                     %}
 
+
+                    {% if group is not iterable %}
 					{% set newEntity = entity ~'.list.new' %}
 					<a class="btn btn-success pull-right" href="{{ path('createBackend',{'entity':entity}) }}">
 						<i class="fa fa-plus-circle"></i>
 
 						{{ newEntity | trans }}
 						</a>
+					{% endif %}
 					{% endif %}
 					{% endblock %}
 					{% endblock %}
@@ -219,6 +228,6 @@
 
 	</div><!-- ./wrapper -->
 {% endblock %}
-{% block javascripts %}
+{% block js %}
 	<script src="{{ asset('asset/backend/js/app.min.js') }}"></script>
 {% endblock %}

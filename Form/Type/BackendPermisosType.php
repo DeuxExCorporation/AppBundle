@@ -37,24 +37,25 @@ class BackendPermisosType extends AbstractType
 	public function buildForm (FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add ('estado', 'choice', ['label' => $this->translator->trans ('backendPermisos.form.status'),
-				'choices' => [TRUE => $this->translator->trans ('backendPermisos.form.yes'),
-					FALSE => $this->translator->trans ('backendPermisos.form.no')]])
+			->add ('estado', 'choice', ['label' => $this->translator->trans ('BackendPermisos.form.status'),
+				'choices' => [TRUE => $this->translator->trans ('BackendPermisos.form.yes'),
+					FALSE => $this->translator->trans ('BackendPermisos.form.no')]])
 
-			->add ('crear', 'choice', ['label' => $this->translator->trans ('backendPermisos.form.create'),
-				'choices' => [TRUE => $this->translator->trans ('backendPermisos.form.yes'),
-					          FALSE => $this->translator->trans ('backendPermisos.form.no')]])
+			->add ('crear', 'choice', ['label' => $this->translator->trans ('BackendPermisos.form.create'),
+				'choices' => [TRUE => $this->translator->trans ('BackendPermisos.form.yes'),
+					          FALSE => $this->translator->trans ('BackendPermisos.form.no')]])
 
-			->add ('editar', 'choice', ['label' => $this->translator->trans ('backendPermisos.form.edit'),
-				   					    'choices' => [TRUE => $this->translator->trans ('backendPermisos.form.yes'),
-								 				      FALSE => $this->translator->trans ('backendPermisos.form.no')]])
+			->add ('editar', 'choice', ['label' => $this->translator->trans ('BackendPermisos.form.edit'),
+				   					    'choices' => [TRUE => $this->translator->trans ('BackendPermisos.form.yes'),
+								 				      FALSE => $this->translator->trans ('BackendPermisos.form.no')]])
 
-			->add ('borrar', 'choice', ['label' => $this->translator->trans ('backendPermisos.form.delete'),
-				   						'choices' => [TRUE => $this->translator->trans ('backendPermisos.form.yes'),
-							     					  FALSE => $this->translator->trans ('backendPermisos.form.no')]])
+			->add ('borrar', 'choice', ['label' => $this->translator->trans ('BackendPermisos.form.delete'),
+				   						'choices' => [TRUE => $this->translator->trans ('BackendPermisos.form.yes'),
+							     					  FALSE => $this->translator->trans ('BackendPermisos.form.no')]])
 
-			->add ('grupos', 'choice', ['label' => $this->translator->trans ('backendPermisos.form.grups'),
-										'choices' => [true => $this->translator->trans ('backendPermisos.form.root')]])
+			->add ('grupos', 'choice', ['label' => $this->translator->trans ('BackendPermisos.form.grups'),
+										'choices' => ['all'  => $this->translator->trans ('BackendPermisos.form.all'),
+                                                      'root' => $this->translator->trans ('BackendPermisos.form.root')]])
 			;
 
 	}

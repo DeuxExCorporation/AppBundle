@@ -14,7 +14,7 @@ services:
 
     backend:
         class: Destiny\AppBundle\Services\BackendService
-        arguments: ["@doctrine.orm.entity_manager","@service_container","@translator.default"]
+        arguments: ["@doctrine.orm.entity_manager","@service_container","@translator.default","@security.authorization_checker","@session"]
 
     app.permisos_repository:
         class:     Doctrine\ORM\EntityRepository
@@ -28,6 +28,8 @@ services:
         arguments: ["@app.permisos_repository"]
         tags:
             - { name: security.voter }
+
+    permisos.voter: "@security.access.backend_permisos_voter"
 
     kernel.listener.modo.mantenimiento.listener:
         class: Destiny\AppBundle\Listener\ModoMantenimientoListener

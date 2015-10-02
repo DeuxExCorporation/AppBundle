@@ -3,28 +3,34 @@ namespace Destiny\AppBundle\Services;
 
 
 
+use Destiny\AppBundle\Entity\Idiomas;
 use Doctrine\ORM\EntityManager;
+
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 
 class BackendService
 {
-	protected $em, $security, $container, $translator;
+	protected $em, $security, $container, $translator, $user, $sesion;
 
 
-	public function __construct (EntityManager $EntityManager, Container $container, Translator $translator)
+	public function __construct (EntityManager $EntityManager, Container $container, Translator $translator, AuthorizationChecker $user, Session $session)
 	{
 		$this->em         = $EntityManager;
         $this->security   = $container->get('security.authorization_checker');
         $this->container  = $container;
         $this->translator = $translator;
+        $this->user       = $user;
+        $this->sesion     = $session;
 	}
 
 	public function getMenu()
 	{
-		return $this->em->getRepository('DestinyAppBundle:BackendSecciones')->getActiveMenusBackend();
+		return $this->em->getRepository('DestinyAppBundle:BackendSecciones')->getActiveMenusBackend($this->user->isGranted('ROLE_ROOT'));
 	}
 
     public function checkPermisions($metodo, $entidad, $usuario = null)
@@ -34,6 +40,8 @@ class BackendService
 
     public function listElements ($entity,$element =null)
     {
+
+
 
         if (method_exists ($this->container->get($entity), 'groups'))
         {
@@ -52,17 +60,33 @@ class BackendService
 
         return $list;
     }
+    public function existClass($entity)
+    {
+        foreach($this->em->getRepository('DestinyAppBundle:BundlesActivos')->findAll() as $bundle)
+        {
+            if (class_exists('Destiny\\'.$bundle.'\\Entity\\' .ucfirst($entity)))
+            {
+                return 'Destiny'.$bundle.':' .ucfirst($entity);
+            }
+        }
+
+    }
 
     public function getElements ($entity, $typeList = 'list',$element =null, $group = null)
     {
-        $repository = $this->em->getRepository ('DestinyAppBundle:' .ucfirst($entity));
+        $repository = $this->em->getRepository ($this->existClass($entity));
+
+        $orden =  ($this->sesion->get('order-by')['entidad'] === $entity)
+                        ?  $this->sesion->get('order-by') : null;
 
         switch ($typeList) {
             case ($typeList === 'list'):
 
                 return (method_exists ($repository, 'getAll'))
                     ? $repository->getAll ($element)
-                    : $repository->findAll ();
+                    : (is_null($orden))
+                            ? $repository->findAll()
+                            : $repository->findBy ([],[$orden['order'] => $orden['asc']]);
                 break;
 
            case ($typeList === 'one'):
@@ -73,7 +97,7 @@ class BackendService
                 break;
 
            case ($typeList === 'group'):
-                return $repository->getAllByGroup ($group);
+                return $repository->getAllByGroup ($group,$orden);
                 break;
 
            case ($typeList === 'content'):
@@ -87,6 +111,7 @@ class BackendService
 
     public function getTranslations($entity,$element,Idiomas $language)
     {
+
         $repository = $this->em->getRepository ('DestinyAppBundle:' . ucfirst ($entity).'Traducciones');
 
         $edit = $repository->getTranslation ($element,$language->getIsoCode());
@@ -94,10 +119,13 @@ class BackendService
         if (is_null($edit))
         {
             $edit = $this->container->get($entity.'-traducciones')->newEntity();
+
             $canonica = $this->getElements($entity,'one',$element);
+
             $edit->setCanonica($canonica);
             $edit->setIdioma($language);
         }
+
 
         return $edit;
     }
@@ -221,7 +249,7 @@ class BackendService
 
     public function methodExist($class,$metodo,$variable = null)
     {
-        return (method_exists($class,$metodo)) ? $class->$metodo($variable) : false;
+        return (method_exists($class,$metodo)) ? $class->$metodo($variable) : null;
     }
 
 
