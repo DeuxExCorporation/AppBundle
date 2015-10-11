@@ -33,6 +33,7 @@ class UsuariosRepository extends EntityRepository
 
 		$group = $this->getGrupo($group);
 
+
 		return $query->select(['u'])
 			->from('DestinyAppBundle:Usuarios', 'u')
 			->where($query->expr()->like('u.roles',':group'))
@@ -54,11 +55,12 @@ class UsuariosRepository extends EntityRepository
 			->setParameters(['group' => '%ROLE_ROOT%'])*/
 			->orderBy('u.lastLogin','asc')
 			->getQuery()->getResult();
-		;
+
 	}
 
     private function getGrupo($grupo)
     {
+
         switch ($grupo){
 
             case $grupo ==='Administrador':
@@ -66,15 +68,18 @@ class UsuariosRepository extends EntityRepository
 
                 break;
 
-            case $grupo ==='Normal':
+            case $grupo ==='Usuarios':
                 return 'ROLE_NORMALUSER';
-
-
                 break;
 
             case $grupo ==='Gestores':
 
                 return 'ROLE_GESTOR';
+                break;
+
+            case $grupo === 'Gestor de protectoras':
+
+                return 'ROLE_PROTECTORA';
                 break;
         }
     }

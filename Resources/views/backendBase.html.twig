@@ -27,92 +27,7 @@
 					<span class="sr-only">Toggle navigation</span>
 				</a>
 				<!-- Navbar Right Menu -->
-				<div class="navbar-custom-menu">
-					<ul class="nav navbar-nav">
-						<!-- Messages: style can be found in dropdown.less-->
-						<li class="dropdown messages-menu">
-							<!-- Menu toggle button -->
-							{% set mensajes = mensajes.mensajesSinLeer %}
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-envelope-o"></i>
-								{{ 'mensajes.list.title' | trans }}
-								{% if  mensajes | length > 0 %}
-								<span class="label label-success">{{ mensajes | length }}</span>
-								{% endif %}
-							</a>
-							<ul class="dropdown-menu">
-								<li class="header">
-									{% if  mensajes | length > 0 %}
-										{{ 'mensajes.list.cant' | trans({'%cantidad%': mensajes | length }) }}
-									{% else %}
-										{{ 'mensajes.list.noread' | trans () }}
-									{% endif %}
-								</li>
-								<li>
-									<!-- inner menu: contains the messages -->
-									<ul class="menu">
-										{%  for mensaje in mensajes %}
-										<li><!-- start message -->
-
-												<!-- Message title and timestamp -->
-
-													<a href="{{ path('editBackend',{'entity':'mensajes','element':mensaje.slug }) }}">
-														{{ mensaje.asunto }}
-
-													<small><i class="fa fa-clock-o"></i> {{ mensaje.fechaCreacion | date ('d/m/Y H:i') }}</small>
-											</a>
-												<!-- The message -->
-
-										</li><!-- end message -->
-										{% endfor %}
-									</ul><!-- /.menu -->
-								</li>
-								<li class="footer">
-									<a href="{{ path('listBackend',{'entity':'mensajes'}) }}">
-										{{ 'mensajes.list.all' | trans  }}
-									</a>
-								</li>
-							</ul>
-						</li><!-- /.messages-menu -->
-						<li class="dropdown messages-menu">
-							<!-- Menu toggle button -->
-
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-database"></i>
-								{{ 'configuration.list.title' | trans }}
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="{{ path('listBackend',{'entity':'idiomas'}) }}">
-										<i class="fa fa-flag-o"></i>
-										{{ 'configuration.list.language' | trans }}
-									</a>
-								</li>
-								<li>
-									<a href="{{ path('listBackend',{'entity':'empresaRedesSociales'}) }}">
-										<i class="fa fa-globe"></i>{{ 'configuration.list.redesSociales' | trans }}
-									</a>
-								</li>
-								<li>
-									<a href="{{ path('editBackend',{'entity':'empresaContacto','element':'default'}) }}">
-										<i class="fa fa-building"></i>{{ 'configuration.list.contacto' | trans }}
-									</a>
-								</li>
-								<li>
-									<a href="{{ path('editBackend',{'entity':'empresaWeb','element':'default'}) }}">
-										<i class="fa fa-cloud"></i>{{ 'configuration.list.web' | trans }}
-									</a>
-								</li>
-                                <li>
-                                    <a href="{{ path('editBackend',{'entity':'empresaEmails','element':'default'}) }}">
-                                        <i class="fa fa-envelope-o"></i>
-                                        {{ 'configuration.list.email' | trans }}
-                                    </a>
-                                </li>
-							</ul>
-						</li><!-- /.messages-menu -->
-					</ul>
-				</div>
+                {% include '@DestinyApp/Backend/Include/menuSuperior.html.twig' %}
 			</nav>
 		</header>
 		<!-- Left side column. contains the logo and sidebar -->
@@ -153,7 +68,7 @@
 										<li>
 											<a href="{{ path('listBackend',{'entity':seccion.destino}) }}">
 												{{ seccion.icono | raw }}
-												{{ seccion.nombre | trans }}
+												{{ seccion.etiqueta | trans }}
 											</a>
 										</li>
 								{% endfor %}

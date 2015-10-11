@@ -29,18 +29,18 @@ class ArticulosContenidoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-	        ->add ('titulo', 'text', ['label' => $this->translator->trans ('articulosContenido.form.title'),
+	        ->add ('nombre', 'text', ['label' => $this->translator->trans ('articulosContenido.form.title'),
 		        'max_length' => 150])
 	        ->add('descripcion', 'textarea', ['label' => $this->translator->trans ('articulosContenido.form.description'),
 	        ])
-            ->add('imagen', 'entity', array(
-                'class' => 'DestinyAppBundle:Imagenes',
-                'label' => $this->translator->trans ('articulosContenido.form.imagen'),
-                'required' => false,
-                'expanded' => true,
-                'multiple' => false,
-
-                'choice_label' => 'webPath',))
+            ->add('imagen','entity',[
+                'label'         => $this->translator->trans('articulosContenido.form.imagen'),
+                'class'         => 'DestinyAppBundle:Imagenes',
+                'data_class'    => 'Destiny\AppBundle\Entity\Imagenes',
+                'required'      => false,
+                'multiple'      => false,
+                'expanded'      => false,
+                'choice_label'  => 'webPath'])
 
         ;
     }

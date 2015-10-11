@@ -28,7 +28,7 @@ class NoticiasTraducciones
     /**
      * @var string
      *
-     * @ORM\Column(name="titulo", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255)
      *
      * @Assert\NotBlank(message="noticias.tituloWeb.notblank")
      * @Assert\Length(
@@ -38,7 +38,7 @@ class NoticiasTraducciones
      *      maxMessage = "noticias.titulo.max"
      * )
      */
-    private $titulo;
+    private $nombre;
 
     /**
      * @var string
@@ -119,28 +119,7 @@ class NoticiasTraducciones
         return $this->id;
     }
 
-    /**
-     * Set titulo
-     *
-     * @param string $titulo
-     * @return NoticiasTraducciones
-     */
-    public function setTitulo($titulo)
-    {
-        $this->titulo = $titulo;
 
-        return $this;
-    }
-
-    /**
-     * Get titulo
-     *
-     * @return string 
-     */
-    public function getTitulo()
-    {
-        return $this->titulo;
-    }
 
     /**
      * Set tituloSeo
@@ -281,5 +260,28 @@ class NoticiasTraducciones
     public function getTipo()
     {
         return $this->getCanonica()->getTipo();
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return NoticiasTraducciones
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
     }
 }

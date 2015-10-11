@@ -70,7 +70,15 @@
         {% elseif type == null %}
         {% else %}
             <td>
-                {{ attribute(element, type) }}
+                {% if attribute(element, type) is iterable %}
+                    {% for att in attribute(element, type) %}
+                        <a href="{{ path('editBackend',{'entity':type,'element':att.slug}) }}">
+                            {{ att }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    {{ attribute(element, type) }}
+                {% endif %}
             </td>
         {% endif %}
     {% endfor %}
@@ -110,7 +118,8 @@
     </td>
     <td>{{ element.fechaModificacion | date ('d/m/y H:i') }}</td>
     <td>
-        {% if actual == element.slug  %}
+
+        {% if actual == element.slug or cantDelete == false  %}
             <i class="fa fa-trash"></i>
         {% else %}
             <a href="#borrar-{{ element.slug }}">

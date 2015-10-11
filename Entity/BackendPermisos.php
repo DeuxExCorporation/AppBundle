@@ -71,10 +71,12 @@ class BackendPermisos
     private $borrar;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="grupo", type="string", length=255, nullable=true)
-     */
+     * @ORM\ManyToMany(targetEntity="Destiny\AppBundle\Entity\RolesUsuarios")
+     * @ORM\JoinTable(name="grupos_permisos",
+     *      joinColumns={@ORM\JoinColumn(name="permisos_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="grupos_id", referencedColumnName="id", onDelete="CASCADE")}
+     *      )
+     **/
     private $grupos;
 
     /**
@@ -104,7 +106,13 @@ class BackendPermisos
         return $this->getNombre();
     }
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->grupos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -114,213 +122,6 @@ class BackendPermisos
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set entidad
-     *
-     * @param string $entidad
-     * @return Permisos
-     */
-    public function setEntidad($entidad)
-    {
-        $this->entidad = $entidad;
-
-        return $this;
-    }
-
-    /**
-     * Get entidad
-     *
-     * @return string 
-     */
-    public function getEntidad()
-    {
-        return $this->entidad;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Permisos
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set crear
-     *
-     * @param boolean $crear
-     * @return Permisos
-     */
-    public function setCrear($crear)
-    {
-        $this->crear = $crear;
-
-        return $this;
-    }
-
-    /**
-     * Get crear
-     *
-     * @return boolean 
-     */
-    public function getCrear()
-    {
-        return $this->crear;
-    }
-
-    /**
-     * Set editar
-     *
-     * @param boolean $editar
-     * @return Permisos
-     */
-    public function setEditar($editar)
-    {
-        $this->editar = $editar;
-
-        return $this;
-    }
-
-    /**
-     * Get editar
-     *
-     * @return boolean 
-     */
-    public function getEditar()
-    {
-        return $this->editar;
-    }
-
-    /**
-     * Set borrar
-     *
-     * @param boolean $borrar
-     * @return Permisos
-     */
-    public function setBorrar($borrar)
-    {
-        $this->borrar = $borrar;
-
-        return $this;
-    }
-
-    /**
-     * Get borrar
-     *
-     * @return boolean 
-     */
-    public function getBorrar()
-    {
-        return $this->borrar;
-    }
-
-    /**
-     * Set grupos
-     *
-     * @param string $grupos
-     * @return Permisos
-     */
-    public function setGrupos($grupos)
-    {
-        $this->grupos = $grupos;
-
-        return $this;
-    }
-
-    /**
-     * Get grupos
-     *
-     * @return string 
-     */
-    public function getGrupos()
-    {
-        return $this->grupos;
-    }
-
-    /**
-     * Set estado
-     *
-     * @param boolean $estado
-     * @return Permisos
-     */
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
-
-        return $this;
-    }
-
-    /**
-     * Get estado
-     *
-     * @return boolean 
-     */
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-
-    /**
-     * Set fechaCreacion
-     *
-     * @param \DateTime $fechaCreacion
-     * @return Permisos
-     */
-    public function setFechaCreacion($fechaCreacion)
-    {
-        $this->fechaCreacion = $fechaCreacion;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaCreacion
-     *
-     * @return \DateTime 
-     */
-    public function getFechaCreacion()
-    {
-        return $this->fechaCreacion;
-    }
-
-    /**
-     * Set fechaModificacion
-     *
-     * @param \DateTime $fechaModificacion
-     * @return Permisos
-     */
-    public function setFechaModificacion($fechaModificacion)
-    {
-        $this->fechaModificacion = $fechaModificacion;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaModificacion
-     *
-     * @return \DateTime 
-     */
-    public function getFechaModificacion()
-    {
-        return $this->fechaModificacion;
     }
 
     /**
@@ -344,5 +145,222 @@ class BackendPermisos
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set entidad
+     *
+     * @param string $entidad
+     * @return BackendPermisos
+     */
+    public function setEntidad($entidad)
+    {
+        $this->entidad = $entidad;
+
+        return $this;
+    }
+
+    /**
+     * Get entidad
+     *
+     * @return string 
+     */
+    public function getEntidad()
+    {
+        return $this->entidad;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return BackendPermisos
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set crear
+     *
+     * @param boolean $crear
+     * @return BackendPermisos
+     */
+    public function setCrear($crear)
+    {
+        $this->crear = $crear;
+
+        return $this;
+    }
+
+    /**
+     * Get crear
+     *
+     * @return boolean 
+     */
+    public function getCrear()
+    {
+        return $this->crear;
+    }
+
+    /**
+     * Set editar
+     *
+     * @param boolean $editar
+     * @return BackendPermisos
+     */
+    public function setEditar($editar)
+    {
+        $this->editar = $editar;
+
+        return $this;
+    }
+
+    /**
+     * Get editar
+     *
+     * @return boolean 
+     */
+    public function getEditar()
+    {
+        return $this->editar;
+    }
+
+    /**
+     * Set borrar
+     *
+     * @param boolean $borrar
+     * @return BackendPermisos
+     */
+    public function setBorrar($borrar)
+    {
+        $this->borrar = $borrar;
+
+        return $this;
+    }
+
+    /**
+     * Get borrar
+     *
+     * @return boolean 
+     */
+    public function getBorrar()
+    {
+        return $this->borrar;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return BackendPermisos
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set fechaCreacion
+     *
+     * @param \DateTime $fechaCreacion
+     * @return BackendPermisos
+     */
+    public function setFechaCreacion($fechaCreacion)
+    {
+        $this->fechaCreacion = $fechaCreacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaCreacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaCreacion()
+    {
+        return $this->fechaCreacion;
+    }
+
+    /**
+     * Set fechaModificacion
+     *
+     * @param \DateTime $fechaModificacion
+     * @return BackendPermisos
+     */
+    public function setFechaModificacion($fechaModificacion)
+    {
+        $this->fechaModificacion = $fechaModificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaModificacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaModificacion()
+    {
+        return $this->fechaModificacion;
+    }
+
+    /**
+     * Add grupos
+     *
+     * @param \Destiny\AppBundle\Entity\RolesUsuarios $grupos
+     * @return BackendPermisos
+     */
+    public function addGrupo(\Destiny\AppBundle\Entity\RolesUsuarios $grupos)
+    {
+        $this->grupos[] = $grupos;
+
+        return $this;
+    }
+
+    /**
+     * Remove grupos
+     *
+     * @param \Destiny\AppBundle\Entity\RolesUsuarios $grupos
+     */
+    public function removeGrupo(\Destiny\AppBundle\Entity\RolesUsuarios $grupos)
+    {
+        $this->grupos->removeElement($grupos);
+    }
+
+    /**
+     * Get grupos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGrupos()
+    {
+        return $this->grupos;
     }
 }

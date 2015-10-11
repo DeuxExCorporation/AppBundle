@@ -30,7 +30,7 @@ class Noticias
     /**
      * @var string
      *
-     * @ORM\Column(name="titulo", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255)
      *
      * @Assert\NotBlank(message="noticias.tituloWeb.notblank")
      * @Assert\Length(
@@ -40,11 +40,11 @@ class Noticias
      *      maxMessage = "noticias.titulo.max"
      * )
      */
-    private $titulo;
+    private $nombre;
 
 	/**
 	 * @var string
-	 * @Gedmo\Slug(fields={"titulo"})
+	 * @Gedmo\Slug(fields={"nombre"})
 	 * @ORM\Column(name="slug", type="string", length=255)
 	 */
 	private $slug;
@@ -147,7 +147,7 @@ class Noticias
 
 	public function __toString()
 	{
-		return $this->getTitulo();
+		return $this->getNombre();
 	}
 
     /**

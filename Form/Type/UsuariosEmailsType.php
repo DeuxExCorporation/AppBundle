@@ -2,6 +2,7 @@
 
 namespace Destiny\AppBundle\Form\Type;
 
+use Destiny\AppBundle\Entity\UsuariosEmails;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -67,5 +68,10 @@ class UsuariosEmailsType extends AbstractType
     {
 
         return TRUE;
+    }
+
+    public function newEntity()
+    {
+        return new UsuariosEmails();
     }
 }

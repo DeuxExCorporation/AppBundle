@@ -127,6 +127,7 @@
             {% endif %}
             {% if canonica.type == 'imagenes' %}
                 <div class="col-sm-11">
+
                     {% set imageEntity =  form.vars.value.type~'.list.image'  %}
                     <h5 class="sub-header">{{ imageEntity | trans }}</h5>
                     <img class="img-responsive" src="{{ asset(traduccion.webPath != null ? traduccion.webPath : canonica.webPath)  | imagine_filter('image_backend_edit')}}">
@@ -163,7 +164,11 @@ and (field.vars.name != 'group') and (field.vars.name != 'imagenes') and (field.
         {% for single in imagenes %}
             <div class="form-group col-md-6 col-xs-6 clearfix">
                 {{ form_widget(single) }}
+                {% if single.vars.label != 'None'  %}
                 <img src="{{ asset (single.vars.label) | imagine_filter('image_backend_edit') }}"><br>
+                {% else %}
+                    {{ 'sinimagen' | trans }}
+                {% endif %}
             </div>
         {% endfor %}
     </div>

@@ -119,6 +119,7 @@ class MenuBackendLoader extends AbstractFixture implements  FixtureInterface, Or
 				               ->setDestino($seccion['destino'])
 				               ->setIcono($seccion['icono'])
 				               ->setEtiqueta($seccion['etiqueta'])
+                               ->setZona('principal')
 				               ->setGrupo($grupo)
 			                   ->setEstado(TRUE);
 

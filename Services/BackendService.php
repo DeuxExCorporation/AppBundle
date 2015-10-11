@@ -12,20 +12,17 @@ use Symfony\Component\Filesystem\Filesystem;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 
 class BackendService
 {
 
-	protected $em, $security, $container, $translator, $user, $sesion;
+	protected $em, $security, $container, $translator, $user, $sesion, $cheker;
 
 
-
-
-
-
-    public function __construct (EntityManager $EntityManager, Container $container, Translator $translator, AuthorizationChecker $user, Session $session)
+    public function __construct (EntityManager $EntityManager, Container $container, Translator $translator, TokenStorage $user, Session $session, AuthorizationChecker $checker)
 
 	{
 		$this->em         = $EntityManager;
@@ -33,14 +30,20 @@ class BackendService
         $this->container  = $container;
         $this->translator = $translator;
         $this->user       = $user;
-
         $this->sesion     = $session;
+        $this->cheker     = $checker;
 
 	}
 
-	public function getMenu()
+	public function getMenu($zona = null)
 	{
-		return $this->em->getRepository('DestinyAppBundle:BackendSecciones')->getActiveMenusBackend($this->user->isGranted('ROLE_ROOT'));
+		$menu = (is_null($zona))
+            ? $this->em->getRepository('DestinyAppBundle:BackendSecciones')
+                    ->getActiveMenusBackend($this->user->getToken()->getUser())
+            : $this->em->getRepository('DestinyAppBundle:BackendSecciones')
+                    ->getActiveMenusBackendSuperior();
+
+        return $menu;
 	}
 
     public function checkPermisions($metodo, $entidad, $usuario = null)
@@ -50,7 +53,6 @@ class BackendService
 
     public function listElements ($entity,$element =null)
     {
-
 
 
         if (method_exists ($this->container->get($entity), 'groups'))
@@ -64,6 +66,7 @@ class BackendService
         }else{
 
             $list = $this->getElements ($entity,$element);
+
         }
 
 
@@ -87,16 +90,20 @@ class BackendService
         $repository = $this->em->getRepository ($this->existClass($entity));
 
         $orden =  ($this->sesion->get('order-by')['entidad'] === $entity)
-                        ?  $this->sesion->get('order-by') : null;
+                        ?  $this->sesion->get('order-by') : ['order' => 'nombre', 'asc' => 'ASC'];
 
         switch ($typeList) {
+
             case ($typeList === 'list'):
 
-                return (method_exists ($repository, 'getAll'))
-                    ? $repository->getAll ($element)
-                    : (is_null($orden))
-                            ? $repository->findAll()
+
+                $lista =  (method_exists ($repository, 'getAll'))
+                            ? $repository->getAll ($element, $this->user->getToken(),$this->cheker ,$orden)
                             : $repository->findBy ([],[$orden['order'] => $orden['asc']]);
+
+
+                return $lista;
+
                 break;
 
            case ($typeList === 'one'):
@@ -169,6 +176,13 @@ class BackendService
             ? $this->container->get($serivicio)->postEdit($entidad,$seccion,$tipo) : null;
     }
 
+    public function postChange($entidad,$serivicio,$tipo,$seccion)
+    {
+
+        (method_exists ($this->container->get($serivicio), 'postChange'))
+            ? $this->container->get($serivicio)->postChange($entidad,$seccion,$tipo) : null;
+    }
+
     public function processForm($entidad)
     {
         $this->methodExist($entidad,'upload');
@@ -199,15 +213,13 @@ class BackendService
 
     public function changeEstatus($entidad,$servicio)
     {
-        $status = ($entidad->getEstado () == TRUE) ? FALSE : TRUE;
+        $status = ($entidad->getEstado () === TRUE) ? FALSE : TRUE;
         $entidad->setEstado ($status);
 
         $this->em->persist ($entidad);
         $this->em->flush ();
 
         $this->methodExist($servicio,'postChange',$entidad);
-
-
 
         $this->container->get('session')->getFlashBag ()->set ('success', [
             'title'   => $this->translator->trans ('flash.change.title'),
@@ -222,8 +234,7 @@ class BackendService
                         ? $this->getElements($entidad.'Contenido','one',$antigua,$tipo)
                         : $this->getElements($entidad,'one',$antigua);
 
-
-        $nueva = $this->em->getRepository ('DestinyAppBundle:' .ucfirst($entidadActual))->getChangePosition($antigua,$posicion);
+        $nueva = $this->em->getRepository ($this->existClass($entidadActual))->getChangePosition($antigua,$posicion);
 
         $nueva->setPosicion($antigua->getPosicion());
 
@@ -241,9 +252,10 @@ class BackendService
         ]);
     }
 
-    public function isDeleteable($entity,$delete)
+    public function isDeletable($entidad,$delete)
     {
-        return   $this->methodExist($entity,'isDeletable',$delete);
+
+        return   $this->methodExist($this->container->get($entidad),'isDeletable',$delete);
     }
 
     public function removeContenidos($entity)
@@ -259,6 +271,7 @@ class BackendService
 
     public function methodExist($class,$metodo,$variable = null)
     {
+
         return (method_exists($class,$metodo)) ? $class->$metodo($variable) : null;
     }
 

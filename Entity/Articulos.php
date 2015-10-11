@@ -26,7 +26,7 @@ class Articulos
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="titulo", type="string", length=255)
+	 * @ORM\Column(name="nombre", type="string", length=255)
 	 * @Assert\NotBlank(message="articulo.titulo.notblank")
 	 * @Assert\Length(
 	 *      min = 2,
@@ -35,12 +35,12 @@ class Articulos
 	 *      maxMessage = "articulo.titulo.max"
 	 * )
 	 */
-	private $titulo;
+	private $nombre;
 
 
 	/**
 	 * @var string
-	 * @Gedmo\Slug(fields={"titulo"})
+	 * @Gedmo\Slug(fields={"nombre"})
 	 * @ORM\Column(name="slug", type="string", length=255)
 	 */
 	private $slug;
@@ -101,8 +101,8 @@ class Articulos
     /**
      * @ORM\ManyToOne(targetEntity="Destiny\AppBundle\Entity\Imagenes",
      *     cascade={"persist"})
-     * @ORM\JoinColumn(name="imagen_id", nullable=true, referencedColumnName="id", onDelete="CASCADE")
-     **/
+     * @ORM\JoinColumn(name="imagen_id", referencedColumnName="id", onDelete="CASCADE")
+     */
     private $imagen;
 
     /**
@@ -114,8 +114,20 @@ class Articulos
 
 	public function __toString()
 	{
-		return $this->getTitulo();
+		return $this->getNombre();
 	}
+
+	public function getType()
+	{
+		return 'articulos';
+	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->traducciones = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -127,20 +139,15 @@ class Articulos
         return $this->id;
     }
 
-	public function getType()
-	{
-		return 'articulos';
-	}
-
     /**
      * Set titulo
      *
      * @param string $titulo
-     * @return Articulo
+     * @return Articulos
      */
-    public function setTitulo($titulo)
+    public function setNombre($nombre)
     {
-        $this->titulo = $titulo;
+        $this->nombre = $nombre;
 
         return $this;
     }
@@ -150,55 +157,9 @@ class Articulos
      *
      * @return string 
      */
-    public function getTitulo()
+    public function getNombre()
     {
-        return $this->titulo;
-    }
-
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     * @return Articulo
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string 
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * Set posicion
-     *
-     * @param string $posicion
-     * @return Articulo
-     */
-    public function setPosicion($posicion)
-    {
-        $this->posicion = $posicion;
-
-        return $this;
-    }
-
-    /**
-     * Get posicion
-     *
-     * @return string 
-     */
-    public function getPosicion()
-    {
-        return $this->posicion;
+        return $this->nombre;
     }
 
     /**
@@ -225,26 +186,49 @@ class Articulos
     }
 
     /**
-     * Set estado
+     * Set descripcion
      *
-     * @param boolean $estado
+     * @param string $descripcion
      * @return Articulos
      */
-    public function setEstado($estado)
+    public function setDescripcion($descripcion)
     {
-        $this->estado = $estado;
+        $this->descripcion = $descripcion;
 
         return $this;
     }
 
     /**
-     * Get estado
+     * Get descripcion
      *
-     * @return boolean 
+     * @return string 
      */
-    public function getEstado()
+    public function getDescripcion()
     {
-        return $this->estado;
+        return $this->descripcion;
+    }
+
+    /**
+     * Set posicion
+     *
+     * @param integer $posicion
+     * @return Articulos
+     */
+    public function setPosicion($posicion)
+    {
+        $this->posicion = $posicion;
+
+        return $this;
+    }
+
+    /**
+     * Get posicion
+     *
+     * @return integer 
+     */
+    public function getPosicion()
+    {
+        return $this->posicion;
     }
 
     /**
@@ -294,12 +278,35 @@ class Articulos
     }
 
     /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Articulos
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
      * Set seccion
      *
      * @param \Destiny\AppBundle\Entity\Secciones $seccion
      * @return Articulos
      */
-    public function setSeccion(\Destiny\AppBundle\Entity\Secciones $seccion)
+    public function setSeccion(\Destiny\AppBundle\Entity\Secciones $seccion = null)
     {
         $this->seccion = $seccion;
 
@@ -339,24 +346,6 @@ class Articulos
         return $this->noticia;
     }
 
-	public function getListado()
-	{
-		if (!is_null($this->getSeccion())){
-			return $this->getSeccion();
-		}
-
-		if (!is_null($this->getNoticia())){
-			return $this->getNoticia();
-		}
-	}
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->traducciones = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Add traducciones
      *
@@ -389,6 +378,8 @@ class Articulos
     {
         return $this->traducciones;
     }
+
+
 
     /**
      * Set imagen

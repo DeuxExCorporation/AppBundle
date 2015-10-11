@@ -86,6 +86,11 @@ class UsuariosType extends AbstractType
                 $usuario->setRoles(['ROLE_GESTOR']);
 
                 break;
+
+            case $grupo ==='protectora':
+                $usuario->setRoles(['ROLE_PROTECTORA']);
+
+                break;
 		}
 
 
@@ -95,12 +100,13 @@ class UsuariosType extends AbstractType
 
 	public function isDeletable ($usuario)
 	{
-		if (in_array('ROLE_ROOT',$usuario->getRoles()))
+
+		if (is_object($usuario) && in_array('ROLE_ROOT',$usuario->getRoles()))
 		{
 			return false;
 		}
 
-		return TRUE;
+		return true;
 	}
 
 
@@ -118,12 +124,19 @@ class UsuariosType extends AbstractType
 
 	public function groups ()
 	{
-		return ['ROLE_ROOT'       =>['nombre'=>'Administrador',
-							         'slug'  =>'admin',
-									 'rol'   => 'ROLE_ROOT'],
-                'ROLE_GESTOR'       =>['nombre'=>'Gestores',
-                                        'slug'  =>'gestor',
-                                        'rol'   => 'ROLE_GESTOR']];
+		return ['ROLE_ROOT'      =>['nombre'=>'Administrador',
+							        'slug'  =>'admin',
+									'rol'   => 'ROLE_ROOT'],
+                'ROLE_GESTOR'    =>['nombre'=>'Gestores',
+                                    'slug'  =>'gestor',
+                                    'rol'   => 'ROLE_GESTOR'],
+                'ROLE_PROTECTORA'=>['nombre'=>'Gestor de protectoras',
+                                    'slug'  =>'protectora',
+                                    'rol'   => 'ROLE_PROTECTORA'],
+                'ROLE_NORMALUSER'=>['nombre'=>'Usuarios',
+                                    'slug'  =>'normal',
+                                    'rol'   => 'ROLE_NORMALUSER']
+        ];
 	}
 
 	public function postEdit ($usuario)

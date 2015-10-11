@@ -33,7 +33,6 @@ class AccessVoter extends AbstractVoter
             $entidades[] = 'Destiny\AppBundle\Entity\\'. $entidad->getEntidad();
         }
 
-
         return $entidades;
     }
 
@@ -43,45 +42,51 @@ class AccessVoter extends AbstractVoter
         $entidad = $this->permisos->findOneByEntidad($this->getClassName($entidad));
 
 
-        if ($entidad->getGrupos()=== 'root' || $accion === self::EDIT )
+        if (in_array('ROLE_ROOT',$user->getRoles()))
         {
-            $resultado = in_array('ROLE_ROOT',$user->getRoles()) ? null : false;
-            if (!is_null($resultado))
+            return ($accion === self::EDIT ) ? false : true;
+        }
+
+
+        foreach($entidad->getGrupos()->getValues() as $grupo)
+        {
+
+            if (in_array($grupo->getGrupo(),$user->getRoles()))
             {
-                return false;
-            }
+                switch($accion)
+                {
+                    case self::VIEW:
 
+                        $resultado = ($entidad->getEstado() === true) ? true : false;
 
-            switch($accion)
-            {
-                case self::VIEW:
+                        return $resultado;
+                        break;
 
-                    $resultado = ($entidad->getEstado() === true) ? true : false;
+                    case self::EDIT:
+                        $resultado = ($entidad->getEditar() === true) ? false : true;
 
-                    return $resultado;
-                    break;
+                        return $resultado;
 
-                case self::EDIT:
-                    $resultado = ($entidad->getEditar() === true) ? false : true;
+                        break;
 
-                    return $resultado;
+                    case self::DELETE:
+                        $resultado = ($entidad->getBorrar() === true) ? true : false;
+                        return $resultado;
+                        break;
 
-                    break;
+                    case self::CREATE:
+                        $resultado = ($entidad->getCrear() === true) ? true : false;
+                        return $resultado;
+                        break;
 
-                case self::DELETE:
-                    $resultado = ($entidad->getBorrar() === true) ? true : false;
-                    return $resultado;
-                    break;
-
-                case self::CREATE:
-                    $resultado = ($entidad->getCrear() === true) ? true : false;
-                    return $resultado;
-                    break;
-
+                }
             }
 
         }
-        return true;
+
+
+
+        return false;
     }
 
     protected function getClassName($class)

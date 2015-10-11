@@ -26,7 +26,7 @@ class ArticulosContenidoTraduccionesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-	        ->add ('titulo', 'text', ['label' => $this->translator->trans ('articulosContenido.form.title'),
+	        ->add ('nombre', 'text', ['label' => $this->translator->trans ('articulosContenido.form.title'),
 		        'max_length' => 150])
 	        ->add('descripcion', 'textarea', ['label' => $this->translator->trans ('articulosContenido.form.description'),
 		        'max_length' => 150,

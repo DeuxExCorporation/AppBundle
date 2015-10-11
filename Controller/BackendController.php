@@ -29,7 +29,7 @@ class BackendController extends Controller
 			[
 				'cantCreate'  => null,
 				'activeUsers' => $em->getRepository('DestinyAppBundle:Usuarios')->getActiveUsers(),
-				'messages'    => $this->get('backend')->listElements('mensajes'),
+				'messages'    => $em->getRepository('DestinyAppBundle:Mensajes')->getMensajesSinLeer(),
 				'group'       => false
 
 			]);
@@ -50,8 +50,6 @@ class BackendController extends Controller
             $entity = $type .'Contenido';
         }
 
-
-
         $permiso = $this->get('backend')->checkPermisions('view',$this->get($entity)->newEntity(),$this->getUser());
 
          if (false === $permiso)  throw $this->createAccessDeniedException('Unauthorized access!');
@@ -62,9 +60,9 @@ class BackendController extends Controller
                 'group'        => (method_exists($this->get($entity),'groups')) ? $this->get($entity)->groups() : false,
                 'listElements' => $backend->methodExist($this->get($entity),'listElements'),
                 'cantCreate'   => $backend->methodExist($this->get($entity),'cantCreate',$entity),
-                'cantDelete'   => $backend->methodExist($this->get($entity),'cantDelete',$entity),
+                'cantDelete'   => $backend->methodExist($this->get($entity),'isDeletable',$entity),
                 'listButton'   => $backend->methodExist($this->get($entity),'listButton',$entity),
-                'list'         => isset($element) ? $list : $backend->listElements($entity),
+                'list'         => isset($list) ? $list : $backend->listElements($entity),
                 'section'      => isset($element) ? $element : null,
                 'type'         => $type,
 
@@ -80,6 +78,7 @@ class BackendController extends Controller
 	 */
 	public function createBackendAction (Request $request, $entity ,$group = null, $type =null)
 	{
+
         $backend = $this->get('backend');
         if (!is_null($type))
         {
@@ -88,7 +87,9 @@ class BackendController extends Controller
             $list = $backend->getElements($type.'Contenido','content',$group);
         }
 
+
 		$new = $this->get(strtolower($entity))->newEntity($group, $type);
+
         if (false === $this->get('backend')->checkPermisions('create',$new,$this->getUser()))
             throw $this->createAccessDeniedException('Unauthorized access!');
 
@@ -110,12 +111,14 @@ class BackendController extends Controller
                 :$this->generateUrl('editContentBackend', ['type'=>$group, 'entity' => $type, 'element'=> $new->getSlug(), 'group' => $this->get('backend')->removeContenidos($entity)]);
             return $this->redirect($url);
         }
+
 		return $this->render ('DestinyAppBundle:Backend:editCreate.html.twig',
 			[
 
                 'group'        => $backend->methodExist($this->get($entity),'groups',$entity),
                 'listElements' => $backend->methodExist($this->get($entity),'listElements'),
                 'cantCreate'   => $backend->methodExist($this->get($entity),'cantCreate',$entity),
+                'cantDelete'   => $backend->methodExist($this->get($entity),'isDeletable',$entity),
                 'notList'      => $backend->methodExist($this->get($entity),'notList',$entity),
                 'listButton'   => $backend->methodExist($this->get($entity),'listButton',$entity),
                 'notBack'      => (property_exists($this->get ($entity), 'notBack')) ? True : false,
@@ -140,6 +143,7 @@ class BackendController extends Controller
 
         $backend = $this->get('backend');
         $actual = (is_null($type)) ? $entity : $group;
+
         $edit = $backend->getElements($actual,'one',$element, $group);
 
 		$formulario = $this->createForm ($this->get($actual),$edit,
@@ -152,7 +156,7 @@ class BackendController extends Controller
 		if (($formulario->isSubmitted ()) && ($formulario->isValid ()))
 		{
             $backend->processForm($edit);
-            $backend->postEdit($edit,$entity,$type,$element);
+            $backend->postEdit($edit,$actual,$type,$element);
 			$traductor = $this->get('translator');
 
 			$this->get ('session')->getFlashBag()->set ('success', [
@@ -175,6 +179,7 @@ class BackendController extends Controller
                 'group'        => $backend->methodExist($this->get($entidad),'groups',$entidad),
                 'listElements' => $backend->methodExist($this->get($entidad),'listElements'),
                 'cantCreate'   => $backend->methodExist($this->get($entity),'cantCreate',$entity),
+                'cantDelete'   => $backend->methodExist($this->get($entity),'isDeletable',$entity),
                 'listButton'   => $backend->methodExist($this->get($entidad),'listButton',$entidad),
                 'translatable' => (property_exists($this->get((is_null($type) ? $entity : $group)),'translatable')) ? true : false,
                 'notBack'      => (property_exists($this->get ($entity), 'notBack')) ? True : false,
@@ -201,7 +206,7 @@ class BackendController extends Controller
 
         if (false === $permiso)  throw $this->createAccessDeniedException('Unauthorized access!');
 
-        if (is_null($this->get('backend')->isDeleteable($actual,$delete)) || ($this->get('backend')->isDeleteable($actual,$delete) === true))
+        if (is_null($this->get('backend')->isDeletable($actual,$delete)))
         {
             $this->get('backend')->deleteElementAndFile($delete,$actual);
 
@@ -246,6 +251,7 @@ class BackendController extends Controller
 				'message' => $traductor->trans ('flash.notChangable.message', ['entidad' => $change])
 			]);
 		}
+        $this->get('backend')->postChange($change,$entity,$type,$element);
 
 		return $this->redirect($request->headers->get('referer'));
 
@@ -320,6 +326,7 @@ class BackendController extends Controller
                 'group'        => $backend->methodExist($this->get($actual),'groups',$entity),
                 'listElements' => $backend->methodExist($this->get((is_null($type)) ? $entity : $entity .'Contenido'),'listElements'),
                 'cantCreate'   => $backend->methodExist($this->get($entity),'cantCreate',$entity),
+                'cantDelete'   => $backend->methodExist($this->get($entity),'isDeletable',$entity),
                 'listButton'   => $backend->methodExist($this->get($entity),'listButton',$entity),
                 'notBack'      => (property_exists($this->get ($entity), 'notBack')) ? True : false,
                 'notList'      => (property_exists($this->get ($actual), 'notList')) ? True : false,

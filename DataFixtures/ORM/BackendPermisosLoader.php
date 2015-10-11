@@ -40,7 +40,7 @@ class BackendPermisosLoader extends AbstractFixture implements  FixtureInterface
                     ['nombre' => 'Usuarios',
                         'entidad'=> 'Usuarios'],
                     ['nombre' => 'Emails',
-                        'entidad'=> 'UsuariosEmail'],
+                        'entidad'=> 'UsuariosEmails'],
                     ['nombre' => 'Newsletter',
                         'entidad'=> 'Newsletter'],
                     ['nombre' => 'Secciones del Backend',

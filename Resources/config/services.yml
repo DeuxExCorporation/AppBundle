@@ -14,10 +14,10 @@ services:
 
     backend:
         class: Destiny\AppBundle\Services\BackendService
-        arguments: ["@doctrine.orm.entity_manager","@service_container","@translator.default","@security.authorization_checker","@session"]
+        arguments: ["@doctrine.orm.entity_manager","@service_container","@translator.default","@security.token_storage","@session","@security.authorization_checker"]
 
 
-    app.permisos_repository:
+    app.permisos_basic_repository:
         class:     Doctrine\ORM\EntityRepository
         factory:   ["@doctrine.orm.entity_manager", getRepository]
         arguments: [Destiny\AppBundle\Entity\BackendPermisos]
@@ -26,11 +26,9 @@ services:
     security.access.backend_permisos_voter:
         class:      Destiny\AppBundle\Security\AccessVoter
         public:     false
-        arguments: ["@app.permisos_repository"]
+        arguments: ["@app.permisos_basic_repository"]
         tags:
             - { name: security.voter }
-
-    permisos.voter: "@security.access.backend_permisos_voter"
 
     kernel.listener.modo.mantenimiento.listener:
         class: Destiny\AppBundle\Listener\ModoMantenimientoListener
@@ -38,6 +36,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
+    kernel.listener.movil.detector:
+        class: Destiny\AppBundle\Listener\MovilListener
+        arguments: ["@session"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     destiny_appbundle.form.type.idiomas:
         class:  Destiny\AppBundle\Form\Type\IdiomasType

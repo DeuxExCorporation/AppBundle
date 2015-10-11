@@ -2,6 +2,7 @@
 
 namespace Destiny\AppBundle\Entity\Repository;
 
+use Destiny\AppBundle\Entity\Usuarios;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,30 +13,32 @@ use Doctrine\ORM\EntityRepository;
  */
 class BackendSeccionesRepository extends EntityRepository
 {
-	public function getActiveMenusBackend($IsRoot = false)
+	public function getActiveMenusBackend(Usuarios $user)
 	{
-
 		$em = $this->getEntityManager ();
 
 		$query = $em->createQueryBuilder();
-        if ($IsRoot === false)
+
+        if (!in_array('ROLE_ROOT',$user->getRoles()))
         {
-            $consulta =  $query->select(['s','g'])
+            $consulta =  $query->select(['s','g','p','r'])
                 ->from('DestinyAppBundle:BackendGruposSecciones','g')
                 ->innerJoin('g.secciones','s')
-                ->where($query->expr()->eq('g.estado',':grupo'))
+                ->innerJoin('s.permisos','p')
+                ->innerJoin('s.permisos','r')
+                ->andWhere($query->expr()->eq('g.estado',':grupo'))
                 ->andWhere($query->expr()->eq('s.estado',':seccion'))
-                ->setParameters([':grupo' => true,'seccion' => true]);
-        }else {
-            $consulta =  $query->select(['s','g'])
-                ->from('DestinyAppBundle:BackendGruposSecciones','g')
-                ->innerJoin('g.secciones','s')
-                ->where($query->expr()->eq('g.estado',':grupo'))
-                ->setParameters([':grupo' => true]);
+                ->andWhere($query->expr()->eq('r.grupo',':rol'))
+                ->setParameters([':grupo' => true,'seccion' => true,'rol' => $user->getRoles()[0]]);
+
+            return $consulta->getQuery()->getResult();
+
         }
 
-        return $consulta->getQuery()->getResult();
+        $consulta =  $query->select(['g'])
+            ->from('DestinyAppBundle:BackendGruposSecciones','g');
 
+        return $consulta->getQuery()->getResult();
 
 	}
 
@@ -55,4 +58,18 @@ class BackendSeccionesRepository extends EntityRepository
 
 
 	}
+
+    public function getActiveMenusBackendSuperior()
+    {
+        $em = $this->getEntityManager ();
+        $query = $em->createQueryBuilder();
+
+        $consulta =  $query->select(['s'])
+            ->from('DestinyAppBundle:BackendSecciones','s')
+            ->where($query->expr()->eq('s.zona',':zona'))
+            ->setParameters([':zona' => 'superior'])
+        ;
+
+        return $consulta->getQuery()->getResult();
+    }
 }

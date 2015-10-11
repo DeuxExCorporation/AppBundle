@@ -64,6 +64,13 @@ class BackendSecciones
     /**
      * @var string
      *
+     * @ORM\Column(name="zona", type="string", length=255)
+     */
+    private $zona;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="icono", type="string", length=255)
      */
     private $icono;
@@ -88,10 +95,30 @@ class BackendSecciones
      */
     private $fechaModificacion;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Destiny\AppBundle\Entity\RolesUsuarios")
+     * @ORM\JoinTable(name="backend_secciones_roles",
+     *      joinColumns={@ORM\JoinColumn(name="secciones_backend_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="grupos_id", referencedColumnName="id", onDelete="CASCADE")}
+     *      )
+     **/
+    private $permisos;
+
     public function __toString()
     {
         return $this->getNombre();
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->permisos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->zona = 'principal';
+
+    }
+
     /**
      * Get id
      *
@@ -307,5 +334,84 @@ class BackendSecciones
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add permisos
+     *
+     * @param \Destiny\AppBundle\Entity\RolesUsuarios $permisos
+     * @return BackendSecciones
+     */
+    public function addPermisos(\Destiny\AppBundle\Entity\RolesUsuarios $permisos)
+    {
+        $this->permisos[] = $permisos;
+
+        return $this;
+    }
+
+    /**
+     * Remove permisos
+     *
+     * @param \Destiny\AppBundle\Entity\RolesUsuarios $permisos
+     */
+    public function removePermisos(\Destiny\AppBundle\Entity\RolesUsuarios $permisos)
+    {
+        $this->permisos->removeElement($permisos);
+    }
+
+    /**
+     * Get permisos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPermisos()
+    {
+        return $this->permisos;
+    }
+
+    /**
+     * Add permisos
+     *
+     * @param \Destiny\AppBundle\Entity\RolesUsuarios $permisos
+     * @return BackendSecciones
+     */
+    public function addPermiso(\Destiny\AppBundle\Entity\RolesUsuarios $permisos)
+    {
+        $this->permisos[] = $permisos;
+
+        return $this;
+    }
+
+    /**
+     * Remove permisos
+     *
+     * @param \Destiny\AppBundle\Entity\RolesUsuarios $permisos
+     */
+    public function removePermiso(\Destiny\AppBundle\Entity\RolesUsuarios $permisos)
+    {
+        $this->permisos->removeElement($permisos);
+    }
+
+    /**
+     * Set zona
+     *
+     * @param string $zona
+     * @return BackendSecciones
+     */
+    public function setZona($zona)
+    {
+        $this->zona = $zona;
+
+        return $this;
+    }
+
+    /**
+     * Get zona
+     *
+     * @return string 
+     */
+    public function getZona()
+    {
+        return $this->zona;
     }
 }

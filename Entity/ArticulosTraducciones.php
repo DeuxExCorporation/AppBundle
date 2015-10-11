@@ -34,7 +34,7 @@ class ArticulosTraducciones
 	 *      maxMessage = "articulo.titulo.max"
 	 * )
 	 */
-	private $titulo;
+	private $nombre;
 
 
 	/**
@@ -66,7 +66,7 @@ class ArticulosTraducciones
 
 	public function __toString()
 	{
-		return $this->getCanonica()->getTitulo();
+		return $this->getCanonica()->getNombre();
 	}
 
 	public function getSlug()
@@ -94,28 +94,7 @@ class ArticulosTraducciones
         return $this->id;
     }
 
-    /**
-     * Set titulo
-     *
-     * @param string $titulo
-     * @return ArticulosTraducciones
-     */
-    public function setTitulo($titulo)
-    {
-        $this->titulo = $titulo;
 
-        return $this;
-    }
-
-    /**
-     * Get titulo
-     *
-     * @return string 
-     */
-    public function getTitulo()
-    {
-        return $this->titulo;
-    }
 
     /**
      * Set descripcion
@@ -199,5 +178,28 @@ class ArticulosTraducciones
     public function getFechaModificacion()
     {
         return $this->getCanonica()->getFechaModificacion();
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return ArticulosTraducciones
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
     }
 }

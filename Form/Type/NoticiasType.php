@@ -30,7 +30,7 @@ class NoticiasType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titulo', 'text', ['label' => $this->translator->trans ('noticias.form.title')])
+            ->add('nombre', 'text', ['label' => $this->translator->trans ('noticias.form.title')])
             ->add('tituloSeo', 'text', ['label' => $this->translator->trans ('noticias.form.seoTitle')])
             ->add('descripcionSeo', 'text', ['label' => $this->translator->trans ('noticias.form.seoDescription')])
 	        ->add('categorias','entity',['label' => $this->translator->trans('noticias.form.categoria'),

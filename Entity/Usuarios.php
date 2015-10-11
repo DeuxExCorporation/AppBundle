@@ -10,7 +10,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 /**
  * Idiomas
  *
- * @ORM\Table(name="usuario")
+ * @ORM\Table(name="usuarios")
  * @ORM\Entity(repositoryClass="Destiny\AppBundle\Entity\Repository\UsuariosRepository")
  * @UniqueEntity("email")
  * @UniqueEntity("username")

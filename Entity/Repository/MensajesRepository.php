@@ -24,4 +24,17 @@ class MensajesRepository extends EntityRepository
 			->setParameters(['estado' => false])
 			->getQuery()->getResult();
 	}
+
+    public function getAll()
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder();
+
+        return $query->select(['m'])
+            ->from('DestinyAppBundle:Mensajes', 'm')
+            ->getQuery()->getResult();
+    }
+
+
 }

@@ -17,19 +17,21 @@
                 </a>
             </td>
 
-			{% for element in listElements | keys %}
+			{% for key in listElements | keys  %}
+			{% for element in listElements   %}
 				<td>
 
-                        {{ element }}
-                    <a href="{{ path('orderByBackend',{'entity':entity,'order':element,'asc':'asc' }) }}">
+                        {{ key }}
+                    <a href="{{ path('orderByBackend',{'entity':entity,'order':element ,'asc':'asc' }) }}">
                         <i class="fa fa-sort-alpha-asc"></i>
 
                     </a>
-                    <a href="{{ path('orderByBackend',{'entity':entity,'order':element,'asc':'desc' }) }}">
+                    <a href="{{ path('orderByBackend',{'entity':entity,'order':element ,'asc':'desc' }) }}">
                         <i class="fa fa-sort-alpha-desc"></i>
 
                     </a>
                 </td>
+			{% endfor %}
 			{% endfor %}
 			<td>{{ status | trans }}</td>
             <td>{{ 'form.lastmodification' | trans }}</td>
